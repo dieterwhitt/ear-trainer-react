@@ -6,4 +6,4 @@ const Chords = () => {
     return <h1>Chords</h1>
 }
 
-export default Chords
+export default Chords;

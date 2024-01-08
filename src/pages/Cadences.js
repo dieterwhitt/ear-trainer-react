@@ -6,4 +6,4 @@ const Cadences = () => {
     return <h1>Cadences</h1>
 }
 
-export default Cadences
+export default Cadences;

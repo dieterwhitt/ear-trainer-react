@@ -24,10 +24,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="Intervals" element={<Intervals />} />
-            <Route path="Chords" element={<Chords />} />
-            <Route path="Cadences" element={<Cadences />} />
-            <Route path="About" element={<About />} />
+            <Route path="intervals" element={<Intervals />} />
+            <Route path="chords" element={<Chords />} />
+            <Route path="cadences" element={<Cadences />} />
+            <Route path="about" element={<About />} />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

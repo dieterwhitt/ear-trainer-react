@@ -5,7 +5,13 @@
 import { Outlet, Link } from "react-router-dom";
 
 const Layout = () => {
-    return <></>
+    return (
+    <>
+        <nav>
+            <Link to= "/intervals">intervals</Link>
+        </nav>  
+    </>
+    )
 }
 
 export default Layout
