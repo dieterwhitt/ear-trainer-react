@@ -10,6 +10,8 @@ const Layout = () => {
         <nav>
             <Link to= "/intervals">intervals</Link>
         </nav>  
+
+        <Outlet/>
     </>
     )
 }

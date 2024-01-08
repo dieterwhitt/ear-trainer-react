@@ -4,7 +4,7 @@
 //filename index.js
 
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 
 //routing
@@ -35,5 +35,4 @@ export default function App() {
     );
   }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+ReactDOM.render(<App />, document.getElementById('root'));
