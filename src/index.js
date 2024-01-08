@@ -17,5 +17,23 @@ import Cadences from "./pages/Cadences"
 import About from "./pages/About"
 import NoPage from "./pages/NoPage";
 
+
+export default function App() {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="Intervals" element={<Intervals />} />
+            <Route path="Chords" element={<Chords />} />
+            <Route path="Cadences" element={<Cadences />} />
+            <Route path="About" element={<About />} />
+            <Route path="*" element={<NoPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    );
+  }
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
