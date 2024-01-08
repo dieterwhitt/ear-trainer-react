@@ -1,3 +1,7 @@
+//dieter whittingham
+//ear trainer
+//started on jan 7 2023
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useState, useEffect } from 'react';
