@@ -19,15 +19,32 @@ function Header(){
 
 function play(note){
     //wow...
-    const noteobj = require('../sounds/piano-88-notes/' + note + '.wav');
+    const noteobj = require('../sounds/piano-88-notes/' + note +'.wav');
     new Audio(noteobj).play();
+}
+
+function playInterval(){
+    //plays a random simultaneous interval
+
+    //choose root from 3c to 5c
+    //i.e index 28 to 52
+    const rootIndex = Math.floor(Math.random()*25 + 28);
+    //interval from 1 to 15 semitones (add negative later)
+    const interval = Math.floor(Math.random() * 15 + 1);
+    
+    console.log(keyboard[rootIndex])
+    console.log(keyboard[(rootIndex + interval)])
+
+    play(keyboard[rootIndex])
+    play(keyboard[(rootIndex + interval)])
+    
 }
 
 const Intervals = () => {
     return(
     <>
         <Header />
-        <button onClick={() => play('4c')}>playinterval</button>
+        <button onClick={playInterval}>play interval</button>
     </>
     )
 }

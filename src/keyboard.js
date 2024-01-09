@@ -11,11 +11,9 @@ const notes = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'];
 //const bottom_notes = notes.slice(8);
 let keyboard = [];
 
-const filepath = './sounds/piano-88-notes/'
-
 for(let i = 0; i <= 8; i++){
     for(const note of notes){
-        let add = filepath + note + (i.toString()) + '.wav';
+        let add = (i.toString()) + note;
         //a0, a#0, b0
         if(i == 0){
             if(notes.includes(note,9)){
@@ -34,4 +32,4 @@ for(let i = 0; i <= 8; i++){
 }
 console.log(keyboard);
 
-//export default keyboard;
+export default keyboard;
