@@ -3,6 +3,7 @@
 //filename Intervals.js
 
 import React from 'react';
+import keyboard from '../keyboard';
 
 function Header(){
     return (
