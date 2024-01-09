@@ -17,17 +17,17 @@ function Header(){
         );
 }
 
-function play(){
+function play(note){
     //wow...
-    const note = require('../sounds/piano-88-notes/4c.wav');
-    new Audio(note).play();
+    const noteobj = require('../sounds/piano-88-notes/' + note + '.wav');
+    new Audio(noteobj).play();
 }
 
 const Intervals = () => {
     return(
     <>
         <Header />
-        <button onClick={play}>playinterval</button>
+        <button onClick={() => play('4c')}>playinterval</button>
     </>
     )
 }
