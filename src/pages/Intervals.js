@@ -4,7 +4,7 @@
 
 import React from 'react';
 import keyboard from '../keyboard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 //header component
 function Header(){
@@ -49,19 +49,49 @@ function playInterval(){
 }
 //game interface component
 function GameInterface(){
+    //keep track of first render
+    const firstUpdate = useRef(true);
     //state: number of interval plays remaining
     const [playsleft, setPlaysleft] = useState(10);
     //state: current answer list
-    const [answers, setAnswers] = useState([]);
+    const [answerSheet, setAnswerSheet] = useState([]);
+    //state: user answer list
+    const [userAnswers, setUserAnswers] = useState([]);
     //state: gamestate
     const [gamestate, setGamestate] = useState(0);
 
+    
+    //play interval sound the button is pressed (gamestate change)
+    //but NOT on first render
+    useEffect(() => {if(firstUpdate){
+        //if its the first render, set false and do nothing
+        firstUpdate.current = false;
+    }else{
+        //if its not the first render, handle play.
+        handlePlay()
+    }},
+     [gamestate])
+
     const handleSubmit = (event) => {
         event.preventDefault()
+
+    }
+
+    //handles user pressing the play button
+    //play sound, and log the correct answer to the answersheet
+    const handlePlay = (event) =>{
+        event.preventDefault();
+        //play interval and get the numerical value for it.
+        const currentAnswer = playInterval();
+        //add current answer to answersheet
+        setAnswerSheet(previousState => [...previousState, currentAnswer]);
     }
     return (
     <>
+        
         <form onsubmit={handleSubmit}>
+            <button onClick={handlePlay}>play interval</button>
+
             <select>
                 {/* dropdown */}
                 <option value={0}>Perfect Unison</option>
@@ -80,8 +110,6 @@ function GameInterface(){
                 <option value={13}>Perfect Octave</option>
                 <option value={14}>Minor Ninth</option>
                 <option value={15}>Major Ninth</option>
-                
-
             </select>
         </form>
     </>);
@@ -92,7 +120,6 @@ const Intervals = () => {
     return(
     <>
         <Header />
-        <button onClick={playInterval}>play interval</button>
         <button onClick={() => play('5c')}>test</button>
         <GameInterface />
     </>
