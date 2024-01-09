@@ -23,7 +23,7 @@ function play(note){
     const noteobj = require('../sounds/piano-88-notes/' + note +'.wav');
     new Audio(noteobj).play();
     }catch(e){
-        alert("couldn't play note " + note + e)
+        alert("couldn't play note " + note + " " + e)
     }
 }
 
