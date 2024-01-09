@@ -4,6 +4,7 @@
 
 import React from 'react';
 import keyboard from '../keyboard';
+import { useState, useEffect } from 'react';
 
 function Header(){
     return (
@@ -15,10 +16,18 @@ function Header(){
         </>
         );
 }
+
+function play(){
+    //wow...
+    const note = require('../sounds/piano-88-notes/4c.wav');
+    new Audio(note).play();
+}
+
 const Intervals = () => {
     return(
     <>
         <Header />
+        <button onClick={play}>playinterval</button>
     </>
     )
 }
