@@ -7,7 +7,7 @@ import React from 'react';
 //a key is a string with an integer 0-9 followed by a note, representing all 88 keys
 
 //list of notes
-const notes = ['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'];
+const notes = ['c','cs','d','ds','e','f','fs','g','gs','a','as','b'];
 //const bottom_notes = notes.slice(8);
 let keyboard = [];
 
