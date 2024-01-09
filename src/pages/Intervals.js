@@ -59,24 +59,7 @@ function GameInterface(){
     const [answerSheet, setAnswerSheet] = useState([]);
     //state: user answer list
     const [userAnswers, setUserAnswers] = useState([]);
-    //state: user selection for the dropdown
-    //const [userSelection, setUserSelection] = useState("");
-    //state: gamestate
-    const [gameState, setGameState] = useState(0);
-    //the user answers will be compared to the answer sheet at the end of the game.
-    /*
-    unnecessary code
-    //play interval sound the button is pressed (gamestate change)
-    //but NOT on first render
-    useEffect(() => {if(firstUpdate){
-        //if its the first render, set false and do nothing
-        firstUpdate.current = false;
-    }else{
-        //if its not the first render, handle play.
-        handlePlay();
-    }},
-     [gamestate]);
-     */
+    
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -94,6 +77,7 @@ function GameInterface(){
             setUserAnswers(previousState => [...previousState, currentInput]);
             //update the number of plays left
             setPlaysLeft((previousState) => previousState-1);
+            console.log(userAnswers);
         }     
     }
 
@@ -110,6 +94,7 @@ function GameInterface(){
         document.getElementById("submitButton").disabled = false;
         //add current answer to answersheet
         setAnswerSheet(previousState => [...previousState, currentAnswer]);
+        console.log(answerSheet);
     }
     return (
     <>
