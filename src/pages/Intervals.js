@@ -53,8 +53,38 @@ function GameInterface(){
     const [playsleft, setPlaysleft] = useState(10);
     //state: current answer list
     const [answers, setAnswers] = useState([]);
+    //state: gamestate
+    const [gamestate, setGamestate] = useState(0);
 
-    return <></>;
+    const handleSubmit = (event) => {
+        event.preventDefault()
+    }
+    return (
+    <>
+        <form onsubmit={handleSubmit}>
+            <select>
+                {/* dropdown */}
+                <option value={0}>Perfect Unison</option>
+                <option value={1}>Minor Second</option>
+                <option value={2}>Major Second</option>
+                <option value={3}>Minor Third</option>
+                <option value={4}>Major Third</option>
+                <option value={5}>Diminished Fourth</option>
+                <option value={6}>Perfect Fourth</option>
+                <option value={7}>Diminished Fifth</option>
+                <option value={8}>Perfect Fifth</option>
+                <option value={9}>Minor Sixth</option>
+                <option value={10}>Major Sixth</option>
+                <option value={11}>Minor Seventh</option>
+                <option value={12}>Major Seventh</option>
+                <option value={13}>Perfect Octave</option>
+                <option value={14}>Minor Ninth</option>
+                <option value={15}>Major Ninth</option>
+                
+
+            </select>
+        </form>
+    </>);
 }
 
 //main component
