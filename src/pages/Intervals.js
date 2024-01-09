@@ -38,11 +38,11 @@ function playInterval(){
     //choose root from 3c to 5c
     //i.e index 27 to 51
     const rootIndex = Math.floor(Math.random()*25 + 27);
-    //interval from 0 to 15 semitones (add negative later)
-    const interval = Math.floor(Math.random() * 16);
+    //interval from 0 to 14 semitones (unison to minor 9th)
+    const interval = Math.floor(Math.random() * 15);
 
     const intervalIndex =rootIndex+interval;
-
+    console.log('interval: playing '+ keyboard[rootIndex] + ' and ' + keyboard[intervalIndex]);
     play(keyboard[rootIndex]);
     play(keyboard[intervalIndex]);
 
@@ -83,10 +83,10 @@ function GameInterface(){
         const dropdown = document.getElementById('intervalDropdown');
         //get user input (interval number)
         const currentInput = dropdown.value;
+        console.log("the current user selection is " + currentInput);
         if(currentInput == -1){
             //user didn't select from the dropdown
             alert("Please select an interval.");
-            return
         } else{
             //reenable button
             document.getElementById("gameButton").disabled = false;
@@ -103,6 +103,7 @@ function GameInterface(){
         event.preventDefault();
         //play interval and get the numerical value for it.
         const currentAnswer = playInterval();
+        console.log('the correct answer is ' + currentAnswer);
         //disable the button so that it cant be used before submission
         document.getElementById("gameButton").disabled = true;
         //enable the submit button
@@ -112,7 +113,7 @@ function GameInterface(){
     }
     return (
     <>
-        <form onsubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             {/* play button */}
             <button id='gameButton' onClick={handlePlay}>Play Interval</button>
 
@@ -124,17 +125,16 @@ function GameInterface(){
                 <option value={2}>Major Second</option>
                 <option value={3}>Minor Third</option>
                 <option value={4}>Major Third</option>
-                <option value={5}>Diminished Fourth</option>
-                <option value={6}>Perfect Fourth</option>
-                <option value={7}>Diminished Fifth</option>
-                <option value={8}>Perfect Fifth</option>
-                <option value={9}>Minor Sixth</option>
-                <option value={10}>Major Sixth</option>
-                <option value={11}>Minor Seventh</option>
-                <option value={12}>Major Seventh</option>
-                <option value={13}>Perfect Octave</option>
-                <option value={14}>Minor Ninth</option>
-                <option value={15}>Major Ninth</option>
+                <option value={5}>Perfect Fourth</option>
+                <option value={6}>Tritone</option>
+                <option value={7}>Perfect Fifth</option>
+                <option value={8}>Minor Sixth</option>
+                <option value={9}>Major Sixth</option>
+                <option value={10}>Minor Seventh</option>
+                <option value={11}>Major Seventh</option>
+                <option value={12}>Perfect Octave</option>
+                <option value={13}>Minor Ninth</option>
+                <option value={14}>Major Ninth</option>
             </select>
             {/* submit button: disabled until interval is played*/}
             <input disabled id='submitButton' type="submit" />
@@ -147,8 +147,8 @@ const Intervals = () => {
     return(
     <>
         <Header />
-        <button onClick={() => {play('4c'); play('4e'); 
-                                play('4g'); play('4b')} }>test</button>
+        <button onClick={() => {play('4e'); play('4gs'); 
+                                play('4b'); play('5e')} }>test</button>
         <GameInterface />
     </>
     )
