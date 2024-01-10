@@ -53,6 +53,21 @@ function playInterval(){
     //return the interval
     return interval;
 }
+//returing string of stars based on percentage
+function getStars(percentage){
+    if (percentage <50){
+        return "⭐"; //0-49
+    }else if (percentage < 70){
+        return "⭐⭐" //50-69
+    }else if (percentage < 85){
+        return "⭐⭐⭐" //70-84
+    }else if (percentage < 100){
+        return "⭐⭐⭐⭐" //85-99
+    }else{
+        return "⭐⭐⭐⭐⭐" //100%
+    }
+}
+
 //game interface component
 function GameInterface(){
     //state: number of plays completed
@@ -61,14 +76,39 @@ function GameInterface(){
     const [answerSheet, setAnswerSheet] = useState([]);
     //state: user answer list
     const [userAnswers, setUserAnswers] = useState([]);
-
+    const [resultUpdate, setResultUpdate] = useState(true);
     //setting the rounds per game to 10
     const roundsPerGame = 10;
+
+    function LoadResults(){
+        if (resultUpdate){
+            return <h3>finish the current session to see your results.</h3>
+        }else{
+            var correct = 0;
+            for (const index in answerSheet) {
+                //getting score
+                if (answerSheet[index] == userAnswers[index]){
+                    console.log('getting score');
+                    //correct answer
+                    correct ++;
+                }
+            }
+            //get rounded percentage score
+            const percentage = Math.round(100*correct/roundsPerGame);
+            const stars = getStars(percentage);
+            //render
+            return(
+                <>
+                    <h3>Results:</h3>
+                    <h1>{stars}</h1>
+                    <h5>Score: {correct}/{roundsPerGame} ({'\t' + percentage}%)</h5>
+                </>
+                )}
+    }
     
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
-        document.getElementById("gameButton").innerHTML = 'Play Interval';
         //update number of rounds played
         const newPlaysCompleted = playsCompleted + 1;
         setPlaysCompleted(newPlaysCompleted);
@@ -91,12 +131,9 @@ function GameInterface(){
             //check if the game is finished:
             if(newPlaysCompleted >= roundsPerGame){
                 //just submitted final round
-                //set play button text to play again
-                document.getElementById("gameButton").innerHTML = 'Play Again';
-                //reset plays completed
-                setPlaysCompleted(0);
-
-
+                //update gamestate so results render
+                setResultUpdate(true);
+                console.log("showing results");
             }
         }     
     }
@@ -115,6 +152,7 @@ function GameInterface(){
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
+
     return (
     <>
         <form onSubmit={handleSubmit}>
@@ -144,19 +182,8 @@ function GameInterface(){
             <input disabled id='submitButton' type="submit" />
         </form>
         <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
+        <LoadResults/>
     </>);
-}
-
-function LoadResults(props){
-    //⭐
-    const [renderState, setRenderState] = new useState(false);
-    const submitted = props.submitted;
-    const answers = props.answers;
-    return (
-        <>
-    
-    
-        </>)
 }
 
 //main component
@@ -164,8 +191,6 @@ const Intervals = () => {
     return(
     <>
         <Header />
-        <button onClick={() => {play('4e'); play('4gs'); 
-                                play('4b'); play('5e')} }>test</button>
         <GameInterface />
         
     </>
