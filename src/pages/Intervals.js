@@ -96,12 +96,16 @@ function GameInterface(){
             //get rounded percentage score
             const percentage = Math.round(100*correct/roundsPerGame);
             const stars = getStars(percentage);
+            //disable play buttons so they can see their results
+            document.getElementById("gameButton").disabled = true;
+            document.getElementById('intervalDropdown').disabled = true;
             //render
             return(
                 <>
                     <h3>Results:</h3>
                     <h1>{stars}</h1>
                     <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
+                    <button id='restartButton'>Play Again</button>
                 </>
                 )}
     }
