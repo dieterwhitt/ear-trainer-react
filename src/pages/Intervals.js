@@ -33,7 +33,10 @@ function play(note){
 
 //plays a random interval (unison-major 9th) and returns the inter value
 function playInterval(){
-    //plays a random simultaneous interval
+    //random 0 or 1 which will determine if there will be a delay
+    var delay = Math.floor(Math.random() * 2);
+    //if delay = 1, will have a 500 ms delay between notes.
+    delay = delay*500;
 
     //choose root from 3c to 5c
     //i.e index 27 to 51
@@ -43,41 +46,58 @@ function playInterval(){
 
     const intervalIndex =rootIndex+interval;
     console.log('interval: playing '+ keyboard[rootIndex] + ' and ' + keyboard[intervalIndex]);
+    //with delay
     play(keyboard[rootIndex]);
-    play(keyboard[intervalIndex]);
+    setTimeout(() => play(keyboard[intervalIndex]),delay);
 
     //return the interval
     return interval;
 }
 //game interface component
 function GameInterface(){
-    //keep track of first render
-    const firstUpdate = useRef(true);
-    //state: number of interval plays remaining
-    const [playsLeft, setPlaysLeft] = useState(10);
+    //state: number of plays completed
+    const [playsCompleted, setPlaysCompleted] = useState(0);
     //state: current answer list
     const [answerSheet, setAnswerSheet] = useState([]);
     //state: user answer list
     const [userAnswers, setUserAnswers] = useState([]);
+
+    //setting the rounds per game to 10
+    const roundsPerGame = 10;
     
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
-        const dropdown = document.getElementById('intervalDropdown');
+        document.getElementById("gameButton").innerHTML = 'Play Interval';
+        //update number of rounds played
+        const newPlaysCompleted = playsCompleted + 1;
+        setPlaysCompleted(newPlaysCompleted);
         //get user input (interval number)
-        const currentInput = dropdown.value;
-        console.log("the current user selection is " + currentInput);
+        const currentInput = document.getElementById('intervalDropdown').value;
+        
+        console.log("user submitted " + currentInput);
+        console.log(newPlaysCompleted + " plays completed")
+
         if(currentInput == -1){
             //user didn't select from the dropdown
             alert("Please select an interval.");
         } else{
             //reenable button
             document.getElementById("gameButton").disabled = false;
+            //redisable submit button
+            document.getElementById("submitButton").disabled = true;
             //update user answer sheet
-            setUserAnswers(previousState => [...previousState, currentInput]);
-            //update the number of plays left
-            setPlaysLeft((previousState) => previousState-1);
-            console.log(userAnswers);
+            setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
+            //check if the game is finished:
+            if(newPlaysCompleted >= roundsPerGame){
+                //just submitted final round
+                //set play button text to play again
+                document.getElementById("gameButton").innerHTML = 'Play Again';
+                //reset plays completed
+                setPlaysCompleted(0);
+
+
+            }
         }     
     }
 
@@ -93,8 +113,7 @@ function GameInterface(){
         //enable the submit button
         document.getElementById("submitButton").disabled = false;
         //add current answer to answersheet
-        setAnswerSheet(previousState => [...previousState, currentAnswer]);
-        console.log(answerSheet);
+        setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
     return (
     <>
@@ -124,7 +143,20 @@ function GameInterface(){
             {/* submit button: disabled until interval is played*/}
             <input disabled id='submitButton' type="submit" />
         </form>
+        <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
     </>);
+}
+
+function LoadResults(props){
+    //⭐
+    const [renderState, setRenderState] = new useState(false);
+    const submitted = props.submitted;
+    const answers = props.answers;
+    return (
+        <>
+    
+    
+        </>)
 }
 
 //main component
@@ -135,6 +167,7 @@ const Intervals = () => {
         <button onClick={() => {play('4e'); play('4gs'); 
                                 play('4b'); play('5e')} }>test</button>
         <GameInterface />
+        
     </>
     )
 }
