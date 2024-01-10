@@ -115,29 +115,27 @@ function GameInterface(){
         //get user input (interval number)
         const currentInput = document.getElementById('intervalDropdown').value;
         
+        //reset dropdown
+        document.getElementById('intervalDropdown').selectedIndex = 0;
+        //log
         console.log("user submitted " + currentInput);
-        console.log(newPlaysCompleted + " plays completed")
+        console.log(newPlaysCompleted + " plays completed");
 
-        if(currentInput == -1){
-            //user didn't select from the dropdown
-            alert("Please select an interval.");
-        } else{
-            //reenable button
-            document.getElementById("gameButton").disabled = false;
-            //redisable submit button
-            document.getElementById("submitButton").disabled = true;
-            //update user answer sheet
-            setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
-            //check if the game is finished:
-            if(newPlaysCompleted >= roundsPerGame){
-                //just submitted final round
-                //update gamestate so results render
-                console.log("setting result update status to true")
-                setResultUpdate(true); 
-                
-            }
-        }     
-    }
+        //reenable button
+        document.getElementById("gameButton").disabled = false;
+        //redisable submit button
+        document.getElementById("submitButton").disabled = true;
+        //update user answer sheet
+        setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
+        //check if the game is finished:
+        if(newPlaysCompleted >= roundsPerGame){
+            //just submitted final round
+            //update gamestate so results render
+            console.log("setting result update status to true");
+            setResultUpdate(true); 
+        }
+    }     
+    
 
     //handles user pressing the play button
     //play sound, and log the correct answer to the answersheet
@@ -162,7 +160,7 @@ function GameInterface(){
 
             <select id='intervalDropdown'>
                 {/* dropdown */}
-                <option defaultValue disabled value={-1}>Choose Interval</option>
+                <option selected disabled hidden value={-1}>Choose Interval</option>
                 <option value={0}>Perfect Unison</option>
                 <option value={1}>Minor Second</option>
                 <option value={2}>Major Second</option>
