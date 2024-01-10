@@ -76,12 +76,12 @@ function GameInterface(){
     const [answerSheet, setAnswerSheet] = useState([]);
     //state: user answer list
     const [userAnswers, setUserAnswers] = useState([]);
-    const [resultUpdate, setResultUpdate] = useState(true);
+    const [resultUpdate, setResultUpdate] = useState(false);
     //setting the rounds per game to 10
     const roundsPerGame = 10;
 
     function LoadResults(){
-        if (resultUpdate){
+        if (!resultUpdate){
             return <h3>finish the current session to see your results.</h3>
         }else{
             var correct = 0;
@@ -101,11 +101,11 @@ function GameInterface(){
                 <>
                     <h3>Results:</h3>
                     <h1>{stars}</h1>
-                    <h5>Score: {correct}/{roundsPerGame} ({'\t' + percentage}%)</h5>
+                    <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
                 </>
                 )}
     }
-    
+
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -132,8 +132,9 @@ function GameInterface(){
             if(newPlaysCompleted >= roundsPerGame){
                 //just submitted final round
                 //update gamestate so results render
-                setResultUpdate(true);
-                console.log("showing results");
+                console.log("setting result update status to true")
+                setResultUpdate(true); 
+                
             }
         }     
     }
@@ -161,7 +162,7 @@ function GameInterface(){
 
             <select id='intervalDropdown'>
                 {/* dropdown */}
-                <option selected disabled value={-1}>Choose Interval</option>
+                <option defaultValue disabled value={-1}>Choose Interval</option>
                 <option value={0}>Perfect Unison</option>
                 <option value={1}>Minor Second</option>
                 <option value={2}>Major Second</option>
