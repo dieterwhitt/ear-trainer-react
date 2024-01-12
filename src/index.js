@@ -13,10 +13,9 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Intervals from "./pages/Intervals";
 import Chords from "./pages/Chords";
-import ChordProgressions from "./pages/Chord-Progressions"
+import ChordProgressions from "./pages/ChordProgressions"
 import About from "./pages/About"
 import NoPage from "./pages/NoPage";
-import ChordProgressions from './pages/Chord-Progressions';
 
 
 export default function App() {
@@ -28,7 +27,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="intervals" element={<Intervals />} />
             <Route path="chords" element={<Chords />} />
-            <Route path="cadences" element={<ChordProgressions />} />
+            <Route path="chordProgressions" element={<ChordProgressions />} />
             <Route path="about" element={<About />} />
             <Route path="*" element={<NoPage />} />
           </Route>

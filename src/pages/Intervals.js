@@ -3,8 +3,9 @@
 //filename Intervals.js
 
 import React from 'react';
-import keyboard from '../keyboard';
 import { useState, useEffect, useRef } from 'react';
+import keyboard from '../keyboard';
+import { play, getStars } from '../keyboard';
 
 //header component
 function Header(){
@@ -13,24 +14,11 @@ function Header(){
             <h1>Interval Training</h1>
             <p>Welcome to interval training. When you press play, you will be given
                 a series of random intervals. Identify them using the drop down box.
+                <div/> All intervals up to and including a Major Ninth are possible.
             </p>    
         </>
         );
 }
-//plays a single note 
-//string -> void
-function play(note){
-    //wow...
-    try{
-        //load note object
-        const noteobj = require('../sounds/piano-88-notes/' + note +'.wav');
-        //play
-        new Audio(noteobj).play();
-    }catch(e){
-        alert("couldn't play note " + note + " " + e)
-    }
-}
-
 //plays a random interval (unison-major 9th) and returns the inter value
 function playInterval(){
     //random 0 or 1 which will determine if there will be a delay
@@ -45,27 +33,14 @@ function playInterval(){
     const interval = Math.floor(Math.random() * 15);
 
     const intervalIndex =rootIndex+interval;
-    console.log('interval: playing '+ keyboard[rootIndex] + ' and ' + keyboard[intervalIndex]);
     //with delay
-    play(keyboard[rootIndex]);
-    setTimeout(() => play(keyboard[intervalIndex]),delay);
-
+    play(keyboard[rootIndex], 1);
+    //unison: play only the root
+    if (interval != 15){
+    setTimeout(() => play(keyboard[intervalIndex], 1),delay);
+    }
     //return the interval
     return interval;
-}
-//returing string of stars based on percentage
-function getStars(percentage){
-    if (percentage <50){
-        return "⭐"; //0-49
-    }else if (percentage < 70){
-        return "⭐⭐" //50-69
-    }else if (percentage < 85){
-        return "⭐⭐⭐" //70-84
-    }else if (percentage < 95){
-        return "⭐⭐⭐⭐" //85-95
-    }else{
-        return "⭐⭐⭐⭐⭐" //95-100
-    }
 }
 
 //game interface component
@@ -83,13 +58,12 @@ function GameInterface(){
     function LoadResults(){
         if (!resultUpdate){
             //not ready to load
-            return <h3>finish the current session to see your results.</h3>
+            return <h3>Finish the current session to see your results.</h3>
         }else{
             var correct = 0;
             for (const index in answerSheet) {
                 //getting score
                 if (answerSheet[index] == userAnswers[index]){
-                    console.log('getting score');
                     //correct answer
                     correct ++;
                 }
@@ -217,7 +191,6 @@ const Intervals = () => {
     <>
         <Header />
         <GameInterface />
-        
     </>
     )
 }

@@ -1,6 +1,6 @@
 //dieter whittingham
 //jan 7 2023
-//filename Chord-Progressions.js
+//filename ChordProgressions.js
 
 import React from 'react';
 

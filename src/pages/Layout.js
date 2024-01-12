@@ -12,7 +12,7 @@ const Layout = () => {
             <Link to= "/"> Home </Link>
             <Link to= "/intervals"> Intervals </Link>
             <Link to= "/chords"> Chords </Link>
-            <Link to= "/cadences"> Cadences </Link>
+            <Link to= "/chordProgressions"> Chord Progressions </Link>
             <Link to= "/about"> About </Link>
         </nav>  
 
