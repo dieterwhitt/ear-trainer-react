@@ -61,10 +61,10 @@ function getStars(percentage){
         return "⭐⭐" //50-69
     }else if (percentage < 85){
         return "⭐⭐⭐" //70-84
-    }else if (percentage < 100){
-        return "⭐⭐⭐⭐" //85-99
+    }else if (percentage < 95){
+        return "⭐⭐⭐⭐" //85-95
     }else{
-        return "⭐⭐⭐⭐⭐" //100%
+        return "⭐⭐⭐⭐⭐" //95-100
     }
 }
 
@@ -82,6 +82,7 @@ function GameInterface(){
 
     function LoadResults(){
         if (!resultUpdate){
+            //not ready to load
             return <h3>finish the current session to see your results.</h3>
         }else{
             var correct = 0;
@@ -105,39 +106,60 @@ function GameInterface(){
                     <h3>Results:</h3>
                     <h1>{stars}</h1>
                     <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
-                    <button id='restartButton'>Play Again</button>
+                    <button id='restartButton' onClick={restartGame}>Play Again</button>
                 </>
                 )}
+    }
+
+    const restartGame = () => {
+        //function for resetting the game
+        //reenable button
+        document.getElementById("gameButton").disabled = false;
+        //redisable submit button
+        document.getElementById("submitButton").disabled = true;
+        //reset dropdown
+        document.getElementById('intervalDropdown').disabled = false;
+        //remove results
+        setResultUpdate(false);
+        //reset score
+        setAnswerSheet([]);
+        setUserAnswers([]);
+        setPlaysCompleted(0);
     }
 
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
-        //update number of rounds played
-        const newPlaysCompleted = playsCompleted + 1;
-        setPlaysCompleted(newPlaysCompleted);
         //get user input (interval number)
         const currentInput = document.getElementById('intervalDropdown').value;
-        
-        //reset dropdown
-        document.getElementById('intervalDropdown').selectedIndex = 0;
-        //log
-        console.log("user submitted " + currentInput);
-        console.log(newPlaysCompleted + " plays completed");
+        //check valid input
+        if(currentInput == -1){
+            alert("Please select an interval.");
+        }else{
+            //update number of rounds played
+            const newPlaysCompleted = playsCompleted + 1;
+            setPlaysCompleted(newPlaysCompleted);
+            
+            //reset dropdown
+            document.getElementById('intervalDropdown').selectedIndex = 0;
+            //log
+            console.log("user submitted " + currentInput);
+            console.log(newPlaysCompleted + " plays completed");
 
-        //reenable button
-        document.getElementById("gameButton").disabled = false;
-        //redisable submit button
-        document.getElementById("submitButton").disabled = true;
-        //update user answer sheet
-        setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
-        //check if the game is finished:
-        if(newPlaysCompleted >= roundsPerGame){
-            //just submitted final round
-            //update gamestate so results render
-            console.log("setting result update status to true");
-            setResultUpdate(true); 
-        }
+            //reenable button
+            document.getElementById("gameButton").disabled = false;
+            //redisable submit button
+            document.getElementById("submitButton").disabled = true;
+            //update user answer sheet
+            setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
+            //check if the game is finished:
+            if(newPlaysCompleted >= roundsPerGame){
+                //just submitted final round
+                //update gamestate so results render
+                console.log("setting result update status to true");
+                setResultUpdate(true); 
+            }
+        }   
     }     
     
 
