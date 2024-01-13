@@ -38,7 +38,7 @@ function playChord(){
     const chordIntervalList = chordList[chordType];
     //loop through all notes
     for (const note of chordIntervalList) {
-        play(keyboard[(rootIndex+note)], 0.75);
+        play(keyboard[(rootIndex+note)], 0.6);
     }
 
     return chordType;

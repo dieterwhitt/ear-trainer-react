@@ -43,7 +43,9 @@ function play(note, volume) {
         //load note object
         const noteobj = require('./sounds/piano-88-notes/' + note + '.wav');
         //play
-        new Audio(noteobj).play();
+        const sound = new Audio(noteobj);
+        sound.volume = volume;
+        sound.play();
         console.log("play(): playing " + note);
     } catch (e) {
         alert("couldn't play note " + note + " " + e);

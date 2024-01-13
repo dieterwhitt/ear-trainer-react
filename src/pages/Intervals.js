@@ -37,7 +37,7 @@ function playInterval(){
     play(keyboard[rootIndex], 1);
     //unison: play only the root
     if (interval != 15){
-    setTimeout(() => play(keyboard[intervalIndex], 1),delay);
+    setTimeout(() => play(keyboard[intervalIndex], 0.6),delay);
     }
     //return the interval
     return interval;
