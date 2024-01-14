@@ -7,12 +7,13 @@ import { useState, useEffect, useRef } from 'react';
 import keyboard from '../keyboard';
 import { play, getStars } from '../keyboard';
 
+
 //header component
 function Header(){
     return (
         <>
             <h1>Interval Training</h1>
-            <p>Welcome to interval training. When you press play, you will be given
+            <p className="text-lg font-bold">Welcome to interval training. When you press play, you will be given
                 a series of random intervals. Identify them using the drop down box.
                 <div/> All intervals up to and including a Major Ninth are possible.
             </p>    
