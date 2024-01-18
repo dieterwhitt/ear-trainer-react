@@ -32,9 +32,11 @@ const About = () => {
                 <h4>Contact me:</h4>  
                 <nav>
                     <div>email: dieter.whitt@gmail.com</div>
-                    <a href='https://github.com/dieterwhitt'>github.com/dieterwhitt</a>
+                    <a href='https://github.com/dieterwhitt' target='_blank'>
+                        github.com/dieterwhitt</a>
                     <br/>
-                    <a href='https://linkedin.com/in/dieterwhittingham'>linkedin.com/in/dieterwhittingham</a>
+                    <a href='https://linkedin.com/in/dieterwhittingham' target='_blank'>
+                        linkedin.com/in/dieterwhittingham</a>
                 </nav>
             </div>
         </div>
