@@ -10,17 +10,17 @@ import { play, getStars, chordList } from '../keyboard';
 //header component
 function Header(){
     return (
-        <>
+        <div>
             <h1>Chord Identification Training</h1>
             <p>Welcome to chord identification training. When you press play, 
                 you will be given a series of random chords. 
                 Identify them using the drop down box.
-                <div/> Possible chords: Major (root position or 1st inversion), 
+                <br/> Possible chords: Major (root position or 1st inversion), 
                 Minor (root position or 1st inversion), Dominant 7th (root position), 
                 Diminished 7th (root position), Major-Major Seventh (root position), 
                 Minor-Minor Seventh (root position), or Augmented Triad (root position).
             </p>    
-        </>
+        </div>
         );
 }
 //plays a random chord
@@ -88,9 +88,9 @@ function GameInterface(){
     const restartGame = () => {
         //function for resetting the game
         //reenable button
-        document.getElementById("gameButton0").disabled = false;
+        document.getElementById('gameButton0').disabled = false;
         //redisable submit button
-        document.getElementById("submitButton0").disabled = true;
+        document.getElementById('submitButton0').disabled = true;
         //reset dropdown
         document.getElementById('chordDropdown').disabled = false;
         //remove results
@@ -108,7 +108,7 @@ function GameInterface(){
         const currentInput = document.getElementById('chordDropdown').value;
         //check valid input
         if(currentInput == -1){
-            alert("Please select a chord type.");
+            alert('Please select a chord type.');
         }else{
             //update number of rounds played
             const newPlaysCompleted = playsCompleted + 1;
@@ -117,20 +117,20 @@ function GameInterface(){
             //reset dropdown
             document.getElementById('chordDropdown').selectedIndex = 0;
             //log
-            console.log("user submitted " + currentInput);
-            console.log(newPlaysCompleted + " plays completed");
+            console.log('user submitted ' + currentInput);
+            console.log(newPlaysCompleted + ' plays completed');
 
             //reenable button
-            document.getElementById("gameButton0").disabled = false;
+            document.getElementById('gameButton0').disabled = false;
             //redisable submit button
-            document.getElementById("submitButton0").disabled = true;
+            document.getElementById('submitButton0').disabled = true;
             //update user answer sheet
             setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
             //check if the game is finished:
             if(newPlaysCompleted >= roundsPerGame){
                 //just submitted final round
                 //update gamestate so results render
-                console.log("setting result update status to true");
+                console.log('setting result update status to true');
                 setResultUpdate(true); 
             }
         }   
@@ -141,14 +141,14 @@ function GameInterface(){
     //play sound, and log the correct answer to the answersheet
     const handlePlay = (event) =>{
         event.preventDefault();
-        console.log("handling play");
+        console.log('handling play');
         //play chord and get the numerical value for it.
         const currentAnswer = playChord();
         console.log('the correct answer is ' + currentAnswer);
         //disable the button so that it cant be used before submission
-        document.getElementById("gameButton0").disabled = true;
+        document.getElementById('gameButton0').disabled = true;
         //enable the submit button
-        document.getElementById("submitButton0").disabled = false;
+        document.getElementById('submitButton0').disabled = false;
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
@@ -173,7 +173,7 @@ function GameInterface(){
                 <option value={8}>Augmented Triad</option>
             </select>
             {/* submit button: disabled until interval is played*/}
-            <input disabled id='submitButton0' type="submit" />
+            <input disabled id='submitButton0' type='submit' />
         </form>
         <h2>Chords Remaining: {roundsPerGame - playsCompleted}</h2>
         <LoadResults/>

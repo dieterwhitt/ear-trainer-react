@@ -11,13 +11,13 @@ import { play, getStars } from '../keyboard';
 //header component
 function Header(){
     return (
-        <>
+        <div>
             <h1>Interval Training</h1>
-            <p className="text-lg font-bold">Welcome to interval training. When you press play, you will be given
+            <p className='text-lg font-bold'>Welcome to interval training. When you press play, you will be given
                 a series of random intervals. Identify them using the drop down box.
-                <div/> All intervals up to and including a Major Ninth are possible.
+                <br/> All intervals up to and including a Major Ninth are possible.
             </p>    
-        </>
+        </div>
         );
 }
 //plays a random interval (unison-major 9th) and returns the inter value
@@ -73,7 +73,7 @@ function GameInterface(){
             const percentage = Math.round(100*correct/roundsPerGame);
             const stars = getStars(percentage);
             //disable play buttons so they can see their results
-            document.getElementById("gameButton").disabled = true;
+            document.getElementById('gameButton').disabled = true;
             document.getElementById('intervalDropdown').disabled = true;
             //render
             return(
@@ -89,9 +89,9 @@ function GameInterface(){
     const restartGame = () => {
         //function for resetting the game
         //reenable button
-        document.getElementById("gameButton").disabled = false;
+        document.getElementById('gameButton').disabled = false;
         //redisable submit button
-        document.getElementById("submitButton").disabled = true;
+        document.getElementById('submitButton').disabled = true;
         //reset dropdown
         document.getElementById('intervalDropdown').disabled = false;
         //remove results
@@ -109,7 +109,7 @@ function GameInterface(){
         const currentInput = document.getElementById('intervalDropdown').value;
         //check valid input
         if(currentInput == -1){
-            alert("Please select an interval.");
+            alert('Please select an interval.');
         }else{
             //update number of rounds played
             const newPlaysCompleted = playsCompleted + 1;
@@ -118,20 +118,20 @@ function GameInterface(){
             //reset dropdown
             document.getElementById('intervalDropdown').selectedIndex = 0;
             //log
-            console.log("user submitted " + currentInput);
-            console.log(newPlaysCompleted + " plays completed");
+            console.log('user submitted ' + currentInput);
+            console.log(newPlaysCompleted + ' plays completed');
 
             //reenable button
-            document.getElementById("gameButton").disabled = false;
+            document.getElementById('gameButton').disabled = false;
             //redisable submit button
-            document.getElementById("submitButton").disabled = true;
+            document.getElementById('submitButton').disabled = true;
             //update user answer sheet
             setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
             //check if the game is finished:
             if(newPlaysCompleted >= roundsPerGame){
                 //just submitted final round
                 //update gamestate so results render
-                console.log("setting result update status to true");
+                console.log('setting result update status to true');
                 setResultUpdate(true); 
             }
         }   
@@ -146,9 +146,9 @@ function GameInterface(){
         const currentAnswer = playInterval();
         console.log('the correct answer is ' + currentAnswer);
         //disable the button so that it cant be used before submission
-        document.getElementById("gameButton").disabled = true;
+        document.getElementById('gameButton').disabled = true;
         //enable the submit button
-        document.getElementById("submitButton").disabled = false;
+        document.getElementById('submitButton').disabled = false;
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
@@ -179,7 +179,7 @@ function GameInterface(){
                 <option value={14}>Major Ninth</option>
             </select>
             {/* submit button: disabled until interval is played*/}
-            <input disabled id='submitButton' type="submit" />
+            <input disabled id='submitButton' type='submit' />
         </form>
         <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
         <LoadResults/>

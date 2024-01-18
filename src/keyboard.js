@@ -46,9 +46,9 @@ function play(note, volume) {
         const sound = new Audio(noteobj);
         sound.volume = volume;
         sound.play();
-        console.log("play(): playing " + note);
+        console.log('play(): playing ' + note);
     } catch (e) {
-        alert("couldn't play note " + note + " " + e);
+        alert('couldn\'t play note ' + note + ' ' + e);
     }
 }
 
@@ -69,15 +69,15 @@ const chordList =
 //returing string of stars based on percentage
 function getStars(percentage) {
     if (percentage < 50) {
-        return "⭐"; //0-49
+        return '⭐'; //0-49
     } else if (percentage < 70) {
-        return "⭐⭐"; //50-69
+        return '⭐⭐'; //50-69
     } else if (percentage < 85) {
-        return "⭐⭐⭐"; //70-84
+        return '⭐⭐⭐'; //70-84
     } else if (percentage < 95) {
-        return "⭐⭐⭐⭐"; //85-95
+        return '⭐⭐⭐⭐'; //85-95
     } else {
-        return "⭐⭐⭐⭐⭐"; //95-100
+        return '⭐⭐⭐⭐⭐'; //95-100
     }
 }
 
