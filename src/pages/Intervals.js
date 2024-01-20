@@ -40,7 +40,7 @@ function GameInterface(){
             var correct = 0;
             for (const index in answerSheet) {
                 //getting score
-                if (answerSheet[index] == userAnswers[index]){
+                if (answerSheet[index] === userAnswers[index]){
                     //correct answer
                     correct ++;
                 }
@@ -84,7 +84,7 @@ function GameInterface(){
         //get user input (interval number)
         const currentInput = document.getElementById('intervalDropdown').value;
         //check valid input
-        if(currentInput == -1){
+        if(currentInput === -1){
             alert('Please select an interval.');
         }else{
             //update number of rounds played

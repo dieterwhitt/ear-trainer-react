@@ -5,7 +5,9 @@
 
 import React from 'react';
 
-//general functions
+/*****************************
+ * general functions
+*******************************/
 
 //a key is a string with an integer 0-9 followed by a note, representing all 88 keys
 
@@ -18,13 +20,13 @@ for(let i = 0; i <= 8; i++){
     for(const note of notes){
         let add = (i.toString()) + note;
         //a0, a#0, b0
-        if(i == 0){
+        if(i === 0){
             if(notes.includes(note,9)){
                 keyboard.push(add);
             }
         //c8
-        }else if (i == 8){
-            if (note == 'c'){
+        }else if (i === 8){
+            if (note === 'c'){
                 keyboard.push(add);
             }
         //otherwise add
@@ -69,8 +71,10 @@ export function getStars(percentage) {
         return '⭐⭐⭐⭐⭐'; //95-100
     }
 }
+/*****************************
+ * interval training
+*******************************/
 
-//interval training
 
 //plays a random interval (unison-major 9th) and returns the inter value
 export function playInterval() {
@@ -96,7 +100,9 @@ export function playInterval() {
     return interval;
 }
 
-//chord identification
+/*****************************
+ * chord identification
+*******************************/
 
 //chord types
 const chordList = 
@@ -133,24 +139,52 @@ export function playChord() {
     return chordType;
 }
 
-//for chord progressions
+/*****************************
+ * chord progressions
+*******************************/
 
-//create scale: creates a list which has the name
+//create scale: creates a scale list which has the name
 //of the key plus the 8 notes in it as intervals from the first note
 //note: the first note (string) ex. 'c', 'cs'
 //key: one of 'major' or 'minor'
 export function createScale(note, key){
     if(key){
         //major key
-        return [note + '+', 0, 2, 4, 5, 7, 9, 11]
+        return [note + '+', 0, 2, 4, 5, 7, 9, 11];
     }else{
         //minor key
-        return [note + '-', 0, 2, 3, 5, 7, 8, 11]
+        return [note + '-', 0, 2, 3, 5, 7, 8, 11];
     } 
 }
 
-function createProgression(scale){
-
+function createBassProgression(scale){   
+    //bass: getting tonic bass note
+    //tonic note is from 2g-3fs which is index 22-33
+    let bassTonic;
+    for(let index = 22; index <=33; index ++){
+        //check if the scale note matches the current keyboard note
+        if(scale[0].slice(0, -1) === keyboard[index].slice(1)){
+            bassTonic = index;
+        }
+    }
+    //the output progression list will be:
+    //tonic note (index) followed by integers referencing where the bass line is going
+    //relative to the tonic
+    let progression = [bassTonic]
+    /*
+    ideas: +12 / -12 to go up/down an octave, using scale as baseline
+    seen progressions:
+    I IV V64 V I
+    I vi IV V I
+    i iv i V VI
+    I IV V64 V I
+    i iv i V i
+    i iv V64 V VI
+    I IV I V I
+    i iv V64 V I
+    i VI iv V I
+    I IV I V VI
+    */
 }
 
 
