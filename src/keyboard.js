@@ -15,10 +15,10 @@ import React from 'react';
 const notes = ['c','cs','d','ds','e','f','fs','g','gs','a','as','b'];
 //const bottom_notes = notes.slice(8);
 let keyboard = [];
-
+let add = ''
 for(let i = 0; i <= 8; i++){
     for(const note of notes){
-        let add = (i.toString()) + note;
+        add = (i.toString()) + note;
         //a0, a#0, b0
         if(i === 0){
             if(notes.includes(note,9)){
@@ -78,24 +78,33 @@ export function getStars(percentage) {
 
 //plays a random interval (unison-major 9th) and returns the inter value
 export function playInterval() {
-    //random 0 or 1 which will determine if there will be a delay
-    var delay = Math.floor(Math.random() * 2);
-    //if delay = 1, will have a 500 ms delay between notes.
-    delay = delay * 500;
-
+    //random boolean which will determine if there will be a delay
+    let delay = Math.floor(Math.random() * 2);
+    //500 ms
+    delay *= 500;
+    //boolean determining if its ascending
+    const ascending = Boolean(Math.floor(Math.random() * 2))
     //choose root from 3c to 5c
     //i.e index 27 to 51
-    const rootIndex = Math.floor(Math.random() * 25 + 27);
+    let rootIndex = Math.floor(Math.random() * 25 + 27);
     //interval from 0 to 14 semitones (unison to minor 9th)
     const interval = Math.floor(Math.random() * 15);
+    //index of the second note
+    let intervalIndex = rootIndex + interval;
 
-    const intervalIndex = rootIndex + interval;
-    //with delay
-    play(keyboard[rootIndex], 1);
-    //unison: play only the root
-    if (interval != 15) {
-        setTimeout(() => play(keyboard[intervalIndex], 0.6), delay);
+    if (!ascending){
+        //swap which is played first if descending
+        const temp = rootIndex;
+        rootIndex = intervalIndex;
+        intervalIndex = temp;
     }
+    //play
+    play(keyboard[rootIndex], 0.6);
+    //with delay
+    //ignoring unison
+    if(interval != 0){
+        setTimeout(() => play(keyboard[intervalIndex], 0.6), delay);
+    }    
     //return the interval
     return interval;
 }
@@ -157,22 +166,10 @@ export function createScale(note, key){
     } 
 }
 
-function createBassProgression(scale){   
-    //bass: getting tonic bass note
-    //tonic note is from 2g-3fs which is index 22-33
-    let bassTonic;
-    for(let index = 22; index <=33; index ++){
-        //check if the scale note matches the current keyboard note
-        if(scale[0].slice(0, -1) === keyboard[index].slice(1)){
-            bassTonic = index;
-        }
-    }
-    //the output progression list will be:
-    //tonic note (index) followed by integers referencing where the bass line is going
-    //relative to the tonic
-    let progression = [bassTonic]
+export function createProgressionList(scale){
+    let progression = [];
+    let major;
     /*
-    ideas: +12 / -12 to go up/down an octave, using scale as baseline
     seen progressions:
     I IV V64 V I
     I vi IV V I
@@ -185,6 +182,31 @@ function createBassProgression(scale){
     i VI iv V I
     I IV I V VI
     */
+    //tonic chord
+    //adjust according to minor at the end
+    progression.push('I');
+    //next 3:
+    //IV V64 V
+    //IV I V
+    //IV VI V
+    //VI IV V
+
+}
+
+export function createBassProgression(scale){   
+    //bass: getting tonic bass note
+    //tonic note is from 2g-3fs which is index 22-33
+    let bassTonic;
+    for(let index = 22; index <=33; index ++){
+        //check if the scale note matches the current keyboard note
+        if(scale[0].slice(0, -1) === keyboard[index].slice(1)){
+            bassTonic = index;
+        }
+    }
+    //the output progression list will be:
+    //tonic note (index) followed by integers referencing where the bass progression is going
+    //relative to the tonic. (get note: scale index -> interval -> keyboard note)
+    
 }
 
 
