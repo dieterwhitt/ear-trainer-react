@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.21.1"
+    "react-router-dom": "^6.21.1",
+    "tailwindcss-animate": "^1.0.7"
   }
 }

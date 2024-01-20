@@ -4,8 +4,14 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'font1': ['Raleway', 'sans-serif'],
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
 }
 

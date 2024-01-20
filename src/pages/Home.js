@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
-    <div>
+    <div className="font-font1 text-center">
         <h1>Welcome to Ear Trainer</h1>
         <h4>Choose from interval training, chord identification training, or chord progression training!
             <br/>Also check out the About page!</h4>
