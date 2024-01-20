@@ -4,8 +4,8 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import keyboard from '../keyboard';
-import { play, getStars } from '../keyboard';
+import { getStars } from '../keyboard';
+import { playInterval } from '../keyboard';
 
 
 //header component
@@ -20,30 +20,6 @@ function Header(){
         </div>
         );
 }
-//plays a random interval (unison-major 9th) and returns the inter value
-function playInterval(){
-    //random 0 or 1 which will determine if there will be a delay
-    var delay = Math.floor(Math.random() * 2);
-    //if delay = 1, will have a 500 ms delay between notes.
-    delay = delay*500;
-
-    //choose root from 3c to 5c
-    //i.e index 27 to 51
-    const rootIndex = Math.floor(Math.random()*25 + 27);
-    //interval from 0 to 14 semitones (unison to minor 9th)
-    const interval = Math.floor(Math.random() * 15);
-
-    const intervalIndex =rootIndex+interval;
-    //with delay
-    play(keyboard[rootIndex], 1);
-    //unison: play only the root
-    if (interval != 15){
-    setTimeout(() => play(keyboard[intervalIndex], 0.6),delay);
-    }
-    //return the interval
-    return interval;
-}
-
 //game interface component
 function GameInterface(){
     //state: number of plays completed

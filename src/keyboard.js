@@ -1,8 +1,11 @@
 //dieter whittingham
 //jan 8 2023
-//sound player
+
+//keyboard.js: file for configuring keyboard loading and chord theory
 
 import React from 'react';
+
+//general functions
 
 //a key is a string with an integer 0-9 followed by a note, representing all 88 keys
 
@@ -52,6 +55,49 @@ function play(note, volume) {
     }
 }
 
+//returing string of stars based on percentage
+export function getStars(percentage) {
+    if (percentage < 50) {
+        return '⭐'; //0-49
+    } else if (percentage < 70) {
+        return '⭐⭐'; //50-69
+    } else if (percentage < 85) {
+        return '⭐⭐⭐'; //70-84
+    } else if (percentage < 95) {
+        return '⭐⭐⭐⭐'; //85-95
+    } else {
+        return '⭐⭐⭐⭐⭐'; //95-100
+    }
+}
+
+//interval training
+
+//plays a random interval (unison-major 9th) and returns the inter value
+export function playInterval() {
+    //random 0 or 1 which will determine if there will be a delay
+    var delay = Math.floor(Math.random() * 2);
+    //if delay = 1, will have a 500 ms delay between notes.
+    delay = delay * 500;
+
+    //choose root from 3c to 5c
+    //i.e index 27 to 51
+    const rootIndex = Math.floor(Math.random() * 25 + 27);
+    //interval from 0 to 14 semitones (unison to minor 9th)
+    const interval = Math.floor(Math.random() * 15);
+
+    const intervalIndex = rootIndex + interval;
+    //with delay
+    play(keyboard[rootIndex], 1);
+    //unison: play only the root
+    if (interval != 15) {
+        setTimeout(() => play(keyboard[intervalIndex], 0.6), delay);
+    }
+    //return the interval
+    return interval;
+}
+
+//chord identification
+
 //chord types
 const chordList = 
 [
@@ -66,20 +112,45 @@ const chordList =
 [0, 4, 8] //augmmented
 ];
 
-//returing string of stars based on percentage
-function getStars(percentage) {
-    if (percentage < 50) {
-        return '⭐'; //0-49
-    } else if (percentage < 70) {
-        return '⭐⭐'; //50-69
-    } else if (percentage < 85) {
-        return '⭐⭐⭐'; //70-84
-    } else if (percentage < 95) {
-        return '⭐⭐⭐⭐'; //85-95
-    } else {
-        return '⭐⭐⭐⭐⭐'; //95-100
+//plays a random chord
+export function playChord() {
+    //choose root from 4c to 4b
+    //i.e index 39 to 50
+    const rootIndex = Math.floor(Math.random() * 12 + 39);
+    //random number from 0-8 determining the chord
+    const chordType = Math.floor(Math.random() * 9);
+
+    console.log('chord: playing chord type ' + chordType +
+        ' with root ' + keyboard[rootIndex]);
+
+    //play chord
+    const chordIntervalList = chordList[chordType];
+    //loop through all notes
+    for (const note of chordIntervalList) {
+        play(keyboard[(rootIndex + note)], 0.6);
     }
+
+    return chordType;
 }
 
-export {play, chordList, getStars};
+//for chord progressions
+
+//create scale: creates a list which has the name
+//of the key plus the 8 notes in it as intervals from the first note
+//note: the first note (string) ex. 'c', 'cs'
+//key: one of 'major' or 'minor'
+export function createScale(note, key){
+    if(key){
+        //major key
+        return [note + '+', 0, 2, 4, 5, 7, 9, 11]
+    }else{
+        //minor key
+        return [note + '-', 0, 2, 3, 5, 7, 8, 11]
+    } 
+}
+
+function createProgression(scale){
+
+}
+
 

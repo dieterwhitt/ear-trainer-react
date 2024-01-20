@@ -4,8 +4,8 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import keyboard from '../keyboard';
-import { play, getStars, chordList } from '../keyboard';
+import { getStars } from '../keyboard';
+import { playChord } from '../keyboard';
 
 //header component
 function Header(){
@@ -22,26 +22,6 @@ function Header(){
             </p>    
         </div>
         );
-}
-//plays a random chord
-function playChord(){
-    //choose root from 4c to 4b
-    //i.e index 39 to 50
-    const rootIndex = Math.floor(Math.random()*12 + 39);
-    //random number from 0-8 determining the chord
-    const chordType = Math.floor(Math.random() * 9);
-
-    console.log('chord: playing chord type '+ chordType + 
-    ' with root ' + keyboard[rootIndex]);
-
-    //play chord
-    const chordIntervalList = chordList[chordType];
-    //loop through all notes
-    for (const note of chordIntervalList) {
-        play(keyboard[(rootIndex+note)], 0.6);
-    }
-
-    return chordType;
 }
 //game interface component
 function GameInterface(){
