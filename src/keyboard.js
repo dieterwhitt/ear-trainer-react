@@ -40,8 +40,11 @@ console.log(keyboard);
 
 export default keyboard;
 
-//plays a single note 
-//string -> void
+/**
+ * plays a single note
+ * @param {string} note 
+ * @param {float} volume 
+ */
 function play(note, volume) {
     //wow...
     try {
@@ -57,7 +60,11 @@ function play(note, volume) {
     }
 }
 
-//returing string of stars based on percentage
+/**
+ * 
+ * @param {float} percentage 
+ * @returns a string of stars based on percentage
+ */
 export function getStars(percentage) {
     if (percentage < 50) {
         return '⭐'; //0-49
@@ -76,7 +83,10 @@ export function getStars(percentage) {
 *******************************/
 
 
-//plays a random interval (unison-major 9th) and returns the inter value
+/**
+ * plays a random interval (unison-major 9th) and returns the inter value
+ * @returns the interval that was played (int)
+ */
 export function playInterval() {
     //random boolean which will determine if there will be a delay
     let delay = Math.floor(Math.random() * 2);
@@ -102,7 +112,7 @@ export function playInterval() {
     play(keyboard[rootIndex], 0.6);
     //with delay
     //ignoring unison
-    if(interval != 0){
+    if(interval !== 0){
         setTimeout(() => play(keyboard[intervalIndex], 0.6), delay);
     }    
     //return the interval
@@ -127,7 +137,10 @@ const chordList =
 [0, 4, 8] //augmmented
 ];
 
-//plays a random chord
+/**
+ * plays a random chord for chord identification training
+ * @returns the type of chord that was played (int, index of chordList)
+ */
 export function playChord() {
     //choose root from 4c to 4b
     //i.e index 39 to 50
@@ -152,11 +165,14 @@ export function playChord() {
  * chord progressions
 *******************************/
 
-//create scale: creates a scale list which has the name
-//of the key plus the 8 notes in it as intervals from the first note
-//note: the first note (string) ex. 'c', 'cs'
-//key: one of 'major' or 'minor'
-export function createScale(note, key){
+/**
+ * create scale: creates a scale list which has the name
+ * of the key plus the 8 notes in it as intervals from the first note
+ * @param {string} note the first note of the scale ex. 'c', 'cs'
+ * @param {boolean} key major - true minor - false
+ * @returns 
+ */
+function createScale(note, key){
     if(key){
         //major key
         return [note + '+', 0, 2, 4, 5, 7, 9, 11];
@@ -165,10 +181,12 @@ export function createScale(note, key){
         return [note + '-', 0, 2, 3, 5, 7, 8, 11];
     } 
 }
-
-export function createProgressionList(scale){
-    let progression = [];
-    let major;
+/**
+ * given a scale generates a random chord progression in roman numerals
+ * @param {list} scale 
+ * @returns list of roman numeral strings representing the progression
+ */
+function createProgressionList(scale){
     /*
     seen progressions:
     I IV V64 V I
@@ -182,18 +200,53 @@ export function createProgressionList(scale){
     i VI iv V I
     I IV I V VI
     */
+    let progression = [];
     //tonic chord
     //adjust according to minor at the end
     progression.push('I');
     //next 3:
-    //IV V64 V
-    //IV I V
-    //IV VI V
-    //VI IV V
+    //0 - IV V64 V
+    //1 - IV I V
+    //2 - VI IV V
+    //C represents V64
+    const middleSequence = Math.floor(Math.random()*3);
+    if (middleSequence === 0){
+        progression.push('IV', 'C', 'V');
+    }else if (middleSequence === 1){
+        progression.push('IV', 'I', 'V');
+    }else{
+        progression.push('VI', 'IV', 'V');
+    }
+    finalChord = Math.floor(Math.random()*2)
+    //final chord: I or VI
+    if(finalChord === 0){
+        progression.push('I')
+    }else{
+        progression.push('VI')
+    }
 
+    //lastly convert numerals based on major/minor key
+    if (scale.slice(-1) === '-'){
+        //minor key: lowercase i, iv, uppercase VI
+        for (const index in progression) {
+            if(progression[index] === 'I' || progression[index] === 'IV'){
+                //make it lowercase
+                progression[index] = progression[index].toLowerCase();
+            }
+        }
+    }else{
+        //major key
+        for (const index in progression) {
+            if(progression[index] === 'VI'){
+                //make it lowercase
+                progression[index] = progression[index].toLowerCase();
+            }
+        }
+    }
+    return progression;
 }
 
-export function createBassProgression(scale){   
+function createBassProgression(scale){   
     //bass: getting tonic bass note
     //tonic note is from 2g-3fs which is index 22-33
     let bassTonic;
