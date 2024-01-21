@@ -37,10 +37,11 @@ function GameInterface(){
             //not ready to load
             return <h3>Finish the current session to see your results.</h3>
         }else{
-            var correct = 0;
+            let correct = 0;
             for (const index in answerSheet) {
                 //getting score
-                if (answerSheet[index] === userAnswers[index]){
+                //== since they're 2 different arrays in memory
+                if (answerSheet[index] == userAnswers[index]){
                     //correct answer
                     correct ++;
                 }

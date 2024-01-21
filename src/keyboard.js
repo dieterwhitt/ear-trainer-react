@@ -62,7 +62,7 @@ function play(note, volume) {
 
 /**
  * 
- * @param {float} percentage 
+ * @param {int} percentage 
  * @returns a string of stars based on percentage
  */
 export function getStars(percentage) {
