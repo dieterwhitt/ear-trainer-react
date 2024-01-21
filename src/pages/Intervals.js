@@ -4,8 +4,7 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { getStars } from '../keyboard';
-import { playInterval } from '../keyboard';
+import { getStars, playInterval } from '../keyboard';
 
 
 //header component

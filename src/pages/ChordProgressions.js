@@ -5,7 +5,7 @@
 import React from 'react';
 import { useState } from 'react';
 import keyboard from '../keyboard';
-import { play, getStars } from '../keyboard';
+import { testBass } from '../keyboard';
 
 //header component
 function Header(){
@@ -22,14 +22,11 @@ function Header(){
 
 
 
-const ChordProgressions = () => {
-    
-
-
-    
+const ChordProgressions = () => {   
     return (
         <div>
-            
+            <Header/>
+            <button onClick={testBass}>test</button>
         </div>);
 }
 

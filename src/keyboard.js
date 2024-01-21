@@ -243,6 +243,7 @@ function createNumeralProgression(scale){
             }
         }
     }
+    console.log('current progression: ' + progression);
     return progression;
 }
 /**
@@ -278,6 +279,7 @@ function createBassProgression(scale, numeralProgression){
             bassProgression.push(index);
         }
     }
+    
     //other 4 notes
     //keeping track of the previous note played for harmony reasons
     let tonic = bassProgression[0]
@@ -285,35 +287,37 @@ function createBassProgression(scale, numeralProgression){
     //keeping track of previous scale index
     let previousScaleIndex = 1;
     let currentScaleIndex, noteDiff, cand1, cand2;
-    let cadential = false;
+    let cadential;
     //cand2 > cand1
-    for (const numeral of numeralProgression) {
+    for (let index = 1; index <= 4; index ++) {
         //get what scale note we should be on
-        currentScaleIndex = numeralToScaleIndex(numeral);
+        currentScaleIndex = numeralToScaleIndex(numeralProgression[index]);
         //difference from the previous note to the current one
         noteDiff = scale[currentScaleIndex] - scale[previousScaleIndex];
         //get the note candidates
+        //set cadential back to false
+        cadential = false;
         if (noteDiff < 0){
             //moving down the scale
             cand1 = previousNote + noteDiff;
             //shift an octave up
             cand2 = cand1 + 12;
-            cadential = false;
         }else if (noteDiff > 0){
             //moving up the scale
             cand2 = previousNote + noteDiff;
             //shift an octave down
             cand1 = cand2 - 12;
-            cadential = false;
         }else{
             //same scale note (C -> V)
-            cand1 = previousNote + 12;
-            cand2 = previousNote - 12;
+            cand2 = previousNote + 12;
+            cand1 = previousNote - 12;
             //mark cadential
             cadential = true;
         }
         //now have 2 candidates
         let candidates = [cand1, cand2];
+        console.log('current candidates for chord ' + index + ': ' + candidates + 
+        ' cadential: ' + cadential);
         let chosen = -1;
         for (const index in candidates) {
             //remove any jump bigger than a 5th
@@ -341,19 +345,33 @@ function createBassProgression(scale, numeralProgression){
                 }
             }else if (previousNote > 33){
                 //not candential and previous note was too high
-                candidates.splice(1,1);
+                chosen = cand1;
             }else if (previousNote < 22){
                 //too low
                 chosen = cand2;
             }else{
                 //choose at random
+                console.log('choosing randomly between ' + candidates);
                 const choice = Math.floor(Math.random() * 2);
                 chosen = candidates.at(choice);
             }
         }
+        console.log('chosen for chord ' + index + ': ' + chosen);
         bassProgression.push(chosen);
+        //update
+        previousNote = chosen;
+        previousScaleIndex = currentScaleIndex;
     }
     return bassProgression;
 }
 
-
+export function testBass(){
+    const cmajorScale = createScale('c', true);
+    const numeralProgression = createNumeralProgression(cmajorScale);
+    const bassProgression = createBassProgression(cmajorScale, numeralProgression);
+    let delay = 0;
+    for (const note of bassProgression) {
+        setTimeout(() => play(keyboard[note], 0.6), delay);
+        delay += 1500;
+    }
+}

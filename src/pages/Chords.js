@@ -4,8 +4,7 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { getStars } from '../keyboard';
-import { playChord } from '../keyboard';
+import { getStars, playChord } from '../keyboard';
 
 //header component
 function Header(){
