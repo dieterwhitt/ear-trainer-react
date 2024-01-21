@@ -11,7 +11,7 @@ import React from 'react';
 
 //a key is a string with an integer 0-9 followed by a note, representing all 88 keys
 
-//list of notes
+//array of notes
 const notes = ['c','cs','d','ds','e','f','fs','g','gs','a','as','b'];
 //const bottom_notes = notes.slice(8);
 let keyboard = [];
@@ -35,7 +35,7 @@ for(let i = 0; i <= 8; i++){
         }
     }
 }
-//now have a list of every key
+//now have a array of every key
 console.log(keyboard);
 
 export default keyboard;
@@ -124,7 +124,7 @@ export function playInterval() {
 *******************************/
 
 //chord types
-const chordList = 
+const chordArray = 
 [
 [0, 4, 7, 12], //0 - major in root position 
 [0, 3, 8, 12], //1 - major in first inversion
@@ -139,7 +139,7 @@ const chordList =
 
 /**
  * plays a random chord for chord identification training
- * @returns the type of chord that was played (int, index of chordList)
+ * @returns the type of chord that was played (int, index of chordArray)
  */
 export function playChord() {
     //choose root from 4c to 4b
@@ -152,9 +152,9 @@ export function playChord() {
         ' with root ' + keyboard[rootIndex]);
 
     //play chord
-    const chordIntervalList = chordList[chordType];
+    const chordIntervalArray = chordArray[chordType];
     //loop through all notes
-    for (const note of chordIntervalList) {
+    for (const note of chordIntervalArray) {
         play(keyboard[(rootIndex + note)], 0.6);
     }
 
@@ -166,7 +166,7 @@ export function playChord() {
 *******************************/
 
 /**
- * create scale: creates a scale list which has the name
+ * create scale: creates a scale array which has the name
  * of the key plus the 8 notes in it as intervals from the first note
  * @param {string} note the first note of the scale ex. 'c', 'cs'
  * @param {boolean} key major - true minor - false
@@ -183,10 +183,10 @@ function createScale(note, key){
 }
 /**
  * given a scale generates a random chord progression in roman numerals
- * @param {list} scale 
- * @returns list of roman numeral strings representing the progression
+ * @param {array} scale 
+ * @returns array of roman numeral strings representing the progression
  */
-function createProgressionList(scale){
+function createNumeralProgression(scale){
     /*
     seen progressions:
     I IV V64 V I
@@ -217,7 +217,7 @@ function createProgressionList(scale){
     }else{
         progression.push('VI', 'IV', 'V');
     }
-    finalChord = Math.floor(Math.random()*2)
+    const finalChord = Math.floor(Math.random()*2)
     //final chord: I or VI
     if(finalChord === 0){
         progression.push('I')
@@ -245,21 +245,115 @@ function createProgressionList(scale){
     }
     return progression;
 }
+/**
+ * converts a roman numeral to its index in a scale array
+ * @param {string} numeral 
+ * @returns - int index of scale
+ */
+function numeralToScaleIndex(numeral){
+    if(numeral === 'I' || numeral === 'i'){
+        return 1;
+    }else if(numeral === 'IV' || numeral === 'iv'){
+        return 4;
+    }else if(numeral === 'V' || numeral === 'C'){
+        return 5;
+    }else{
+        return 6;
+    }
+}
 
-function createBassProgression(scale){   
+/**
+ * creates a base line in terms of keyboard indexes
+ * @param {Array} scale 
+ * @param {Array} numeralProgression
+ * @returns a array of integers representing the keyboard indexes of the bass line
+ */
+function createBassProgression(scale, numeralProgression){   
     //bass: getting tonic bass note
     //tonic note is from 2g-3fs which is index 22-33
-    let bassTonic;
+    let bassProgression = [];
     for(let index = 22; index <=33; index ++){
         //check if the scale note matches the current keyboard note
         if(scale[0].slice(0, -1) === keyboard[index].slice(1)){
-            bassTonic = index;
+            bassProgression.push(index);
         }
     }
-    //the output progression list will be:
-    //tonic note (index) followed by integers referencing where the bass progression is going
-    //relative to the tonic. (get note: scale index -> interval -> keyboard note)
-    
+    //other 4 notes
+    //keeping track of the previous note played for harmony reasons
+    let tonic = bassProgression[0]
+    let previousNote = tonic;
+    //keeping track of previous scale index
+    let previousScaleIndex = 1;
+    let currentScaleIndex, noteDiff, cand1, cand2;
+    let cadential = false;
+    //cand2 > cand1
+    for (const numeral of numeralProgression) {
+        //get what scale note we should be on
+        currentScaleIndex = numeralToScaleIndex(numeral);
+        //difference from the previous note to the current one
+        noteDiff = scale[currentScaleIndex] - scale[previousScaleIndex];
+        //get the note candidates
+        if (noteDiff < 0){
+            //moving down the scale
+            cand1 = previousNote + noteDiff;
+            //shift an octave up
+            cand2 = cand1 + 12;
+            cadential = false;
+        }else if (noteDiff > 0){
+            //moving up the scale
+            cand2 = previousNote + noteDiff;
+            //shift an octave down
+            cand1 = cand2 - 12;
+            cadential = false;
+        }else{
+            //same scale note (C -> V)
+            cand1 = previousNote + 12;
+            cand2 = previousNote - 12;
+            //mark cadential
+            cadential = true;
+        }
+        //now have 2 candidates
+        let candidates = [cand1, cand2];
+        let chosen = -1;
+        for (const index in candidates) {
+            //remove any jump bigger than a 5th
+            if (!cadential && Math.abs(previousNote - candidates[index]) > 7){
+                //interval from previous to current is bigger than a 5th
+                //not including cadential (octave jump)
+                //remove candidate
+                candidates.splice(index, 1);
+                //choose the other object
+                chosen = candidates[0];
+            }
+        }
+        //if there are still 2 candidates
+        if (chosen === -1){
+            //handle cadential 
+            if(cadential){
+                if (previousNote < tonic){
+                    //previous note was lower than the tonic
+                    //jump to cand2
+                    chosen = cand2;
+                }else{
+                    //previous note was higher
+                    //jump to cand1 (remove cand2)
+                    chosen = cand1;
+                }
+            }else if (previousNote > 33){
+                //not candential and previous note was too high
+                candidates.splice(1,1);
+            }else if (previousNote < 22){
+                //too low
+                chosen = cand2;
+            }else{
+                //choose at random
+                const choice = Math.floor(Math.random() * 2);
+                chosen = candidates.at(choice);
+            }
+        }
+        bassProgression.push(chosen);
+    }
+    return bassProgression;
 }
 
 

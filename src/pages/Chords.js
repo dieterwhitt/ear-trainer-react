@@ -27,9 +27,9 @@ function Header(){
 function GameInterface(){
     //state: number of plays completed
     const [playsCompleted, setPlaysCompleted] = useState(0);
-    //state: current answer list
+    //state: current answer array
     const [answerSheet, setAnswerSheet] = useState([]);
-    //state: user answer list
+    //state: user answer array
     const [userAnswers, setUserAnswers] = useState([]);
     const [resultUpdate, setResultUpdate] = useState(false);
     //setting the rounds per game to 10
