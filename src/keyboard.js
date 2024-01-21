@@ -59,7 +59,12 @@ function play(note) {
         alert('couldn\'t play note ' + keyboard[note] + ' ' + e);
     }
 }
-
+/**
+ * exponential function to determine the volume of each note for balancing
+ * higher notes - higher volume to balance the sound
+ * @param {int} note - note on the keyboard which is being calculated
+ * @returns volume 0-1
+ */
 export function volumeFunction(note){
     const a = 5.509;
     const b = 0.0393;
