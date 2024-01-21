@@ -42,22 +42,31 @@ export default keyboard;
 
 /**
  * plays a single note
- * @param {string} note 
- * @param {float} volume 
+ * @param {int} note - keyboard index of the note 
  */
-function play(note, volume) {
+function play(note) {
     //wow...
     try {
         //load note object
-        const noteobj = require('./sounds/piano-88-notes/' + note + '.wav');
+        const noteobj = require('./sounds/piano-88-notes/' + keyboard[note] + '.wav');
         //play
         const sound = new Audio(noteobj);
+        const volume = volumeFunction(note)
         sound.volume = volume;
         sound.play();
-        console.log('play(): playing ' + note);
+        console.log('play(): playing ' + keyboard[note] + ' with volume ' + volume);
     } catch (e) {
-        alert('couldn\'t play note ' + note + ' ' + e);
+        alert('couldn\'t play note ' + keyboard[note] + ' ' + e);
     }
+}
+
+export function volumeFunction(note){
+    const a = 5.509;
+    const b = 0.0393;
+    const c = 14.49;
+    //ae^(bx) + c
+    const volume = (Math.floor(a * Math.exp(b * note) + c))/100;
+    return volume;
 }
 
 /**
@@ -91,7 +100,7 @@ export function playInterval() {
     //random boolean which will determine if there will be a delay
     let delay = Math.floor(Math.random() * 2);
     //500 ms
-    delay *= 500;
+    delay *= 1500;
     //boolean determining if its ascending
     const ascending = Boolean(Math.floor(Math.random() * 2))
     //choose root from 3c to 5c
@@ -109,11 +118,11 @@ export function playInterval() {
         intervalIndex = temp;
     }
     //play
-    play(keyboard[rootIndex], 0.6);
+    play(rootIndex);
     //with delay
     //ignoring unison
     if(interval !== 0){
-        setTimeout(() => play(keyboard[intervalIndex], 0.6), delay);
+        setTimeout(() => play(intervalIndex), delay);
     }    
     //return the interval
     return interval;
@@ -154,8 +163,9 @@ export function playChord() {
     //play chord
     const chordIntervalArray = chordArray[chordType];
     //loop through all notes
+    let volume;
     for (const note of chordIntervalArray) {
-        play(keyboard[(rootIndex + note)], 0.6);
+        play(rootIndex+note);
     }
 
     return chordType;
@@ -371,7 +381,7 @@ export function testBass(){
     const bassProgression = createBassProgression(cmajorScale, numeralProgression);
     let delay = 0;
     for (const note of bassProgression) {
-        setTimeout(() => play(keyboard[note], 0.6), delay);
-        delay += 1500;
+        setTimeout(() => play(note), delay);
+        delay += 2000;
     }
 }
