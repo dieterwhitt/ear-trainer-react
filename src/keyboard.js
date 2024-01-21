@@ -105,7 +105,7 @@ export function playInterval() {
     //random boolean which will determine if there will be a delay
     let delay = Math.floor(Math.random() * 2);
     //500 ms
-    delay *= 1500;
+    delay *= 1000;
     //boolean determining if its ascending
     const ascending = Boolean(Math.floor(Math.random() * 2))
     //choose root from 3c to 5c
@@ -241,7 +241,7 @@ function createNumeralProgression(scale){
     }
 
     //lastly convert numerals based on major/minor key
-    if (scale.slice(-1) === '-'){
+    if (scale[0].slice(-1) === '-'){
         //minor key: lowercase i, iv, uppercase VI
         for (const index in progression) {
             if(progression[index] === 'I' || progression[index] === 'IV'){
@@ -381,7 +381,7 @@ function createBassProgression(scale, numeralProgression){
 }
 
 export function testBass(){
-    const cmajorScale = createScale('c', true);
+    const cmajorScale = createScale('d', false);
     const numeralProgression = createNumeralProgression(cmajorScale);
     const bassProgression = createBassProgression(cmajorScale, numeralProgression);
     let delay = 0;
