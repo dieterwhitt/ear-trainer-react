@@ -20,8 +20,6 @@ function Header(){
         );
 }
 
-
-
 const ChordProgressions = () => {   
     return (
         <div>

@@ -395,7 +395,8 @@ function createBassProgression(scale, numeralProgression){
         noteDiff = scale[currentScaleIndex] - scale[previousScaleIndex];
         //get the note candidates
         //update cadential
-        numeralProgression[index] === 'C' ? cadential = false : cadential = true;
+        //true if the previous chord was cadential, allowing jumps on V
+        numeralProgression[index - 1] === 'C' ? cadential = true : cadential = false;
         //calling separate function
         chosen = chooseBass(previousNote, noteDiff, cadential, tonic);
         bassProgression.push(chosen);
@@ -409,13 +410,13 @@ function createBassProgression(scale, numeralProgression){
  * bass line testing function
  */
 export function testBass(){
-    const cmajorScale = createScale('d', false);
+    const cmajorScale = createScale('f', false);
     const numeralProgression = createNumeralProgression(cmajorScale);
     const bassProgression = createBassProgression(cmajorScale, numeralProgression);
     let delay = 0;
     for (const note of bassProgression) {
         setTimeout(() => play(note), delay);
-        delay += 2000;
+        delay += 1500;
     }
 }
 /*
@@ -427,9 +428,23 @@ function scaleTonicTriad(scale){
     const tonicTriad = [root + scale[3], root + scale[5], root + 12];
     return tonicTriad;
 }
+/**
+* dictionary of songs used
+* necessary for randomlly generated chord progressions
+* false indicates that the song cannot be used in the progression or doesn't exist
+* there may be multiple songs for each progression
+* song format: string with start-destination numbers and split by a -
+* ex. '51-71-34-55'
 */
-
-function getNextTriad(scale, scaleIndex, previousScaleIndex, previousTriad){
+const songDictionary = 
+[
+    [[false], ['songI-IV'], ['songI-V'], [false], [false]], //I -> I, IV, V, C, VI 
+    [['songIV-I'], [false], ['songIV-V'], ['songIV-C'], [false]], //IV -> I, IV, V, C, VI 
+    [], //V -> I, IV, V, C, VI 
+    [], //C -> I, IV, V, C, VI 
+    []  //VI -> I, IV, V, C, VI 
+];
+function getNextTriad(scale,  previousTriad){
 
 }
 
@@ -440,13 +455,13 @@ function createTriadProgression(scale, numeralProgression){
     //1st inversion triad
     //root: 3rd of the chord. root: 3g to 4fs
     const root = scaleToNote(scale, 34, 45);
-    let previousTriad = [3, 5, 1];
-    triadProgression.push(previousTriad);
+    const tonic = [3, 5, 1];
+    triadProgression.push(tonic);
+    let previousTriad = tonic;
     //other 4 triads
     for(let index = 1; index <= 4; index ++){
         //use songs to get the next triad (previous chord, current chord)
-        const calculatedTriad = getNextTriad(numeralProgression[index-1], 
-            numeralProgression[index-2]);
+        //const calculatedTriad = ;
     }  
 
 }
