@@ -447,7 +447,11 @@ const songDictionary =
 function getNextTriad(scale,  previousTriad){
 
 }
-
+/**
+ * 
+ * @param {*} scale 
+ * @param {*} numeralProgression 
+ */
 function createTriadProgression(scale, numeralProgression){
     //triad: array of 3 scale indexes
     //then they will be converted into keyboard indexes in another function
