@@ -527,10 +527,12 @@ const songs =
             //not V-I or V-VI cadential
             return false;
         }
-    }else if (previousNumeral.toUpperCase() == 'IV' && currentNumeral.toUpperCase() == 'I' && cadence){
+    }else if (previousNumeral.toUpperCase() == 'IV' && 
+    currentNumeral.toUpperCase() == 'I' && cadence){
         //plagal cadence
         song = songs[4];
-    }else if (previousNumeral.toUpperCase() == 'I' && currentNumeral.toUpperCase() == 'V' && cadence){
+    }else if (previousNumeral.toUpperCase() == 'I' && 
+    currentNumeral.toUpperCase() == 'V' && cadence){
         //half cadence
         //choose between 5 and 6
         choice = Math.floor(Math.random() * 2) + 5;
