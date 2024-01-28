@@ -4,17 +4,20 @@
 
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { useState } from 'react';
+
+
 
 const Layout = () => {
     return (
-    <div>
-        <nav className="flex flex-row items-center gap-8 bg-indigo-400 font-font1 
-        text-white text-4xl animate-in slide-in-from-top ease-in-out duration-700 h-12">
-            <Link className="hover:text-zinc-300" to='/'>Home </Link>
-            <Link className="hover:text-zinc-300" to='/intervals'>Intervals </Link>
-            <Link className="hover:text-zinc-300" to='/chords'>Chords </Link>
-            <Link className="hover:text-zinc-300" to='/chordProgressions'>Chord Progressions </Link>
-            <Link className="hover:text-zinc-300" to='/about'>About</Link>
+    <div className='bg-slate-100 h-screen'>
+        <nav className='flex flex-row items-center gap-8 bg-indigo-400 font-font1 
+        text-white text-4xl h-14'>
+            <Link className='hover:text-zinc-300 hover:underline' to='/' >Home </Link>
+            <Link className='hover:text-zinc-300 hover:underline' to='/intervals' >Intervals </Link>
+            <Link className='hover:text-zinc-300 hover:underline' to='/chords'>Chords </Link>
+            <Link className='hover:text-zinc-300 hover:underline' to='/chordProgressions'>Chord Progressions </Link>
+            <Link className='hover:text-zinc-300 hover:underline' to='/about'>About</Link>
         </nav>  
 
         <Outlet/>
