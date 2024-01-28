@@ -233,7 +233,7 @@ function createNumeralProgression(scale){
     */
     const leadingChords = [
         ['IV', 'I'], // 0 - tonic 4
-        ['V', 'I'], // 1 - tonic 55
+        ['V', 'I'], // 1 - tonic 5
         ['IV', 'C'], // 2 - cadential
         ['IV', 'V'], // 3 - dominant
         ['VI', 'IV'] // 4 - dominant/cad prep
@@ -451,14 +451,12 @@ function createBassProgression(scale, numeralProgression){
 export function testBass(){
     const cmajorScale = createScale('f', false);
     const numeralProgression = createNumeralProgression(cmajorScale);
-    /*
     const bassProgression = createBassProgression(cmajorScale, numeralProgression);
     let delay = 0;
     for (const note of bassProgression) {
         setTimeout(() => play(note), delay);
         delay += 1500;
     }
-    */
 }
 /*
 function scaleTonicTriad(scale){
@@ -469,25 +467,119 @@ function scaleTonicTriad(scale){
     const tonicTriad = [root + scale[3], root + scale[5], root + 12];
     return tonicTriad;
 }
+*/
+
 /**
+ * function for applying a song if it applies, otherwise returs false (default)
+ * @param {Array} previousTriad - the previous triad
+ * @param {String} previousNumeral - previous numeral
+ * @param {String} currentNumeral - current numeral
+ * @param {Boolean} cadence - whether it's at a cadence
+ */
+function applySong(previousTriad, previousNumeral, currentNumeral, cadence){
+    /**
 * dictionary of songs used
 * necessary for randomlly generated chord progressions
 * false indicates that the song cannot be used in the progression or doesn't exist
 * there may be multiple songs for each progression
 * song format: string with start-destination numbers and split by a -
-* ex. '51-71-34-55'
+* ex. '51-71-23-55'
 */
-const songDictionary = 
-[
-    [[false], ['songI-IV'], ['songI-V'], [false], [false]], //I -> I, IV, V, C, VI 
-    [['songIV-I'], [false], ['songIV-V'], ['songIV-C'], [false]], //IV -> I, IV, V, C, VI 
-    [], //V -> I, IV, V, C, VI 
-    [], //C -> I, IV, V, C, VI 
-    []  //VI -> I, IV, V, C, VI 
-];
-function getNextTriad(scale,  previousTriad){
-
+const songs = 
+[   //2-1 tonic (V-I, not at cadences)
+    '71-53-21',
+    //2-3 tonic (V-I, anywhere)
+    '71-23-55',
+    //21 sacrifice (V-I, cadences only)
+    '75-53-21',
+    //weak deceptive (V-VI, cadences only)
+    '71-53-21',
+    //plagal cadence (IV-I, cadences only)
+    '11-65-43',
+    //half cadence 3-2 (I-V, cadences only)
+    '55-32-17',
+    //half cadence 1-2 (I-V, cadences only)
+    '35-57-12'];
+    const progression = [previousNumeral, currentNumeral];
+    let song = '';
+    let choice = 0;
+    if (previousNumeral === 'V'){
+        //pick random song and apply
+        if (currentNumeral == 'I'){
+            if(cadence){
+                //choose between index 1 and 2, choose 1 75% of the time
+                choice = Math.floor(Math.random() * 4)
+                if (choice < 4){
+                    //75% chance
+                    choice = 1;
+                }else{
+                    choice = 2;
+                }
+                song = songs[choice];
+            }else{
+                //choose between index 0 and 1
+                song = songs[Math.floor(Math.random() * 2) + 1];
+            }
+        }else if (currentNumeral.toUpperCase() == 'VI' && cadence){
+            //weak deceptive
+            song = songs[3];
+        }else{
+            //not V-I or V-VI cadential
+            return false;
+        }
+    }else if (previousNumeral.toUpperCase() == 'IV' && currentNumeral.toUpperCase() == 'I' && cadence){
+        //plagal cadence
+        song = songs[4];
+    }else if (previousNumeral.toUpperCase() == 'I' && currentNumeral.toUpperCase() == 'V' && cadence){
+        //half cadence
+        //choose between 5 and 6
+        choice = Math.floor(Math.random() * 2) + 5;
+        song = songs[choice];
+    }else{
+        //song not found
+        return false;
+    }
+    //now implementing the song
+    let newTriad = [];
+    let chosen = false;
+    let songIndex = 0;
+    for (const note of previousTriad) {
+        chosen = false;
+        songIndex = 0;
+        while (!chosen) {
+            // index of the KEY characters in the song string
+            if(note == song[songIndex]){
+                // if note in the triad is matched in the song string: add the song value
+                newTriad.push(song[songIndex+1]);
+                // skip out the loop
+                chosen = true;
+            }else if(!chosen && songIndex > 6){
+                //error checking
+                console.log('unable to convert song, stuck in loop');
+            }
+            songIndex += 3;
+        }
+    }
+    //new triad done
+    return newTriad;
 }
+/**
+ * 
+ * @param {*} scale 
+ * @param {*} previousTriad 
+ * @param {*} previousNumeral 
+ * @param {*} currentNumeral 
+ * @param {*} cadence 
+ */
+function getNextTriad(scale,  previousTriad, previousNumeral, currentNumeral, cadence){
+    const appliedSongs = applySong(previousTriad, previousNumeral, currentNumeral, cadence);
+    if (Array.isArray(appliedSongs)){
+        //check if songs apply
+        return appliedSongs;
+    }
+    let possibleNotes = [];
+    const triadRoot = numeralToScaleIndex(currentNumeral);
+}   
 /**
  * 
  * @param {*} scale 

@@ -15,7 +15,8 @@ function Header(){
             <p>Welcome to chord progression training. When you press play, 
                 you will be given a chord progression with 5 chords. 
                 <br/> Possible chords: I/i, IV/iv, V, V6/4, VI/vi.
-            </p>    
+            </p>
+            <h2>Coming Soon!</h2>    
         </div>
         );
 }
