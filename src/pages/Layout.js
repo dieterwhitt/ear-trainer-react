@@ -11,17 +11,17 @@ import { useState } from 'react';
 const Layout = () => {
     return (
     <div className='bg-slate-100 h-screen'>
-        <nav className='flex flex-row items-center gap-8 bg-indigo-400 font-font1 
-        text-white text-4xl h-14'>
-            <Link className='hover:text-zinc-300 hover:underline' 
+        <nav className='flex flex-row items-center
+        bg-indigo-400 font-font1 text-white text-5xl h-[9%]'>
+            <Link className='hover:text-zinc-300 mx-[1.7%]'
             to='/' >Home </Link>
-            <Link className='hover:text-zinc-300 hover:underline' 
+            <Link className='hover:text-zinc-300 mx-[1.7%]' 
             to='/intervals' >Intervals </Link>
-            <Link className='hover:text-zinc-300 hover:underline' 
+            <Link className='hover:text-zinc-300 mx-[1.7%]'  
             to='/chords'>Chords </Link>
-            <Link className='hover:text-zinc-300 hover:underline' 
+            <Link className='hover:text-zinc-300 mx-[1.7%]' 
             to='/chordProgressions'>Chord Progressions </Link>
-            <Link className='hover:text-zinc-300 hover:underline' 
+            <Link className='hover:text-zinc-300 mx-[1.7%]' 
             to='/about'>About</Link>
         </nav>  
 
