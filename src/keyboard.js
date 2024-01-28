@@ -246,27 +246,30 @@ function createNumeralProgression(scale){
         ['I', 'V'] //(3)
     ];
     const transitions = [
-        [0, [1, 2, 3]],
-        [1, [3]],
-        [2, [1, 2]],
-        [3, [5]],
-        [4, [1, 2, 3]],
-
+        [0, 1, 2], // 0 -> 0, 1, 2
+        [3], // 1 -> 3
+        [0, 1], // 2 -> 0, 1
+        [4], // 3 -> 4
+        [0, 1, 2], //4 -> 0, 1, 2
     ]
     let progression = [];
     //tonic chord
     //adjust according to minor at the end
     progression.push('I');
     const leadingChordIndex = Math.floor(Math.random() * 5); // random 0-5
+    console.log('the leading chord index is ' + leadingChordIndex);
     //adding beginning chords
     for (const chord of leadingChords[leadingChordIndex]) {
         progression.push(chord);
     }
     //get possible cadences
     const possibleCadenceIndex = transitions[leadingChordIndex];
-    const cadenceIndex = Math.floor(Math.random() * possibleCadenceIndex.length());
+    console.log('the possible cadences are ' + possibleCadenceIndex);
+
+    const chosen = Math.floor(Math.random() * possibleCadenceIndex.length);
+    console.log('the chosen index of the possible cadences is ' + chosen);
     //adding cadence
-    for (const chord0 of cadences[cadenceIndex]) {
+    for (const chord0 of cadences[possibleCadenceIndex[chosen]]) {
         progression.push(chord0);
     }
 
@@ -442,12 +445,14 @@ function createBassProgression(scale, numeralProgression){
 export function testBass(){
     const cmajorScale = createScale('f', false);
     const numeralProgression = createNumeralProgression(cmajorScale);
+    /*
     const bassProgression = createBassProgression(cmajorScale, numeralProgression);
     let delay = 0;
     for (const note of bassProgression) {
         setTimeout(() => play(note), delay);
         delay += 1500;
     }
+    */
 }
 /*
 function scaleTonicTriad(scale){
