@@ -137,25 +137,24 @@ export function playInterval() {
  * chord identification
 *******************************/
 
-//chord types
-const chordArray = 
-[
-[0, 4, 7, 12], //0 - major in root position 
-[0, 3, 8, 12], //1 - major in first inversion
-[0, 3, 7, 12], //2 - minor in first inversion
-[0, 4, 9, 12], //3 - minor in first inversion
-[0, 4, 7, 10], //4 - dominant 7th
-[0, 3, 6, 9], //5 - diminished 7th
-[0, 4, 7, 11], //6 - major 7th
-[0, 3, 7, 10], //7 - minor 7th
-[0, 4, 8] //augmmented
-];
-
 /**
  * plays a random chord for chord identification training
  * @returns the type of chord that was played (int, index of chordArray)
  */
 export function playChord() {
+    //chord types
+    const chordArray = 
+    [
+    [0, 4, 7, 12], //0 - major in root position 
+    [0, 3, 8, 12], //1 - major in first inversion
+    [0, 3, 7, 12], //2 - minor in first inversion
+    [0, 4, 9, 12], //3 - minor in first inversion
+    [0, 4, 7, 10], //4 - dominant 7th
+    [0, 3, 6, 9], //5 - diminished 7th
+    [0, 4, 7, 11], //6 - major 7th
+    [0, 3, 7, 10], //7 - minor 7th
+    [0, 4, 8] //augmmented
+    ];
     //choose root from 4c to 4b
     //i.e index 39 to 50
     const rootIndex = Math.floor(Math.random() * 12 + 39);
@@ -196,6 +195,8 @@ function createScale(note, key){
         return [note + '-', 0, 2, 3, 5, 7, 8, 11];
     } 
 }
+
+
 /**
  * given a scale generates a random chord progression in roman numerals
  * @param {array} scale 
@@ -204,40 +205,69 @@ function createScale(note, key){
 function createNumeralProgression(scale){
     /*
     seen progressions:
-    I IV V64 V I
-    I vi IV V I
-    i iv i V VI
-    I IV V64 V I
-    i iv i V i
-    i iv V64 V VI
-    I IV I V I
-    i iv V64 V I
-    i VI iv V I
-    I IV I V VI
+    I IV I V I/VI
+    I IV C V I/VI
+    I VI IV C V
+    I IV I C V
+    I IV V I V
+    I V I IV I
+    I V I IV V
+    cadence types:
+    first 2 chords:
+    tonic
+        - IV I (tonic 4)
+        - V I (tonic 5)
+    cadential
+        - IV C
+    dominant
+        - IV V
+    dominant/cadential prep
+        - VI IV
+
+    cadences:
+        - (cadential, dominant prep, tonic 4) V I
+        - (cadential, dominant prep, tonic 4) V VI
+        - (tonic 4, dominant prep) C V
+        - (tonic 5) IV I
+        - (dominant) I V
     */
+    const leadingChords = [
+        ['IV', 'I'], // 0 - tonic 4
+        ['V', 'I'], // 1 - tonic 55
+        ['IV', 'C'], // 2 - cadential
+        ['IV', 'V'], // 3 - dominant
+        ['VI', 'IV'] // 4 - dominant/cad prep
+    ];
+    const cadences = [
+        ['V', 'I'], //(0,2,4)
+        ['V', 'VI'], //(0,2,4)
+        ['C', 'V'], //(0, 4)
+        ['IV', 'I'], //(1)
+        ['I', 'V'] //(3)
+    ];
+    const transitions = [
+        [0, [1, 2, 3]],
+        [1, [3]],
+        [2, [1, 2]],
+        [3, [5]],
+        [4, [1, 2, 3]],
+
+    ]
     let progression = [];
     //tonic chord
     //adjust according to minor at the end
     progression.push('I');
-    //next 3:
-    //0 - IV V64 V
-    //1 - IV I V
-    //2 - VI IV V
-    //C represents V64
-    const middleSequence = Math.floor(Math.random()*3);
-    if (middleSequence === 0){
-        progression.push('IV', 'C', 'V');
-    }else if (middleSequence === 1){
-        progression.push('IV', 'I', 'V');
-    }else{
-        progression.push('VI', 'IV', 'V');
+    const leadingChordIndex = Math.floor(Math.random() * 5); // random 0-5
+    //adding beginning chords
+    for (const chord of leadingChords[leadingChordIndex]) {
+        progression.push(chord);
     }
-    const finalChord = Math.floor(Math.random()*2)
-    //final chord: I or VI
-    if(finalChord === 0){
-        progression.push('I')
-    }else{
-        progression.push('VI')
+    //get possible cadences
+    const possibleCadenceIndex = transitions[leadingChordIndex];
+    const cadenceIndex = Math.floor(Math.random() * possibleCadenceIndex.length());
+    //adding cadence
+    for (const chord0 of cadences[cadenceIndex]) {
+        progression.push(chord0);
     }
 
     //lastly convert numerals based on major/minor key
