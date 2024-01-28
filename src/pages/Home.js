@@ -19,7 +19,8 @@ const Home = () => {
         <main className='flex flex-row justify-center gap-12 justify-center 
         animate-in fade-in slide-in-from-bottom-8 ease-in-out duration-1000'>
             <div className='flex-none w-1/4 border-solid rounded-xl border-2
-            bg-gradient-to-b from-white to-slage-50 border-indigo-400'>
+            bg-gradient-to-b from-white to-slage-50 border-indigo-400
+            transition ease-out hover:scale-110 duration-300'>
                 <h3 className='text-2xl font-bold my-2'>
                     Interval Training
                 </h3>
@@ -30,14 +31,15 @@ const Home = () => {
                 </p>
                 <Link to='/intervals' >
                     <button className='text-xl font-bold my-5 outline rounded-full
-                    outline-indigo-400 w-36 h-10 outline-2 outline-offset-1
-                    bg-indigo-200'>
+                    outline-indigo-400 w-36 h-10 outline-2 outline-offset-1 
+                    bg-indigo-200 hover:bg-indigo-300'>
                         Play Intervals
                     </button>
                 </Link>
             </div>
             <div className='flex-none w-1/4 border-solid rounded-xl border-2 
-            border-indigo-400 bg-gradient-to-b from-white to-slate-50'> 
+            border-indigo-400 bg-gradient-to-b from-white to-slate-50
+            transition ease-out hover:scale-110 duration-300'> 
                 <h3 className='text-2xl font-bold my-2'>
                     Chord Identification</h3>
                 <p className='text-lg my-2 leading-6 mx-3'>
@@ -48,13 +50,14 @@ const Home = () => {
                 <Link to='/chords' >
                     <button className='text-xl font-bold my-5 outline rounded-full 
                     w-60 h-10 outline-offset-1 outline-indigo-400 outline-2
-                    bg-indigo-200'>
+                    bg-indigo-200 hover:bg-indigo-300'>
                         Play Chord Identification
                     </button>
                 </Link>
             </div>
             <div className='flex-none w-1/4 border-solid rounded-xl border-2 
-            border-indigo-400 bg-gradient-to-b from-white to-slate-50'>
+            border-indigo-400 bg-gradient-to-b from-white to-slate-50
+            transition ease-out hover:scale-110 duration-300'>
                 <h3 className='text-2xl font-bold my-2'>
                     Chord Progressions</h3>
                 <p className='text-lg my-20 leading-6'>
