@@ -374,14 +374,20 @@ function chooseBass(previousNote, noteDiff, cadential, tonic){
     if (chosen === -1){
         //handle cadential 
         if(cadential){
-            if (previousNote < tonic){
-                //previous note was lower than the tonic
-                //jump to cand2
-                chosen = cand2;
+            //50% chance to stay on note
+            const stay = Boolean(Math.floor(Math.random() * 2));
+            if (stay){
+                if (previousNote < tonic){
+                    //previous note was lower than the tonic
+                    //jump to cand2
+                    chosen = cand2;
+                }else{
+                    //previous note was higher
+                    //jump to cand1 (remove cand2)
+                    chosen = cand1;
+                }
             }else{
-                //previous note was higher
-                //jump to cand1 (remove cand2)
-                chosen = cand1;
+                chosen = previousNote;
             }
         }else if (previousNote > 33){
             //not candential and previous note was too high
