@@ -18,7 +18,7 @@ For more on how the backend works, feel free to look at the code or read the inf
 I'm planning on buying a domain to host this webapp when I add its final features and polish it.\
 I'm also planning on creating a video demonstration for this project in the very near future.
 
-__My info:__\
+## Contact Me:
 discord: dieterw_\
 email: dieter.whitt@gmail.com\
 linkedin: [linkedin.com/in/dieterwhittingham](https://linkedin.com/in/dieterwhittingham)
