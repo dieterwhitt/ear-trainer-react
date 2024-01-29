@@ -16,7 +16,7 @@ const Home = () => {
             chord progression training!
             <br/>Also check out the About page!
         </h4>
-        <main className='flex flex-row justify-center gap-[4.5%] justify-center 
+        <main className='flex flex-row justify-center gap-[4.5%]
         animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000'>
             <div className='flex-none w-[27%] border-solid rounded-xl border-4
             bg-gradient-to-b from-white to-slage-50 border-indigo-400
