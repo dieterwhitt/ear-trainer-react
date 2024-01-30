@@ -5,7 +5,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
+//import './index.css'
 
 //routing
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
