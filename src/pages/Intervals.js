@@ -20,7 +20,10 @@ function Header(){
         </div>
         );
 }
-
+/**
+ * component for the settings menu of the game
+ * @returns 
+ */
 function OptionHeader(){
 
     const handleReset = (event) => {
@@ -35,7 +38,7 @@ function OptionHeader(){
     }
 
     return(
-        <fieldset>
+        <fieldset id='settings'>
             <legend>Choose Possible Intervals:</legend>
             <input type='checkbox' name='pu' id='setting0' defaultChecked={true}></input>
             <label for='pu'>Perfect Unison</label>
@@ -79,6 +82,7 @@ function OptionHeader(){
             <br/>
             <input type='reset' onClick={handleReset} value='Reset to Default'></input>
         </fieldset>
+        
     )
 }
 //game interface component
@@ -90,13 +94,24 @@ function GameInterface(){
     //state: user answer array
     const [userAnswers, setUserAnswers] = useState([]);
     const [resultUpdate, setResultUpdate] = useState(false);
-    //setting the rounds per game to 10
-    const roundsPerGame = 10;
+    
+    //first render of the game
+    const [firstRender, setFirstRender] = useState(true);
+
+    //setting the intial rounds per game to 10
+    const [roundsPerGame, setRoundsPerGame] = useState(10);
 
     function LoadResults(){
         if (!resultUpdate){
             //not ready to load
-            return <h3>Finish the current session to see your results.</h3>
+            return (
+                <div>
+                    <h3>Finish the current session to see your results.</h3>
+                    {/*button that reloads the page*/}
+                    <button onClick={() => window.location.reload(false)}>Start Over</button>
+                </div>
+            
+            )
         }else{
             let correct = 0;
             for (const index in answerSheet) {
@@ -125,19 +140,28 @@ function GameInterface(){
     }
 
     const restartGame = () => {
-        //function for resetting the game
-        //reenable button
-        document.getElementById('gameButton').disabled = false;
-        //redisable submit button
-        document.getElementById('submitButton').disabled = true;
-        //reset dropdown
-        document.getElementById('intervalDropdown').disabled = false;
-        //remove results
-        setResultUpdate(false);
-        //reset score
-        setAnswerSheet([]);
-        setUserAnswers([]);
-        setPlaysCompleted(0);
+        if (!firstRender){
+            //doesn't apply when user presses the PLAY! button
+            //in that case, the conditional rendering will load the default settings
+            //function for resetting the game
+            //reenable button
+            document.getElementById('gameButton').disabled = false;
+            //redisable submit button
+            document.getElementById('submitButton').disabled = true;
+            //reset dropdown
+            document.getElementById('intervalDropdown').disabled = false;
+            //remove results
+            setResultUpdate(false);
+            //reset score
+            setAnswerSheet([]);
+            setUserAnswers([]);
+            setPlaysCompleted(0);
+        }
+        //close settings menu
+        document.getElementById('settings').disabled = true;
+        //set rounds per game
+        setRoundsPerGame(document.getElementById('setting17').value);
+        
     }
 
     //handles user submitting
@@ -190,38 +214,48 @@ function GameInterface(){
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
-
-    return (
-    <>
-        <form onSubmit={handleSubmit}>
-            {/* play button */}
-            <button id='gameButton' onClick={handlePlay}>Play Interval</button>
-
-            <select id='intervalDropdown'>
-                {/* dropdown */}
-                <option selected disabled hidden value={-1}>Choose Interval</option>
-                <option value={0}>Perfect Unison</option>
-                <option value={1}>Minor Second</option>
-                <option value={2}>Major Second</option>
-                <option value={3}>Minor Third</option>
-                <option value={4}>Major Third</option>
-                <option value={5}>Perfect Fourth</option>
-                <option value={6}>Tritone</option>
-                <option value={7}>Perfect Fifth</option>
-                <option value={8}>Minor Sixth</option>
-                <option value={9}>Major Sixth</option>
-                <option value={10}>Minor Seventh</option>
-                <option value={11}>Major Seventh</option>
-                <option value={12}>Perfect Octave</option>
-                <option value={13}>Minor Ninth</option>
-                <option value={14}>Major Ninth</option>
-            </select>
-            {/* submit button: disabled until interval is played*/}
-            <input disabled id='submitButton' type='submit' />
-        </form>
-        <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
-        <LoadResults/>
-    </>);
+    //returning
+    if(firstRender){
+        return(
+            <div>
+                <button
+                    onClick={() => {restartGame(); setFirstRender(false)}}>PLAY!
+                </button>
+            </div>
+        )
+    }else{
+        return (
+            <div>
+                <form onSubmit={handleSubmit}>
+                    {/* play button */}
+                    <button id='gameButton' onClick={handlePlay}>Play Interval</button>
+        
+                    <select id='intervalDropdown'>
+                        {/* dropdown */}
+                        <option selected disabled hidden value={-1}>Choose Interval</option>
+                        <option value={0}>Perfect Unison</option>
+                        <option value={1}>Minor Second</option>
+                        <option value={2}>Major Second</option>
+                        <option value={3}>Minor Third</option>
+                        <option value={4}>Major Third</option>
+                        <option value={5}>Perfect Fourth</option>
+                        <option value={6}>Tritone</option>
+                        <option value={7}>Perfect Fifth</option>
+                        <option value={8}>Minor Sixth</option>
+                        <option value={9}>Major Sixth</option>
+                        <option value={10}>Minor Seventh</option>
+                        <option value={11}>Major Seventh</option>
+                        <option value={12}>Perfect Octave</option>
+                        <option value={13}>Minor Ninth</option>
+                        <option value={14}>Major Ninth</option>
+                    </select>
+                    {/* submit button: disabled until interval is played*/}
+                    <input disabled id='submitButton' type='submit' />
+                </form>
+                <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
+                <LoadResults/>
+            </div>);
+    }
 }
 
 //main component
