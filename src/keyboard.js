@@ -581,7 +581,15 @@ function getNextTriad(scale,  previousTriad, previousNumeral, currentNumeral, ca
     }
     let possibleNotes = [];
     const triadRoot = numeralToScaleIndex(currentNumeral);
-}   
+}  
+
+/**
+ * first check if a song is applicable
+ * for each note, get all possible destinations
+ * use these to 
+ * 
+ */
+
 /**
  * 
  * @param {*} scale 
@@ -602,6 +610,8 @@ function createTriadProgression(scale, numeralProgression){
         //use songs to get the next triad (previous chord, current chord)
         //const calculatedTriad = ;
     }  
+
+
 
 }
 

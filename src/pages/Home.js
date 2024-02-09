@@ -71,7 +71,7 @@ const Home = () => {
                 </Link>
             </div>
         </main>
-        <p className='text-xl my-[2%] 
+        <p className='text-xl my-[2%]
         animate-in fade-in slide-in-from-bottom ease-out duration-1000'>
             Created by Dieter Whittingham
         </p>

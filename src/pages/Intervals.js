@@ -20,71 +20,7 @@ function Header(){
         </div>
         );
 }
-/**
- * component for the settings menu of the game
- * @returns 
- */
-function OptionHeader(){
 
-    const handleReset = (event) => {
-        event.preventDefault()
-        // resetting all settings to default
-        // recheck all settings 0-15
-        for (let i = 0; i <= 16; i++) {
-            document.getElementById('setting' + i).checked = true;
-        }
-        // reset rounds per game to 10
-        document.getElementById('setting17').value = 10;
-    }
-
-    return(
-        <fieldset id='settings'>
-            <legend>Choose Possible Intervals:</legend>
-            <input type='checkbox' name='pu' id='setting0' defaultChecked={true}></input>
-            <label for='pu'>Perfect Unison</label>
-            <input type='checkbox' name='min2' id='setting1' defaultChecked={true}></input>
-            <label for='min2'>Minor Second</label>
-            <input type='checkbox' name='maj2' id='setting2' defaultChecked={true}></input>
-            <label for='maj2'>Major Second</label>
-            <input type='checkbox' name='min3' id='setting3' defaultChecked={true}></input>
-            <label for='min3'>Minor Third</label>
-            <input type='checkbox' name='maj3' id='setting4' defaultChecked={true}></input>
-            <label for='maj3'>Major Third</label>
-            <input type='checkbox' name='p4' id='setting5' defaultChecked={true}></input>
-            <label for='p4'>Perfect Fourth</label>
-            <input type='checkbox' name='tt' id='setting6' defaultChecked={true}></input>
-            <label for='tt'>Tritone</label>
-            <input type='checkbox' name='p5' id='setting7' defaultChecked={true}></input>
-            <label for='p5'>Perfect Fifth</label>
-            <input type='checkbox' name='min6' id='setting8' defaultChecked={true}></input>
-            <label for='min6'>Minor Sixth</label>
-            <input type='checkbox' name='maj6' id='setting9' defaultChecked={true}></input>
-            <label for='maj6'>Major Sixth</label>
-            <input type='checkbox' name='min7' id='setting10' defaultChecked={true}></input>
-            <label for='min7'>Minor Seventh</label>
-            <input type='checkbox' name='maj7' id='setting11' defaultChecked={true}></input>
-            <label for='maj7'>Major Seventh</label>
-            <input type='checkbox' name='p8' id='setting12' defaultChecked={true}></input>
-            <label for='p8'>Perfect Octave</label>
-            <input type='checkbox' name='min9' id='setting13' defaultChecked={true}></input>
-            <label for='min9'>Minor Ninth</label>
-            <input type='checkbox' name='maj9' id='setting14' defaultChecked={true}></input>
-            <label for='maj9'>Major Ninth</label>
-            <br/>
-            <input type='checkbox' name='broken' id='setting15' defaultChecked={true}></input>
-            <label for='broken'>Broken</label>
-            <input type='checkbox' name='harmonic' id='setting16' defaultChecked={true}></input>
-            <label for='harmonic'>Harmonic</label>
-            <br/>
-            <input type='number' name='roundsPerGame' id='setting17' min='1' max='20' 
-            defaultValue={10}></input>
-            <label for='roundsPerGame'>Rounds Per Session (1-20)</label>
-            <br/>
-            <input type='reset' onClick={handleReset} value='Reset to Default'></input>
-        </fieldset>
-        
-    )
-}
 //game interface component
 function GameInterface(){
     //state: number of plays completed
@@ -157,10 +93,6 @@ function GameInterface(){
             setUserAnswers([]);
             setPlaysCompleted(0);
         }
-        //close settings menu
-        document.getElementById('settings').disabled = true;
-        //set rounds per game
-        setRoundsPerGame(document.getElementById('setting17').value);
         
     }
 
@@ -263,7 +195,6 @@ const Intervals = () => {
     return(
     <>
         <Header />
-        <OptionHeader/>
         <GameInterface />
     </>
     )
