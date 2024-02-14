@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 const Layout = () => {
     return (
-    <div className='bg-slate-100 h-screen'>
+    <div className='bg-slate-100 h-screen resize-none'>
         <nav className='flex flex-row items-center gap-[3%]
         bg-indigo-300 font-font1 text-white text-5xl h-[9%]
         px-[1.7%]'>
