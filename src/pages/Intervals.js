@@ -44,7 +44,7 @@ function GameInterface(){
                 <div>
                     <h3>Finish the current session to see your results.</h3>
                     {/*button that reloads the page*/}
-                    <button onClick={() => window.location.reload(false)}>Start Over</button>
+                    <button onClick={() => setFirstRender(true)}>Start Over</button>
                 </div>
             
             )
@@ -93,7 +93,6 @@ function GameInterface(){
             setUserAnswers([]);
             setPlaysCompleted(0);
         }
-        
     }
 
     //handles user submitting

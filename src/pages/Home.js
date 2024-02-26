@@ -2,6 +2,8 @@
 //jan 7 2023
 //filename Home.js
 
+// ...need to fix this garbage file (components)
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
