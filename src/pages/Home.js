@@ -69,6 +69,12 @@ const Home = () => {
                     Chord Progressions</h3>
                 <p className={boxBodyStyle}>
                     Coming Soon!
+                    <br/><br/>
+                    Current Progress:
+                    <br/>Progression Generation Algorithm ✅
+                    <br/>Bass Note Generation Algorithm ✅
+                    <br/>Triad Generation Algorithm⌛
+                    <br/>Exam-style evaluations⌛
                 </p>
                 <Link to='/chordProgressions' >
                     {/*<button>Play Chord Progressions</button>*/}
