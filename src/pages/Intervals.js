@@ -11,12 +11,22 @@ import { getStars, playInterval} from '../keyboard';
 function Header(){
     return (
         <div>
-            <h1>Interval Training</h1>
-            <p className='text-lg font-bold'>Welcome to interval training. 
+            <h1 className='
+            text-6xl my-[2.5%] font-bold animate-in fade-in
+            slide-in-from-top ease-in-out duration-1000'>Interval Training</h1>
+            <div className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
+            slide-in-from-top ease-in-out duration-1000 mx-[4%]'>
+                <p>
+                Welcome to interval training. 
                 When you press play, you will be given
                 a series of random intervals. Identify them using the drop down box.
-                <br/> All intervals up to and including a Major Ninth are possible.
-            </p>    
+                </p>    
+                <p className='text-2xl animate-in fade-in 
+            slide-in-from-top ease-in-out duration-700 mt-[1.5%]'>
+                    All intervals up to and including a Major Ninth are possible.
+                    <br/>(Difficulty options coming soon!)
+                </p>
+            </div>
         </div>
         );
 }
@@ -37,6 +47,11 @@ function GameInterface(){
     //setting the intial rounds per game to 10
     const [roundsPerGame, setRoundsPerGame] = useState(10);
 
+    // using usestate instead of getdocument like a retard
+    const [gameButtonEnabled, setGameButtonEnabled] = useState(true);
+    const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true);
+    const [dropdownEnabled, setDropdownEnabled] = useState(true);
+    
     function LoadResults(){
         if (!resultUpdate){
             //not ready to load
@@ -192,10 +207,10 @@ function GameInterface(){
 //main component
 const Intervals = () => {
     return(
-    <>
+    <div className='font-font1 text-center'>
         <Header />
         <GameInterface />
-    </>
+    </div>
     )
 }
 
