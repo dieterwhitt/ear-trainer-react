@@ -48,55 +48,15 @@ function GameInterface(){
     const [roundsPerGame, setRoundsPerGame] = useState(10);
 
     // using usestate instead of getdocument like a retard
-    const [gameButtonEnabled, setGameButtonEnabled] = useState(true);
+    const [playButtonEnabled, setPlayButtonEnabled] = useState(true);
     const [submitButtonEnabled, setSubmitButtonEnabled] = useState(true);
     const [dropdownEnabled, setDropdownEnabled] = useState(true);
     
-    function LoadResults(){
-        if (!resultUpdate){
-            //not ready to load
-            return (
-                <div>
-                    <h3>Finish the current session to see your results.</h3>
-                    {/*button that reloads the page*/}
-                    <button onClick={() => setFirstRender(true)}>Start Over</button>
-                </div>
-            
-            )
-        }else{
-            let correct = 0;
-            for (const index in answerSheet) {
-                //getting score
-                //== since they're 2 different arrays in memory
-                if (answerSheet[index] == userAnswers[index]){
-                    //correct answer
-                    correct ++;
-                }
-            }
-            //get rounded percentage score
-            const percentage = Math.round(100*correct/roundsPerGame);
-            const stars = getStars(percentage);
-            //disable play buttons so they can see their results
-            document.getElementById('gameButton').disabled = true;
-            document.getElementById('intervalDropdown').disabled = true;
-            //render
-            return(
-                <>
-                    <h3>Results:</h3>
-                    <h1>{stars}</h1>
-                    <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
-                    <button id='restartButton' onClick={restartGame}>Play Again</button>
-                </>
-                )}
-    }
-
+    
     const restartGame = () => {
         if (!firstRender){
-            //doesn't apply when user presses the PLAY! button
-            //in that case, the conditional rendering will load the default settings
-            //function for resetting the game
             //reenable button
-            document.getElementById('gameButton').disabled = false;
+            setPlayButtonEnabled(true);
             //redisable submit button
             document.getElementById('submitButton').disabled = true;
             //reset dropdown
@@ -130,7 +90,7 @@ function GameInterface(){
             console.log(newPlaysCompleted + ' plays completed');
 
             //reenable button
-            document.getElementById('gameButton').disabled = false;
+            setPlayButtonEnabled(true);
             //redisable submit button
             document.getElementById('submitButton').disabled = true;
             //update user answer sheet
@@ -145,7 +105,6 @@ function GameInterface(){
         }   
     }     
     
-
     //handles user pressing the play button
     //play sound, and log the correct answer to the answersheet
     const handlePlay = (event) =>{
@@ -154,51 +113,117 @@ function GameInterface(){
         const currentAnswer = playInterval();
         console.log('the correct answer is ' + currentAnswer);
         //disable the button so that it cant be used before submission
-        document.getElementById('gameButton').disabled = true;
+        setPlayButtonEnabled(false);
         //enable the submit button
         document.getElementById('submitButton').disabled = false;
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
+
+    function FirstRenderPlay() {
+        return (
+        <div>
+            <button className='text-5xl font-bold my-[1%] outline rounded-full
+            outline-indigo-400 h-fit outline-2 outline-offset-2 py-[1.5%] 
+            px-[3%] bg-indigo-200 hover:bg-indigo-300 hover:scale-110 
+            duration-300'
+                onClick={() => {restartGame(); setFirstRender(false)}}>Play 🎵
+            </button>
+        </div>);
+    }
+
+    function PlayButton() {
+        var colorStr = '';
+        if (playButtonEnabled) {
+            colorStr = 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
+                    + 'hover:scale-110 duration-300';
+        } else {
+            colorStr = 'bg-gray-300 outline-gray-400';
+        }
+        return (<button id='gameButton' onClick={handlePlay}
+        className={'text-3xl font-bold my-[1%] outline rounded-full '
+        + 'h-fit outline-2 outline-offset-2 py-[1%] px-[2%] mx-[2%] ' 
+        + colorStr} disabled={!playButtonEnabled}>
+            Play Interval</button>);
+    }
+
+    function DropDown() {
+        return (
+            <select id='intervalDropdown'>
+                {/* dropdown */}
+                <option selected disabled hidden value={-1}>Choose Interval</option>
+                <option value={0}>Perfect Unison</option>
+                <option value={1}>Minor Second</option>
+                <option value={2}>Major Second</option>
+                <option value={3}>Minor Third</option>
+                <option value={4}>Major Third</option>
+                <option value={5}>Perfect Fourth</option>
+                <option value={6}>Tritone</option>
+                <option value={7}>Perfect Fifth</option>
+                <option value={8}>Minor Sixth</option>
+                <option value={9}>Major Sixth</option>
+                <option value={10}>Minor Seventh</option>
+                <option value={11}>Major Seventh</option>
+                <option value={12}>Perfect Octave</option>
+                <option value={13}>Minor Ninth</option>
+                <option value={14}>Major Ninth</option>
+            </select>
+        )
+    }
+
+    function LoadResults(){
+        if (!resultUpdate){
+            //not ready to load
+            return (
+                <div>
+                    <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
+                    <h3>Finish the current session to see your results.</h3>
+                    {/*button that reloads the page*/}
+                    <button onClick={() => setFirstRender(true)}>Start Over</button>
+                </div>
+            
+            )
+        }else{
+            let correct = 0;
+            for (const index in answerSheet) {
+                //getting score
+                //== since they're 2 different arrays in memory
+                if (answerSheet[index] == userAnswers[index]){
+                    //correct answer
+                    correct ++;
+                }
+            }
+            //get rounded percentage score
+            const percentage = Math.round(100*correct/roundsPerGame);
+            const stars = getStars(percentage);
+            //disable play buttons so they can see their results
+            document.getElementById('gameButton').disabled = true;
+            document.getElementById('intervalDropdown').disabled = true;
+            //render
+            return(
+                <>
+                    <h3>Results:</h3>
+                    <h1>{stars}</h1>
+                    <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
+                    <button id='restartButton' onClick={restartGame}>Play Again</button>
+                </>
+                )}
+    }
+
     //returning
     if(firstRender){
-        return(
-            <div>
-                <button
-                    onClick={() => {restartGame(); setFirstRender(false)}}>PLAY!
-                </button>
-            </div>
-        )
+        return <FirstRenderPlay/>
     }else{
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className='flex flex-row justify-center gap-[4.5%]'>
                     {/* play button */}
-                    <button id='gameButton' onClick={handlePlay}>Play Interval</button>
-        
-                    <select id='intervalDropdown'>
-                        {/* dropdown */}
-                        <option selected disabled hidden value={-1}>Choose Interval</option>
-                        <option value={0}>Perfect Unison</option>
-                        <option value={1}>Minor Second</option>
-                        <option value={2}>Major Second</option>
-                        <option value={3}>Minor Third</option>
-                        <option value={4}>Major Third</option>
-                        <option value={5}>Perfect Fourth</option>
-                        <option value={6}>Tritone</option>
-                        <option value={7}>Perfect Fifth</option>
-                        <option value={8}>Minor Sixth</option>
-                        <option value={9}>Major Sixth</option>
-                        <option value={10}>Minor Seventh</option>
-                        <option value={11}>Major Seventh</option>
-                        <option value={12}>Perfect Octave</option>
-                        <option value={13}>Minor Ninth</option>
-                        <option value={14}>Major Ninth</option>
-                    </select>
+                    <PlayButton/>
+                    <DropDown/>
                     {/* submit button: disabled until interval is played*/}
                     <input disabled id='submitButton' type='submit' />
+                    
                 </form>
-                <h2>Intervals Remaining: {roundsPerGame - playsCompleted}</h2>
                 <LoadResults/>
             </div>);
     }

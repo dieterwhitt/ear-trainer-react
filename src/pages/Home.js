@@ -32,7 +32,6 @@ const Home = () => {
         <h4 className={infoStyle}>
             Choose from interval training, chord identification training, or 
             chord progression training!
-            <br/>Also check out the About page!
         </h4>
         <main className={mainStyle}>
             <div className={boxStyle}>
