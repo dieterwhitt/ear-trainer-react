@@ -35,6 +35,17 @@ for(let i = 0; i <= 8; i++){
         }
     }
 }
+// new
+var noteobjArray = [];
+for (var i = 0; i < keyboard.length; i++) {
+    //load note object
+    const file = require('./sounds/piano-88-notes/' + keyboard[i] + '.wav');
+    //play
+    const noteobj = new Audio(file);
+    const volume = volumeFunction(i);
+    noteobj.volume = volume;
+    noteobjArray.push(noteobj);
+}
 //now have a array of every key
 console.log(keyboard);
 
@@ -45,16 +56,10 @@ export default keyboard;
  * @param {int} note - keyboard index of the note 
  */
 function play(note) {
-    //wow...
     try {
-        //load note object
-        const noteobj = require('./sounds/piano-88-notes/' + keyboard[note] + '.wav');
-        //play
-        const sound = new Audio(noteobj);
-        const volume = volumeFunction(note)
-        sound.volume = volume;
-        sound.play();
-        console.log('play(): playing ' + keyboard[note] + ' with volume ' + volume);
+        
+        noteobjArray[note].play();
+        console.log('play(): playing ' + keyboard[note]);
     } catch (e) {
         alert('couldn\'t play note ' + keyboard[note] + ' ' + e);
     }
@@ -70,7 +75,9 @@ export function volumeFunction(note){
     const b = 0.0393;
     const c = 14.49;
     //ae^(bx) + c
-    const volume = (Math.floor(a * Math.exp(b * note) + c))/100;
+    var volume = (Math.floor(a * Math.exp(b * note) + c))/100;
+    // cap volume
+    volume = Math.min(volume, 1);
     return volume;
 }
 
