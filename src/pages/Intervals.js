@@ -209,6 +209,7 @@ function GameInterface(){
     }
 
     function LoadResults(){
+        // fix this atrocious code please !
         if (!resultUpdate){
             //not ready to load
             return (
@@ -218,11 +219,11 @@ function GameInterface(){
                     <h3 className='text-2xl my-[1.5%] font-semibold mx-[4%]'>
                         Finish the current session to see your results.</h3>
                     {/*button that reloads the page*/}
-                    <button className='text-3xl font-bold my-[1%] outline 
-                    rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
-                    mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
-                    hover:scale-110 duration-300'
-                    onClick={() => setFirstRender(true)}>Start Over</button>
+                        <button className='text-3xl font-bold my-[1%] outline 
+                        rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
+                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
+                        hover:scale-110 duration-300'
+                        onClick={() => {restartGame(); setFirstRender(true)}}>Start Over</button>   
                 </div>
             
             )
@@ -245,17 +246,17 @@ function GameInterface(){
             //render
             return(
                 <div className='animate-in fade-in duration-1000 ease-in-out'>
-                    <h3 className='text-5xl my-[3%] font-semibold mx-[4%] ease-in-out
+                    <h3 className='text-5xl py-[1.5%] font-semibold mx-[4%] ease-in-out
                     animate-in slide-in-from-bottom-[70%] duration-1000'>Results ✏️</h3>
-                    <h1 className='text-7xl my-[2%] font-semibold mx-[4%]ease-in-out
+                    <h1 className='text-7xl py-[1%] font-semibold mx-[4%]ease-in-out
                     animate-in slide-in-from-bottom-[100%] duration-1000'>{stars}</h1>
-                    <p className='text-3xl my-[2%] font-semibold mx-[4%]ease-in-out
+                    <p className='text-3xl py-[1%] font-semibold mx-[4%]ease-in-out
                     animate-in slide-in-from-bottom-[60%] duration-1000'>
                         Score: {correct}/{roundsPerGame} ({percentage}%)</p>
                     <div className='animate-in slide-in-from-bottom-[40%] duration-1000 ease-in-out'>
                         <button id='restartButton' onClick={restartGame} 
-                        className='text-3xl font-bold my-[1%] outline 
-                        rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
+                        className='text-3xl font-bold py-[1%] my-[1%] outline 
+                        rounded-full h-fit outline-2 outline-offset-2 px-[2%] 
                         mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
                         hover:scale-110 duration-300'>Play Again</button>
                     </div>
@@ -279,7 +280,7 @@ function GameInterface(){
             <div>
                 <></>
                 <Title/>
-                <div className='flex flex-row justify-center gap-[4.5%] py-[2%]
+                <div className='flex flex-row justify-center gap-[4.5%] py-[1%]
                         animate-in fade-in slide-in-from-bottom-24 
                         ease-in-out duration-1000'>
                     {/* play button */}
@@ -292,9 +293,6 @@ function GameInterface(){
                     <div className='flex justify-start w-[18%]'>
                         <SubmitButton/>
                     </div>
-                    
-                    
-                    {/* submit button: disabled until interval is played*/}
                     
                 </div>
                 <div className='animate-in fade-in slide-in-from-bottom-12 
