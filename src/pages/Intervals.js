@@ -5,6 +5,8 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { getStars, playInterval} from '../keyboard';
+//new for dropdown
+import Dropdown from 'react-dropdown';
 
 
 //header component
