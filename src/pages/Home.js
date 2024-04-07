@@ -11,7 +11,7 @@ const Home = () => {
     const homeStyle = 'font-font1 text-center';
     const titleStyle = 'text-6xl my-[3%] font-bold animate-in fade-in '
     + 'slide-in-from-top ease-in-out duration-1000';
-    const infoStyle = 'text-3xl my-[2.5%] font-semibold animate-in fade-in '
+    const infoStyle = 'text-3xl my-[3%] font-semibold animate-in fade-in '
     + 'slide-in-from-top ease-in-out duration-1000';
     const mainStyle = 'flex flex-row justify-center gap-[4.5%] '
     + 'animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000';
@@ -22,9 +22,9 @@ const Home = () => {
     + 'border-solid border-indigo-400 border-b-4 rounded-t-md';
     const boxBodyStyle = 'text-2xl leading-[140%] px-[5%] pt-[3%]';
     const buttonStyle = 'text-3xl font-bold my-[8%] outline rounded-full '
-    + 'outline-indigo-400 h-fit outline-2 outline-offset-2 py-[2%] px-[3%] '
-    + 'bg-indigo-200 hover:bg-indigo-300';
-    const footerStyle = 'text-xl pt-[2%] '
+    + 'outline-indigo-400 h-fit outline-2 outline-offset-2 py-[2%] px-[3%] mx-[5%] '
+    + 'bg-indigo-200 hover:bg-indigo-300 hover:scale-110 duration-300';
+    const footerStyle = 'text-xl my-[2%] '
     + 'animate-in fade-in slide-in-from-bottom ease-out duration-1000';
     return (
     <div className={homeStyle}>
@@ -68,7 +68,7 @@ const Home = () => {
                     Chord Progressions</h3>
                 <p className={boxBodyStyle}>
                     Coming Soon!
-                    <br/><br/>
+                    <br/>
                     Current Progress:
                     <br/>Progression Generation Algorithm ✅
                     <br/>Bass Note Generation Algorithm ✅
