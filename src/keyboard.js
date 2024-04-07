@@ -57,7 +57,10 @@ export default keyboard;
  */
 function play(note) {
     try {
-        
+        // stop note if it's playing
+        noteobjArray[note].pause()
+        noteobjArray[note].currentTime = 0;
+        // play note
         noteobjArray[note].play();
         console.log('play(): playing ' + keyboard[note]);
     } catch (e) {
