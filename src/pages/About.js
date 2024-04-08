@@ -36,8 +36,8 @@ const About = () => {
                 <br/>
                 -Dieter Whittingham, April 2024
             </p>
-            <div className='text-xl my-[1.5%]
-                    animate-in fade-in slide-in-from-bottom-[20%] ease-out duration-1000'>
+            <div className='text-xl mt-[3%]
+                    animate-in fade-in slide-in-from-bottom-[15%] ease-out duration-1000'>
                 <div className='text-xl'>Contact me:</div>  
                 <nav className='flex flex-row justify-center items-center'>
                     <a href='mailto:dieter.whitt@gmail.com'>

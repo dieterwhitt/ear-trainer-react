@@ -24,7 +24,7 @@ const Home = () => {
     const buttonStyle = 'text-3xl font-bold my-[8%] outline rounded-full '
     + 'outline-indigo-400 h-fit outline-2 outline-offset-2 py-[2%] px-[3%] mx-[5%] '
     + 'bg-indigo-200 hover:bg-indigo-300 hover:scale-110 duration-300';
-    const footerStyle = 'text-xl my-[2%] '
+    const footerStyle = 'text-xl mt-[2.5%] mb-[1.5%] '
     + 'animate-in fade-in slide-in-from-bottom ease-out duration-1000';
     return (
     <div className={homeStyle}>
