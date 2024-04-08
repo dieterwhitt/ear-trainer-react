@@ -4,13 +4,23 @@
 
 import React from 'react';
 
+import github from '../images/github.png'
+import linkedin from '../images/linkedin.png'
+import email from '../images/email.png'
+
 const About = () => {
     return (
-        <div>
-            <h1>About eartrainer.net</h1>
-            <h2>I created this web application to help
-                musicians (like you!) improve their aural skills.</h2>
-            <p>About me: At the time of writing, I'm currently a first year 
+        <div className='font-font1 text-center'>
+            <h1 className='
+            text-6xl my-[3%] font-bold animate-in fade-in
+            slide-in-from-top ease-in-out duration-1000'>
+                About eartrainer.net</h1>
+            <h2 className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
+        slide-in-from-top-[70%] ease-in-out duration-1000 mx-[4%]'>I created this web application to help
+                musicians improve their aural skills.</h2>
+            <p className='text-2xl font-semibold animate-in fade-in 
+        slide-in-from-top-[10%] ease-in-out duration-1000 mx-[6%]
+        leading-relaxed'>At the time of writing, I'm currently a first year 
                 computer science student at the University of Waterloo in Waterloo, Ontario.
                 I designed this website based on my own experiences as a piano player.
                 I began playing piano at age five and graduated from the Royal Conservatory
@@ -19,21 +29,26 @@ const About = () => {
                 training skills alone. I also saw that there were very few resources
                 online to do so and some of them cost money! I used my knowledge of music
                 theory and web development to help give musicians a chance to have 
-                unlimited and free ear training practice. If you'd like to see more about
-                how the backend code works in this project, I will be featuring a video 
-                demonstration of the project in the near future. Thank you for using eartrainer.net! 
+                free and unlimited ear training practice. If you'd like to learn more
+                about this project, I will be featuring a video 
+                demonstration in the near future. Thank you for using eartrainer.net! 
+                <br/>
                 <br/>
                 -Dieter Whittingham, April 2024
             </p>
-            <div>
-                <h4>Contact me:</h4>  
-                <nav>
-                    <div>email: dieter.whitt@gmail.com</div>
+            <div className='text-xl my-[1.5%]
+                    animate-in fade-in slide-in-from-bottom-[20%] ease-out duration-1000'>
+                <div className='text-xl'>Contact me:</div>  
+                <nav className='flex flex-row justify-center items-center'>
+                    <a href='mailto:dieter.whitt@gmail.com'>
+                        <img src={email} alt='email icon'/>
+                    </a>
                     <a href='https://github.com/dieterwhitt' target='_blank'>
-                        github.com/dieterwhitt</a>
-                    <br/>
+                        <img src={github} alt='github icon'/>
+                    </a>
                     <a href='https://linkedin.com/in/dieterwhittingham' target='_blank'>
-                        linkedin.com/in/dieterwhittingham</a>
+                        <img src={linkedin} alt='linkedin icon'/>
+                    </a>
                 </nav>
             </div>
         </div>

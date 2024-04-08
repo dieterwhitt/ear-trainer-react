@@ -8,6 +8,8 @@ import { getStars, playChord } from '../keyboard';
 
 import Select from 'react-select';
 
+// Necessary Refactor: REUSE THE FUCKING COMPONENTS FROM INTERVALS!!!
+
 function Title(){
     return(
         <h1 className='
