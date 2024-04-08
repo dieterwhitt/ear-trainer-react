@@ -5,9 +5,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { getStars, playInterval} from '../keyboard';
-//new for dropdown
-//import Dropdown from 'react-dropdown';
-//import { Dropdown } from 'primereact/dropdown';
+
 import Select from 'react-select';
 
 function Title(){
@@ -24,7 +22,7 @@ function Header(){
         <div className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
         slide-in-from-top-[40%] ease-in-out duration-1000 mx-[4%]'>
             <p>
-            Welcome to interval training. 
+            Welcome to interval identification. 
             When you press play, you will be given
             a series of random intervals. Identify them using the drop down box.
             </p>    
@@ -178,15 +176,21 @@ function GameInterface(){
     }
 
     function Dropdown() {
+        var colorStr = '';
+        if (dropdownEnabled) {
+            colorStr = 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
+                    + 'hover:scale-110 duration-300';
+        } else {
+            colorStr = 'bg-gray-300 outline-gray-400';
+        }
         return (
-            <Select options={options} onChange={setDropdownOption} 
+            <Select options={options} onChange={setDropdownOption} disabled={!dropdownEnabled} 
                 value={dropdownOption} unstyled isSearchable={false}
                 classNames={{
                     container: () => 'text-3xl font-bold my-[10%] outline rounded-full '
                     + 'h-fit outline-2 outline-offset-2 py-[6%] w-[100%] ' 
-                    + 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
-                    + 'hover:scale-110 duration-300',
-                    option: () => 'font-thin bg-slate-50 hover:text-indigo-300',
+                    + colorStr,
+                    option: () => 'font-thin bg-slate-50 hover:text-indigo-300 ',
                 }}/>
         );
     }

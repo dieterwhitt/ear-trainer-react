@@ -4,26 +4,60 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { getStars, playChord} from '../keyboard';
+import { getStars, playChord } from '../keyboard';
+
+import Select from 'react-select';
+
+function Title(){
+    return(
+        <h1 className='
+            text-6xl my-[3%] font-bold animate-in fade-in
+            slide-in-from-top ease-in-out duration-1000'>
+                Chord Identification Training</h1>
+    );
+}
 
 //header component
 function Header(){
     return (
-        <div>
-            <h1>Chord Identification Training</h1>
-            <p>Welcome to chord identification training. When you press play, 
-                you will be given a series of random chords. 
-                Identify them using the drop down box.
-                <br/> Possible chords: Major (root position or 1st inversion), 
-                Minor (root position or 1st inversion), Dominant 7th (root position), 
-                Diminished 7th (root position), Major-Major Seventh (root position), 
-                Minor-Minor Seventh (root position), or Augmented Triad (root position).
+        <div className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
+        slide-in-from-top-[40%] ease-in-out duration-1000 mx-[4%]'>
+            <p>
+            Welcome to chord identification. 
+            When you press play, you will be given
+            a series of random chords. Identify them using the drop down box.
             </p>    
+            <p className='text-2xl animate-in fade-in 
+        slide-in-from-top ease-in-out duration-700 mt-[1.5%]'>
+                The possible chords are: Major, Minor.
+                Dominant 7th, Diminished 7th, Major 7th, Minor 7th,
+                and Augmented Triad.
+                <br/>Major and Minor may be in root position or first inversion. 
+                All other chords will be in root position.
+                <br/>(Difficulty options coming soon!)
+            </p>
         </div>
         );
 }
+
+// will need to refactor to allow difficulty selection
+const options = [
+    {value: 0, label: 'Major (Root Position)'},
+    {value: 1, label: 'Major (1st Inversion)'},
+    {value: 2, label: 'Minor (Root Position)'},
+    {value: 3, label: 'Minor (1st Inversion)'},
+    {value: 4, label: 'Dominant 7th'},
+    {value: 5, label: 'Diminished 7th'},
+    {value: 6, label: 'Major 7th'},
+    {value: 7, label: 'Minor 7th'},
+    {value: 8, label: 'Augmented Triad'},
+];
+
+const defaultOption = {value: -1, label: 'Choose Chord Type'};
+
 //game interface component
 function GameInterface(){
+    
     //state: number of plays completed
     const [playsCompleted, setPlaysCompleted] = useState(0);
     //state: current answer array
@@ -31,63 +65,44 @@ function GameInterface(){
     //state: user answer array
     const [userAnswers, setUserAnswers] = useState([]);
     const [resultUpdate, setResultUpdate] = useState(false);
-    //setting the rounds per game to 10
-    const roundsPerGame = 10;
+    
+    //first render of the game
+    const [firstRender, setFirstRender] = useState(true);
 
-    function LoadResults(){
-        if (!resultUpdate){
-            //not ready to load
-            return <h3>Finish the current session to see your results.</h3>
-        }else{
-            var correct = 0;
-            for (const index in answerSheet) {
-                //getting score
-                //== since they're 2 different arrays in memory
-                if (answerSheet[index] == userAnswers[index]){
-                    //correct answer
-                    correct ++;
-                }
-            }
-            //get rounded percentage score
-            const percentage = Math.round(100*correct/roundsPerGame);
-            const stars = getStars(percentage);
-            //disable play buttons so they can see their results
-            document.getElementById('gameButton0').disabled = true;
-            document.getElementById('chordDropdown').disabled = true;
-            //render
-            return(
-                <>
-                    <h3>Results:</h3>
-                    <h1>{stars}</h1>
-                    <p>Score: {correct}/{roundsPerGame} ({percentage}%)</p>
-                    <button id='restartButton0' onClick={restartGame}>Play Again</button>
-                </>
-                )}
-    }
+    //setting the intial rounds per game to 10
+    const [roundsPerGame, setRoundsPerGame] = useState(10);
 
+    // using usestate instead of getdocument like a retard
+    const [playButtonEnabled, setPlayButtonEnabled] = useState(true);
+    const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
+    const [dropdownEnabled, setDropdownEnabled] = useState(true);
+    const [dropdownOption, setDropdownOption] = useState(defaultOption);
+    
+    
     const restartGame = () => {
-        //function for resetting the game
-        //reenable button
-        document.getElementById('gameButton0').disabled = false;
-        //redisable submit button
-        document.getElementById('submitButton0').disabled = true;
-        //reset dropdown
-        document.getElementById('chordDropdown').disabled = false;
-        //remove results
-        setResultUpdate(false);
-        //reset score
-        setAnswerSheet([]);
-        setUserAnswers([]);
-        setPlaysCompleted(0);
+        if (!firstRender){
+            //reenable button
+            setPlayButtonEnabled(true);
+            //redisable submit button
+            setSubmitButtonEnabled(false);
+            //reset dropdown
+            setDropdownEnabled(true);
+            //remove results
+            setResultUpdate(false);
+            //reset score
+            setAnswerSheet([]);
+            setUserAnswers([]);
+            setPlaysCompleted(0);
+        }
     }
 
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
-        //get user input (chord type number)
-        const currentInput = document.getElementById('chordDropdown').value;
+        //get user input (chord number)
+        const currentInput = dropdownOption.value;
         //check valid input
-        if(currentInput === -1){
+        if(currentInput == -1){
             alert('Please select a chord type.');
         }else{
             //update number of rounds played
@@ -95,15 +110,15 @@ function GameInterface(){
             setPlaysCompleted(newPlaysCompleted);
             
             //reset dropdown
-            document.getElementById('chordDropdown').selectedIndex = 0;
+            setDropdownOption(defaultOption);
             //log
             console.log('user submitted ' + currentInput);
             console.log(newPlaysCompleted + ' plays completed');
 
             //reenable button
-            document.getElementById('gameButton0').disabled = false;
+            setPlayButtonEnabled(true);
             //redisable submit button
-            document.getElementById('submitButton0').disabled = true;
+            setSubmitButtonEnabled(false);
             //update user answer sheet
             setUserAnswers(prevAnswers => [...prevAnswers, currentInput]);
             //check if the game is finished:
@@ -116,57 +131,188 @@ function GameInterface(){
         }   
     }     
     
-
     //handles user pressing the play button
     //play sound, and log the correct answer to the answersheet
     const handlePlay = (event) =>{
         event.preventDefault();
-        console.log('handling play');
         //play chord and get the numerical value for it.
         const currentAnswer = playChord();
         console.log('the correct answer is ' + currentAnswer);
         //disable the button so that it cant be used before submission
-        document.getElementById('gameButton0').disabled = true;
+        setPlayButtonEnabled(false);
         //enable the submit button
-        document.getElementById('submitButton0').disabled = false;
+        setSubmitButtonEnabled(true);
         //add current answer to answersheet
         setAnswerSheet(prevAnswerSheet => [...prevAnswerSheet, currentAnswer]);
     }
 
-    return (
-    <>
-        <form onSubmit={handleSubmit}>
-            {/* play button */}
-            <button id='gameButton0' onClick={handlePlay}>Play Chord</button>
+    function FirstRenderPlay() {
+        return (
+        <div className='animate-in fade-in 
+                slide-in-from-bottom-[50%] ease-in-out duration-1000'>
+            <button className='text-5xl font-bold my-[2%] outline rounded-full
+            outline-indigo-400 h-fit outline-2 outline-offset-2 py-[1.5%] 
+            px-[3%] bg-indigo-200 hover:bg-indigo-300 hover:scale-110 
+            duration-300 '
+                onClick={() => {restartGame(); setFirstRender(false)}}>Play 🎵
+            </button>
+        </div>);
+    }
 
-            <select id='chordDropdown'>
-                {/* dropdown */}
-                <option selected disabled hidden value={-1}>Choose Chord Type</option>
-                <option value={0}>Major (Root Position)</option>
-                <option value={1}>Major (1st Inversion)</option>
-                <option value={2}>Minor (Root Position)</option>
-                <option value={3}>Minor (1st Inversion)</option>
-                <option value={4}>Dominant 7th</option>
-                <option value={5}>Diminished 7th</option>
-                <option value={6}>Major 7th</option>
-                <option value={7}>Minor 7th</option>
-                <option value={8}>Augmented Triad</option>
-            </select>
-            {/* submit button: disabled until interval is played*/}
-            <input disabled id='submitButton0' type='submit' />
-        </form>
-        <h2>Chords Remaining: {roundsPerGame - playsCompleted}</h2>
-        <LoadResults/>
-    </>);
+    function PlayButton() {
+        var colorStr = '';
+        if (playButtonEnabled) {
+            colorStr = 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
+                    + 'hover:scale-110 duration-300';
+        } else {
+            colorStr = 'bg-gray-300 outline-gray-400';
+        }
+        return (<button id='gameButton' onClick={handlePlay}
+        className={'text-3xl font-bold my-[10%] outline rounded-full '
+        + 'h-fit outline-2 outline-offset-2 py-[6%] px-[12%] ' 
+        + colorStr} disabled={!playButtonEnabled}>
+            Play Chord</button>);
+    }
+
+    function Dropdown() {
+        var colorStr = '';
+        if (dropdownEnabled) {
+            colorStr = 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
+                    + 'hover:scale-110 duration-300';
+        } else {
+            colorStr = 'bg-gray-300 outline-gray-400';
+        }
+        return (
+            <Select options={options} onChange={setDropdownOption} disabled={!dropdownEnabled} 
+                value={dropdownOption} unstyled isSearchable={false}
+                classNames={{
+                    container: () => 'text-3xl font-bold my-[10%] outline rounded-full '
+                    + 'h-fit outline-2 outline-offset-2 py-[6%] w-[100%] ' 
+                    + colorStr,
+                    option: () => 'font-thin bg-slate-50 hover:text-indigo-300 ',
+                }}/>
+        );
+    }
+
+    function SubmitButton() {
+        var colorStr = '';
+        if (submitButtonEnabled) {
+            colorStr = 'bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 ' 
+                    + 'hover:scale-110 duration-300';
+        } else {
+            colorStr = 'bg-gray-300 outline-gray-400';
+        }
+        return(
+            <button disabled={!submitButtonEnabled} id='submitButton' 
+                onClick={handleSubmit} className={'text-3xl font-bold my-[10%] '
+                + 'outline rounded-full '
+                + 'h-fit outline-2 outline-offset-2 py-[6%] px-[12%] ' 
+                + colorStr}>Submit</button>
+        );
+    }
+
+    function LoadResults(){
+        // fix this atrocious code please !
+        if (!resultUpdate){
+            //not ready to load
+            return (
+                <div>
+                    <h2 className='text-4xl my-[1.5%] font-semibold mx-[4%]'>
+                        Chords Remaining: {roundsPerGame - playsCompleted}</h2>
+                    <h3 className='text-2xl my-[1.5%] font-semibold mx-[4%]'>
+                        Finish the current session to see your results.</h3>
+                    {/*button that reloads the page*/}
+                        <button className='text-3xl font-bold my-[1%] outline 
+                        rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
+                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
+                        hover:scale-110 duration-300'
+                        onClick={() => {restartGame(); setFirstRender(true)}}>Start Over</button>   
+                </div>
+            
+            )
+        }else{
+            let correct = 0;
+            for (const index in answerSheet) {
+                //getting score
+                //== since they're 2 different arrays in memory
+                if (answerSheet[index] == userAnswers[index]){
+                    //correct answer
+                    correct ++;
+                }
+            }
+            //get rounded percentage score
+            const percentage = Math.round(100*correct/roundsPerGame);
+            const stars = getStars(percentage);
+            //disable play buttons so they can see their results
+            setPlayButtonEnabled(false);
+            setDropdownEnabled(false);
+            //render
+            return(
+                <div className='animate-in fade-in duration-1000 ease-in-out'>
+                    <h3 className='text-5xl py-[1.5%] font-semibold mx-[4%] ease-in-out
+                    animate-in slide-in-from-bottom-[70%] duration-1000'>Results ✏️</h3>
+                    <h1 className='text-7xl py-[1%] font-semibold mx-[4%]ease-in-out
+                    animate-in slide-in-from-bottom-[100%] duration-1000'>{stars}</h1>
+                    <p className='text-3xl py-[1%] font-semibold mx-[4%]ease-in-out
+                    animate-in slide-in-from-bottom-[60%] duration-1000'>
+                        Score: {correct}/{roundsPerGame} ({percentage}%)</p>
+                    <div className='animate-in slide-in-from-bottom-[40%] duration-1000 ease-in-out'>
+                        <button id='restartButton' onClick={restartGame} 
+                        className='text-3xl font-bold py-[1%] my-[1%] outline 
+                        rounded-full h-fit outline-2 outline-offset-2 px-[2%] 
+                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
+                        hover:scale-110 duration-300'>Play Again</button>
+                    </div>
+                    
+                </div>
+                )}
+    }
+
+    //returning
+    if(firstRender){
+        return(
+            <div>
+                <Title/>
+                <Header/>
+                <FirstRenderPlay/>
+            </div>
+        );       
+    }else{
+        // empty div required to reanimate title
+        return (
+            <div>
+                <></>
+                <Title/>
+                <div className='flex flex-row justify-center gap-[4.5%] py-[1%]
+                        animate-in fade-in slide-in-from-bottom-24 
+                        ease-in-out duration-1000'>
+                    {/* play button */}
+                    <div className='flex justify-end w-[18%]'>
+                        <PlayButton/>
+                    </div>
+                    <div className='flex justify-center w-[18%]'>
+                        <Dropdown/>
+                    </div>
+                    <div className='flex justify-start w-[18%]'>
+                        <SubmitButton/>
+                    </div>
+                    
+                </div>
+                <div className='animate-in fade-in slide-in-from-bottom-12 
+                        ease-in-out duration-1000'>
+                    <LoadResults />
+                </div>
+                
+            </div>);
+    }
 }
 
 //main component
 const Chords = () => {
     return(
-    <>
-        <Header />
+    <div className='font-font1 text-center'>
         <GameInterface />
-    </>
+    </div>
     )
 }
 

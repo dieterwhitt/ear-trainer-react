@@ -72,8 +72,8 @@ const Home = () => {
                     Current Progress:
                     <br/>Progression Generation Algorithm ✅
                     <br/>Bass Note Generation Algorithm ✅
-                    <br/>Triad Generation Algorithm⌛
-                    <br/>Exam-style evaluations⌛
+                    <br/>Triad Generation Algorithm ⏳
+                    <br/>Exam-style evaluations ⏳
                 </p>
                 <Link to='/chordProgressions' >
                     {/*<button>Play Chord Progressions</button>*/}

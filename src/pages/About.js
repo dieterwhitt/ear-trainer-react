@@ -7,10 +7,10 @@ import React from 'react';
 const About = () => {
     return (
         <div>
-            <h1>About Ear Trainer</h1>
-            <h2>Hi, I'm Dieter Whittingham.<br/> I created this web application to help
+            <h1>About eartrainer.net</h1>
+            <h2>I created this web application to help
                 musicians (like you!) improve their aural skills.</h2>
-            <p>Some more about me: At the time of writing, I'm currently a first year 
+            <p>About me: At the time of writing, I'm currently a first year 
                 computer science student at the University of Waterloo in Waterloo, Ontario.
                 I designed this website based on my own experiences as a piano player.
                 I began playing piano at age five and graduated from the Royal Conservatory
@@ -23,7 +23,7 @@ const About = () => {
                 how the backend code works in this project, I will be featuring a video 
                 demonstration of the project in the near future. Thank you for using eartrainer.net! 
                 <br/>
-                -Dieter Whittingham, January 2024
+                -Dieter Whittingham, April 2024
             </p>
             <div>
                 <h4>Contact me:</h4>  
