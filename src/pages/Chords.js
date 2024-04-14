@@ -44,10 +44,10 @@ function Header(){
 
 // will need to refactor to allow difficulty selection
 const options = [
-    {value: 0, label: 'Major (Root Position)'},
-    {value: 1, label: 'Major (1st Inversion)'},
-    {value: 2, label: 'Minor (Root Position)'},
-    {value: 3, label: 'Minor (1st Inversion)'},
+    {value: 0, label: 'Major (Root Pos.)'},
+    {value: 1, label: 'Major (1st Inv.)'},
+    {value: 2, label: 'Minor (Root Pos.)'},
+    {value: 3, label: 'Minor (1st Inv.)'},
     {value: 4, label: 'Dominant 7th'},
     {value: 5, label: 'Diminished 7th'},
     {value: 6, label: 'Major 7th'},
@@ -55,7 +55,7 @@ const options = [
     {value: 8, label: 'Augmented Triad'},
 ];
 
-const defaultOption = {value: -1, label: 'Choose Chord Type'};
+const defaultOption = {value: -1, label: 'Choose Chord'};
 
 //game interface component
 function GameInterface(){

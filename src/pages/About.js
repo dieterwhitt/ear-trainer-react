@@ -19,7 +19,7 @@ const About = () => {
         slide-in-from-top-[70%] ease-in-out duration-1000 mx-[4%]'>I created this web application to help
                 musicians improve their aural skills.</h2>
             <p className='text-2xl font-semibold animate-in fade-in 
-        slide-in-from-top-[10%] ease-in-out duration-1000 mx-[6%]
+        slide-in-from-bottom-[5%] ease-in-out duration-1000 mx-[6%]
         leading-relaxed'>At the time of writing, I'm currently a first year 
                 computer science student at the University of Waterloo in Waterloo, Ontario.
                 I designed this website based on my own experiences as a piano player.
@@ -35,12 +35,8 @@ const About = () => {
                 <br/>
                 <br/>
                 -Dieter Whittingham, April 2024
-            </p>
-            <div className='text-xl mt-[3%]
-                    animate-in fade-in slide-in-from-bottom-[15%] ease-out duration-1000'>
-                <div className='text-xl'>Contact me:</div>  
-                <nav className='flex flex-row justify-center items-center'>
-                    <a href='mailto:dieter.whitt@gmail.com'>
+                <div className='flex flex-row justify-center items-center'>
+                    <a href='mailto:whittinghamdieter@gmail.com' >
                         <img src={email} alt='email icon'/>
                     </a>
                     <a href='https://github.com/dieterwhitt' target='_blank'>
@@ -49,8 +45,8 @@ const About = () => {
                     <a href='https://linkedin.com/in/dieterwhittingham' target='_blank'>
                         <img src={linkedin} alt='linkedin icon'/>
                     </a>
-                </nav>
-            </div>
+                </div>
+            </p>
         </div>
     );
 }
