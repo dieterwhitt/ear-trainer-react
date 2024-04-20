@@ -13,7 +13,7 @@ import Select from 'react-select';
 function Title(){
     return(
         <h1 className='
-            text-6xl my-[3%] font-bold animate-in fade-in
+            text-6xl my-[3%] font-normal animate-in fade-in
             slide-in-from-top ease-in-out duration-1000'>
                 Chord Identification Training</h1>
     );
@@ -22,13 +22,13 @@ function Title(){
 //header component
 function Header(){
     return (
-        <div className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
+        <div className='text-3xl mb-[2.5%] font-normal animate-in fade-in 
         slide-in-from-top-[40%] ease-in-out duration-1000 mx-[4%]'>
             <p>
-            Welcome to chord identification. 
+            Welcome to chord identification.
             When you press play, you will be given
             a series of random chords. Identify them using the drop down box.
-            </p>    
+            </p>
             <p className='text-2xl animate-in fade-in 
         slide-in-from-top ease-in-out duration-700 mt-[1.5%]'>
                 The possible chords are: Major, Minor.
@@ -152,7 +152,7 @@ function GameInterface(){
         return (
         <div className='animate-in fade-in 
                 slide-in-from-bottom-[50%] ease-in-out duration-1000'>
-            <button className='text-5xl font-bold my-[2%] outline rounded-full
+            <button className='text-5xl font-normal my-[2%] outline rounded-full
             outline-indigo-400 h-fit outline-2 outline-offset-2 py-[1.5%] 
             px-[3%] bg-indigo-200 hover:bg-indigo-300 hover:scale-110 
             duration-300 '
@@ -170,7 +170,7 @@ function GameInterface(){
             colorStr = 'bg-gray-300 outline-gray-400';
         }
         return (<button id='gameButton' onClick={handlePlay}
-        className={'text-3xl font-bold my-[10%] outline rounded-full '
+        className={'text-3xl font-normal my-[10%] outline rounded-full '
         + 'h-fit outline-2 outline-offset-2 py-[6%] px-[12%] ' 
         + colorStr} disabled={!playButtonEnabled}>
             Play Chord</button>);
@@ -188,7 +188,7 @@ function GameInterface(){
             <Select options={options} onChange={setDropdownOption} disabled={!dropdownEnabled} 
                 value={dropdownOption} unstyled isSearchable={false}
                 classNames={{
-                    container: () => 'text-3xl font-bold my-[10%] outline rounded-full '
+                    container: () => 'text-3xl font-normal my-[10%] outline rounded-full '
                     + 'h-fit outline-2 outline-offset-2 py-[6%] w-[100%] ' 
                     + colorStr,
                     option: () => 'font-thin bg-slate-50 hover:text-indigo-300 ',
@@ -206,7 +206,7 @@ function GameInterface(){
         }
         return(
             <button disabled={!submitButtonEnabled} id='submitButton' 
-                onClick={handleSubmit} className={'text-3xl font-bold my-[10%] '
+                onClick={handleSubmit} className={'text-3xl font-normal my-[10%] '
                 + 'outline rounded-full '
                 + 'h-fit outline-2 outline-offset-2 py-[6%] px-[12%] ' 
                 + colorStr}>Submit</button>
@@ -219,12 +219,12 @@ function GameInterface(){
             //not ready to load
             return (
                 <div>
-                    <h2 className='text-4xl my-[1.5%] font-semibold mx-[4%]'>
+                    <h2 className='text-4xl my-[1.5%] font-normal mx-[4%]'>
                         Chords Remaining: {roundsPerGame - playsCompleted}</h2>
-                    <h3 className='text-2xl my-[1.5%] font-semibold mx-[4%]'>
+                    <h3 className='text-2xl my-[1.5%] font-normal mx-[4%]'>
                         Finish the current session to see your results.</h3>
                     {/*button that reloads the page*/}
-                        <button className='text-3xl font-bold my-[1%] outline 
+                        <button className='text-3xl font-normal my-[1%] outline 
                         rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
                         mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
                         hover:scale-110 duration-300'
@@ -251,16 +251,16 @@ function GameInterface(){
             //render
             return(
                 <div className='animate-in fade-in duration-1000 ease-in-out'>
-                    <h3 className='text-5xl py-[1.5%] font-semibold mx-[4%] ease-in-out
+                    <h3 className='text-5xl py-[1.5%] font-normal mx-[4%] ease-in-out
                     animate-in slide-in-from-bottom-[70%] duration-1000'>Results ✏️</h3>
-                    <h1 className='text-7xl py-[1%] font-semibold mx-[4%]ease-in-out
+                    <h1 className='text-7xl py-[1%] font-normal mx-[4%]ease-in-out
                     animate-in slide-in-from-bottom-[100%] duration-1000'>{stars}</h1>
-                    <p className='text-3xl py-[1%] font-semibold mx-[4%]ease-in-out
+                    <p className='text-3xl py-[1%] font-normal mx-[4%]ease-in-out
                     animate-in slide-in-from-bottom-[60%] duration-1000'>
                         Score: {correct}/{roundsPerGame} ({percentage}%)</p>
                     <div className='animate-in slide-in-from-bottom-[40%] duration-1000 ease-in-out'>
                         <button id='restartButton' onClick={restartGame} 
-                        className='text-3xl font-bold py-[1%] my-[1%] outline 
+                        className='text-3xl font-normal py-[1%] my-[1%] outline 
                         rounded-full h-fit outline-2 outline-offset-2 px-[2%] 
                         mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
                         hover:scale-110 duration-300'>Play Again</button>

@@ -9,19 +9,19 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     const homeStyle = 'font-font1 text-center';
-    const titleStyle = 'text-6xl my-[3%] font-bold animate-in fade-in '
+    const titleStyle = 'text-6xl my-[3%] font-normal animate-in fade-in '
     + 'slide-in-from-top ease-in-out duration-1000';
-    const infoStyle = 'text-3xl my-[3%] font-semibold animate-in fade-in '
+    const infoStyle = 'text-3xl my-[3%] font-normal animate-in fade-in '
     + 'slide-in-from-top ease-in-out duration-1000';
     const mainStyle = 'flex flex-row justify-center gap-[4.5%] '
     + 'animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000';
     const boxStyle = 'flex-none w-[27%] border-solid rounded-xl border-4 '
     + 'bg-gradient-to-b from-white to-slate-50 border-indigo-400 '
     + 'transition ease-out hover:scale-110 duration-300';
-    const boxHeaderStyle = 'text-4xl font-bold py-[4%] bg-indigo-200 '
+    const boxHeaderStyle = 'text-4xl font-normal py-[4%] bg-indigo-200 '
     + 'border-solid border-indigo-400 border-b-4 rounded-t-md';
     const boxBodyStyle = 'text-2xl leading-[140%] px-[5%] pt-[3%]';
-    const buttonStyle = 'text-3xl font-bold my-[8%] outline rounded-full '
+    const buttonStyle = 'text-3xl font-normal my-[8%] outline rounded-full '
     + 'outline-indigo-400 h-fit outline-2 outline-offset-2 py-[2%] px-[3%] mx-[5%] '
     + 'bg-indigo-200 hover:bg-indigo-300 hover:scale-110 duration-300';
     const footerStyle = 'text-xl mt-[2.5%] mb-[1.5%] '

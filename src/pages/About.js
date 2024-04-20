@@ -12,13 +12,13 @@ const About = () => {
     return (
         <div className='font-font1 text-center'>
             <h1 className='
-            text-6xl my-[3%] font-bold animate-in fade-in
+            text-6xl my-[3%] font-normal animate-in fade-in
             slide-in-from-top ease-in-out duration-1000'>
                 About eartrainer.net</h1>
-            <h2 className='text-3xl mb-[2.5%] font-semibold animate-in fade-in 
+            <h2 className='text-3xl mb-[2.5%] font-normal animate-in fade-in 
         slide-in-from-top-[70%] ease-in-out duration-1000 mx-[4%]'>I created this web application to help
                 musicians improve their aural skills.</h2>
-            <p className='text-2xl font-semibold animate-in fade-in 
+            <p className='text-2xl font-normal animate-in fade-in 
         slide-in-from-bottom-[5%] ease-in-out duration-1000 mx-[6%]
         leading-relaxed'>At the time of writing, I'm currently a first year 
                 computer science student at the University of Waterloo in Waterloo, Ontario.
