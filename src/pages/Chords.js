@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
-import { getStars, playChord } from '../keyboard';
+import { getStars, playChord } from '../logic/keyboard';
 
 import Select from 'react-select';
 

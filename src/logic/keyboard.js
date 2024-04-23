@@ -40,7 +40,7 @@ var noteobjArray = [];
 for (var i = 0; i < keyboard.length; i++) {
     console.log('loading sound');
     //load note object
-    const file = require('./sounds/piano-88-notes/' + keyboard[i] + '.wav');
+    const file = require('../sounds/piano-88-notes/' + keyboard[i] + '.wav');
     //play
     const noteobj = new Audio(file);
     const volume = volumeFunction(i);

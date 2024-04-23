@@ -21,7 +21,7 @@ const Layout = () => {
             <Link className={linkStyle} 
             to='/chords'>Chords </Link>
             <Link className={linkStyle} 
-            to='/chordProgressions'>Chord Progressions </Link>
+            to='/chordprogressions'>Chord Progressions </Link>
             <Link className={linkStyle} 
             to='/about'>About</Link>
         </nav>  

@@ -4,8 +4,8 @@
 
 import React from 'react';
 import { useState } from 'react';
-import keyboard from '../keyboard';
-import { testBass } from '../keyboard';
+import keyboard from '../logic/keyboard';
+import { testBass } from '../logic/keyboard';
 
 // Refactor: reuse components including buttons idiot
 // like you need to reuse titles and buttons

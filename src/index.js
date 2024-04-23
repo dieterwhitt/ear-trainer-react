@@ -26,7 +26,7 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path='intervals' element={<Intervals />} />
             <Route path='chords' element={<Chords />} />
-            <Route path='chordProgressions' element={<ChordProgressions />} />
+            <Route path='chordprogressions' element={<ChordProgressions />} />
             <Route path='about' element={<About />} />
             <Route path='*' element={<NoPage />} />
           </Route>
