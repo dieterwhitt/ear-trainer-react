@@ -1,68 +1,28 @@
-//dieter whittingham
-//jan 7 2023
-//filename Intervals.js
+// dieter whittingham
+// april 22 2024
+// multiple choice game interface
 
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { getStars, playInterval } from "../logic/keyboard";
 import Title from "../components/Title";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
+import GenericButton1 from "../components/GenericButton1";
 
 import Select from "react-select";
-import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
-/*
-// interval title
-function IntervalTitle() {
-    return <Title text="Interval Training" />;
-}
 
-// interval header
-function IntervalHeader() {
-    return (
-        <div>
-            <Header
-                text="Welcome to interval identification. When you press
-            play, you will be given a series of random intervals. Identify
-            them using the drop down box."
-            />
-            <Subheader
-                text={
-                    <div>
-                        All intervals up to and including a Major Ninth are
-                        possible.
-                        <br />
-                        (Difficulty options coming soon!)
-                    </div>
-                }
-            />
-        </div>
-    );
-}
+// using for intervals, chords, any game with multiple choice answers
 
-// will need to refactor to allow difficulty selection
-const options = [
-    { value: 0, label: "Perfect Unison" },
-    { value: 1, label: "Minor Second" },
-    { value: 2, label: "Major Second" },
-    { value: 3, label: "Minor Third" },
-    { value: 4, label: "Major Third" },
-    { value: 5, label: "Perfect Fourth" },
-    { value: 6, label: "Tritone" },
-    { value: 7, label: "Perfect Fifth" },
-    { value: 8, label: "Minor Sixth" },
-    { value: 9, label: "Major Sixth" },
-    { value: 10, label: "Minor Seventh" },
-    { value: 11, label: "Major Seventh" },
-    { value: 12, label: "Perfect Octave" },
-    { value: 13, label: "Minor Ninth" },
-    { value: 14, label: "Major Ninth" },
-];
-
-const defaultOption = { value: -1, label: "Choose Interval" };
-
-//game interface component
-function GameInterface() {
+/**
+ * multiple choice game interface
+ * @param props.options array of multiple choice options
+ * @param props.default_option
+ * @param keyword game keyword (ex. interval -> play interval, choose interval)
+ * @param props.header page header
+ * @param props.subheader page subheader
+ */
+function MultipleChoiceInterface(props) {
     //state: number of plays completed
     const [playsCompleted, setPlaysCompleted] = useState(0);
     //state: current answer array
@@ -74,14 +34,29 @@ function GameInterface() {
     //first render of the game
     const [firstRender, setFirstRender] = useState(true);
 
-    //setting the intial rounds per game to 10
+    //setting the intial rounds per game to 10 (will refactor)
     const [roundsPerGame, setRoundsPerGame] = useState(10);
 
     // using usestate instead of getdocument like a retard
     const [playButtonEnabled, setPlayButtonEnabled] = useState(true);
     const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
     const [dropdownEnabled, setDropdownEnabled] = useState(true);
-    const [dropdownOption, setDropdownOption] = useState(defaultOption);
+    const [dropdownOption, setDropdownOption] = useState(props.default_option);
+
+    // game title
+    function GameTitle() {
+        return <Title text={`${props.keyword} Training`} />;
+    }
+
+    // game header
+    function GameHeader() {
+        return (
+            <div>
+                <Header text={props.header} />
+                <Subheader text={props.subheader} />
+            </div>
+        );
+    }
 
     const restartGame = () => {
         if (!firstRender) {
@@ -103,18 +78,18 @@ function GameInterface() {
     //handles user submitting
     const handleSubmit = (event) => {
         event.preventDefault();
-        //get user input (interval number)
+        //get user input (option number)
         const currentInput = dropdownOption.value;
         //check valid input
         if (currentInput == -1) {
-            alert("Please select an interval.");
+            alert("Please select an option.");
         } else {
             //update number of rounds played
             const newPlaysCompleted = playsCompleted + 1;
             setPlaysCompleted(newPlaysCompleted);
 
             //reset dropdown
-            setDropdownOption(defaultOption);
+            setDropdownOption(props.default_option);
             //log
             console.log("user submitted " + currentInput);
             console.log(newPlaysCompleted + " plays completed");
@@ -139,7 +114,7 @@ function GameInterface() {
     //play sound, and log the correct answer to the answersheet
     const handlePlay = (event) => {
         event.preventDefault();
-        //play interval and get the numerical value for it.
+        //play option and get the numerical value for it.
         const currentAnswer = playInterval();
         console.log("the correct answer is " + currentAnswer);
         //disable the button so that it cant be used before submission
@@ -153,53 +128,40 @@ function GameInterface() {
         ]);
     };
 
+    // play button for the first render
     function FirstRenderPlay() {
         return (
             <div
-                className="animate-in fade-in 
+                className="animate-in fade-in text-5xl my-[5%]
                 slide-in-from-bottom-[50%] ease-in-out duration-1000"
             >
-                <button
-                    className="text-5xl font-normal my-[2%] outline rounded-full
-            outline-indigo-400 h-fit outline-2 outline-offset-2 py-[1.5%] 
-            px-[3%] bg-indigo-200 hover:bg-indigo-300 hover:scale-110 
-            duration-300 "
+                <GenericButton1
+                    text="Play 🎵"
+                    enabled={true}
                     onClick={() => {
                         restartGame();
                         setFirstRender(false);
                     }}
-                >
-                    Play 🎵
-                </button>
+                    size="5xl"
+                />
             </div>
         );
     }
 
+    // button to play a multiple choice option
     function PlayButton() {
-        var colorStr = "";
-        if (playButtonEnabled) {
-            colorStr =
-                "bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 " +
-                "hover:scale-110 duration-300";
-        } else {
-            colorStr = "bg-gray-300 outline-gray-400";
-        }
         return (
-            <button
-                id="gameButton"
+            <GenericButton1
+                text={`Play ${props.keyword}`}
+                enabled={playButtonEnabled}
                 onClick={handlePlay}
-                className={
-                    "text-3xl font-normal my-[10%] outline rounded-full " +
-                    "h-fit outline-2 outline-offset-2 py-[6%] px-[12%] " +
-                    colorStr
-                }
-                disabled={!playButtonEnabled}
-            >
-                Play Interval
-            </button>
+                py={6}
+                px={12}
+            />
         );
     }
 
+    // dropdown button to display answers using react select
     function Dropdown() {
         var colorStr = "";
         if (dropdownEnabled) {
@@ -211,7 +173,7 @@ function GameInterface() {
         }
         return (
             <Select
-                options={options}
+                options={props.options}
                 onChange={setDropdownOption}
                 disabled={!dropdownEnabled}
                 value={dropdownOption}
@@ -219,7 +181,7 @@ function GameInterface() {
                 isSearchable={false}
                 classNames={{
                     container: () =>
-                        "text-3xl font-normal my-[10%] outline rounded-full " +
+                        "text-3xl font-normal outline rounded-full " +
                         "h-fit outline-2 outline-offset-2 py-[6%] w-[100%] " +
                         colorStr,
                     option: () =>
@@ -230,28 +192,14 @@ function GameInterface() {
     }
 
     function SubmitButton() {
-        var colorStr = "";
-        if (submitButtonEnabled) {
-            colorStr =
-                "bg-indigo-200 outline-indigo-400 hover:bg-indigo-300 " +
-                "hover:scale-110 duration-300";
-        } else {
-            colorStr = "bg-gray-300 outline-gray-400";
-        }
         return (
-            <button
-                disabled={!submitButtonEnabled}
-                id="submitButton"
+            <GenericButton1
+                text="Next"
+                enabled={submitButtonEnabled}
                 onClick={handleSubmit}
-                className={
-                    "text-3xl font-normal my-[10%] " +
-                    "outline rounded-full " +
-                    "h-fit outline-2 outline-offset-2 py-[6%] px-[12%] " +
-                    colorStr
-                }
-            >
-                Submit
-            </button>
+                py={6}
+                px={12}
+            />
         );
     }
 
@@ -262,23 +210,23 @@ function GameInterface() {
             return (
                 <div>
                     <h2 className="text-4xl my-[1.5%] font-normal mx-[4%]">
-                        Intervals Remaining: {roundsPerGame - playsCompleted}
+                        {props.keyword}s Remaining:{" "}
+                        {roundsPerGame - playsCompleted}
                     </h2>
                     <h3 className="text-2xl my-[1.5%] font-normal mx-[4%]">
                         Finish the current session to see your results.
                     </h3>
-                    <button
-                        className="text-3xl font-normal my-[1%] outline 
-                        rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
-                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
-                        hover:scale-110 duration-300"
+                    {/*button that reloads the page*/}
+                    <GenericButton1
+                        text="Start Over"
+                        enabled={true}
                         onClick={() => {
                             restartGame();
                             setFirstRender(true);
                         }}
-                    >
-                        Start Over
-                    </button>
+                        py={1}
+                        px={2}
+                    />
                 </div>
             );
         } else {
@@ -318,17 +266,17 @@ function GameInterface() {
                     >
                         Score: {correct}/{roundsPerGame} ({percentage}%)
                     </p>
-                    <div className="animate-in slide-in-from-bottom-[40%] duration-1000 ease-in-out">
-                        <button
-                            id="restartButton"
+                    <div
+                        className="animate-in slide-in-from-bottom-[40%]
+                         duration-1000 ease-in-out"
+                    >
+                        <GenericButton1
+                            text="Play Again"
+                            enabled={true}
                             onClick={restartGame}
-                            className="text-3xl font-normal py-[1%] my-[1%] outline 
-                        rounded-full h-fit outline-2 outline-offset-2 px-[2%] 
-                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
-                        hover:scale-110 duration-300"
-                        >
-                            Play Again
-                        </button>
+                            py={1}
+                            px={2}
+                        />
                     </div>
                 </div>
             );
@@ -339,8 +287,8 @@ function GameInterface() {
     if (firstRender) {
         return (
             <div>
-                <IntervalTitle />
-                <IntervalHeader />
+                <GameTitle />
+                <GameHeader />
                 <FirstRenderPlay />
             </div>
         );
@@ -349,12 +297,13 @@ function GameInterface() {
         return (
             <div>
                 <></>
-                <IntervalTitle />
+                <GameTitle />
                 <div
                     className="flex flex-row justify-center gap-[4.5%] py-[1%]
                         animate-in fade-in slide-in-from-bottom-24 
                         ease-in-out duration-1000"
                 >
+                    {/* play button */}
                     <div className="flex justify-end w-[18%]">
                         <PlayButton />
                     </div>
@@ -376,46 +325,4 @@ function GameInterface() {
     }
 }
 
-*/
-
-//main component
-const Intervals = () => {
-    const interval_options = [
-        { value: 0, label: "Perfect Unison" },
-        { value: 1, label: "Minor Second" },
-        { value: 2, label: "Major Second" },
-        { value: 3, label: "Minor Third" },
-        { value: 4, label: "Major Third" },
-        { value: 5, label: "Perfect Fourth" },
-        { value: 6, label: "Tritone" },
-        { value: 7, label: "Perfect Fifth" },
-        { value: 8, label: "Minor Sixth" },
-        { value: 9, label: "Major Sixth" },
-        { value: 10, label: "Minor Seventh" },
-        { value: 11, label: "Major Seventh" },
-        { value: 12, label: "Perfect Octave" },
-        { value: 13, label: "Minor Ninth" },
-        { value: 14, label: "Major Ninth" },
-    ];
-
-    return (
-        <MultipleChoiceInterface
-            options={interval_options}
-            default_option={{ value: -1, label: "Choose Interval" }}
-            keyword="Interval"
-            header="Welcome to interval identification. When you press
-            play, you will be given a series of random intervals. Identify
-            them using the drop down box."
-            subheader={
-                <div>
-                    All intervals up to and including a Major Ninth are
-                    possible.
-                    <br />
-                    (Difficulty options coming soon!)
-                </div>
-            }
-        />
-    );
-};
-
-export default Intervals;
+export default MultipleChoiceInterface;
