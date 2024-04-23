@@ -3,12 +3,12 @@
 //filename Intervals.js
 
 import React from "react";
-import { createContext } from "react";
 
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
+import { play_interval } from "../logic/keyboard";
 
 //main component
-const Intervals = () => {
+function Intervals() {
     const interval_options = [
         { value: 0, label: "Perfect Unison" },
         { value: 1, label: "Minor Second" },
@@ -31,7 +31,9 @@ const Intervals = () => {
         <MultipleChoiceInterface
             options={interval_options}
             default_option={{ value: -1, label: "Choose Interval" }}
+            play_function={play_interval}
             keyword="Interval"
+            title="Interval"
             header="Welcome to interval identification. When you press
             play, you will be given a series of random intervals. Identify
             them using the drop down box."
@@ -45,6 +47,6 @@ const Intervals = () => {
             }
         />
     );
-};
+}
 
 export default Intervals;

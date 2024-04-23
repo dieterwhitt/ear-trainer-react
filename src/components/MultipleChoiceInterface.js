@@ -4,7 +4,7 @@
 
 import React from "react";
 import { useState } from "react";
-import { getStars, playInterval } from "../logic/keyboard";
+import { getStars } from "../logic/keyboard";
 import Title from "../components/Title";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
@@ -32,8 +32,10 @@ function GameHeader(props) {
 /**
  * multiple choice game interface
  * @param props.options array of multiple choice options
- * @param props.default_option
+ * @param props.default_option default option
+ * @param props.play_function specific play function
  * @param keyword game keyword (ex. interval -> play interval, choose interval)
+ * @param title title text
  * @param props.header page header
  * @param props.subheader page subheader
  */
@@ -115,7 +117,7 @@ function MultipleChoiceInterface(props) {
     const handlePlay = (event) => {
         event.preventDefault();
         //play option and get the numerical value for it.
-        const currentAnswer = playInterval();
+        const currentAnswer = props.play_function();
         console.log("the correct answer is " + currentAnswer);
         //disable the button so that it cant be used before submission
         setPlayButtonEnabled(false);
@@ -287,7 +289,7 @@ function MultipleChoiceInterface(props) {
     if (firstRender) {
         return (
             <div>
-                <GameTitle keyword={props.keyword} />
+                <GameTitle keyword={props.title} />
                 <GameHeader header={props.header} subheader={props.subheader} />
                 <FirstRenderPlay />
             </div>
@@ -297,7 +299,7 @@ function MultipleChoiceInterface(props) {
         return (
             <div>
                 <div>
-                    <GameTitle keyword={props.keyword} />
+                    <GameTitle keyword={props.title} />
                 </div>
 
                 <div

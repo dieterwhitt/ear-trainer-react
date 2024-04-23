@@ -111,7 +111,7 @@ export function getStars(percentage) {
  * plays a random interval (unison-major 9th) and returns the inter value
  * @returns the interval that was played (int)
  */
-export function playInterval() {
+export function play_interval() {
     //random boolean which will determine if there will be a delay
     let delay = Math.floor(Math.random() * 2);
     //500 ms
@@ -151,7 +151,7 @@ export function playInterval() {
  * plays a random chord for chord identification training
  * @returns the type of chord that was played (int, index of chordArray)
  */
-export function playChord() {
+export function play_chord() {
     //chord types
     const chordArray = [
         [0, 4, 7, 12], //0 - major in root position
