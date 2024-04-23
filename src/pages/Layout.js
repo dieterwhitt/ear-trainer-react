@@ -10,7 +10,7 @@ const Layout = () => {
     const navBarStyle =
         "flex flex-row items-center gap-[3%] bg-indigo-300 " +
         "font-font1 font-light text-white text-5xl px-[1.7%] py-[0.8%]";
-    const webPageStyle = "bg-slate-100 min-h-screen";
+    const webPageStyle = "bg-slate-100 min-h-screen font-font1 text-center";
     return (
         <div className={webPageStyle}>
             <nav className={navBarStyle}>

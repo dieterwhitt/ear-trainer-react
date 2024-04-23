@@ -66,24 +66,20 @@ function HomeBoxButton(props) {
 }
 
 function Home() {
-    const homeStyle = "font-font1 text-center";
-    const infoStyle =
-        "text-3xl my-[3%] font-normal animate-in fade-in " +
-        "slide-in-from-top ease-in-out duration-1000";
-    const mainStyle =
-        "flex flex-row justify-center gap-[4.5%] " +
-        "animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000";
-    const footerStyle =
-        "text-xl mt-[2.5%] mb-[1.5%] " +
-        "animate-in fade-in slide-in-from-bottom ease-out duration-1000";
     return (
-        <div className={homeStyle}>
+        <div>
             <Title text="Welcome to Ear Trainer!" />
-            <h4 className={infoStyle}>
+            <h4
+                className="text-3xl my-[3%] font-normal animate-in fade-in
+                slide-in-from-top ease-in-out duration-1000"
+            >
                 Choose from interval training, chord identification training, or
                 chord progression training!
             </h4>
-            <main className={mainStyle}>
+            <main
+                className="flex flex-row justify-center gap-[4.5%]
+                animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000"
+            >
                 <HomeBox
                     title="Interval Training"
                     body="In interval training, you will be given 10 intervals to
@@ -123,7 +119,12 @@ function Home() {
                     show_button={false}
                 />
             </main>
-            <p className={footerStyle}>Created by Dieter Whittingham</p>
+            <div
+                className="text-xl mt-[2.5%] mb-[1.5%]
+                animate-in fade-in slide-in-from-bottom ease-out duration-1000"
+            >
+                Created by Dieter Whittingham
+            </div>
         </div>
     );
 }
