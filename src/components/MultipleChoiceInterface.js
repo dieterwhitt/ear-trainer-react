@@ -14,6 +14,21 @@ import Select from "react-select";
 
 // using for intervals, chords, any game with multiple choice answers
 
+// game title
+function GameTitle(props) {
+    return <Title text={`${props.keyword} Training`} />;
+}
+
+// game header
+function GameHeader(props) {
+    return (
+        <div>
+            <Header text={props.header} />
+            <Subheader text={props.subheader} />
+        </div>
+    );
+}
+
 /**
  * multiple choice game interface
  * @param props.options array of multiple choice options
@@ -42,21 +57,6 @@ function MultipleChoiceInterface(props) {
     const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
     const [dropdownEnabled, setDropdownEnabled] = useState(true);
     const [dropdownOption, setDropdownOption] = useState(props.default_option);
-
-    // game title
-    function GameTitle() {
-        return <Title text={`${props.keyword} Training`} />;
-    }
-
-    // game header
-    function GameHeader() {
-        return (
-            <div>
-                <Header text={props.header} />
-                <Subheader text={props.subheader} />
-            </div>
-        );
-    }
 
     const restartGame = () => {
         if (!firstRender) {
@@ -287,17 +287,19 @@ function MultipleChoiceInterface(props) {
     if (firstRender) {
         return (
             <div>
-                <GameTitle />
-                <GameHeader />
+                <GameTitle keyword={props.keyword} />
+                <GameHeader header={props.header} subheader={props.subheader} />
                 <FirstRenderPlay />
             </div>
         );
     } else {
-        // empty div required to reanimate title
+        // empty div required to reanimate title on restart
         return (
             <div>
-                <></>
-                <GameTitle />
+                <div>
+                    <GameTitle keyword={props.keyword} />
+                </div>
+
                 <div
                     className="flex flex-row justify-center gap-[4.5%] py-[1%]
                         animate-in fade-in slide-in-from-bottom-24 

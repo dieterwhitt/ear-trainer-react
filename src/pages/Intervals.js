@@ -3,13 +3,8 @@
 //filename Intervals.js
 
 import React from "react";
-import { useState, useEffect, useRef } from "react";
-import { getStars, playInterval } from "../logic/keyboard";
-import Title from "../components/Title";
-import Header from "../components/Header";
-import Subheader from "../components/Subheader";
+import { createContext } from "react";
 
-import Select from "react-select";
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
 
 //main component
