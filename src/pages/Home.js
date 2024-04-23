@@ -8,6 +8,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Title from "../components/Title";
+import Header from "../components/Header";
 
 /**
  * @description component for home page boxes
@@ -69,15 +70,12 @@ function Home() {
     return (
         <div>
             <Title text="Welcome to Ear Trainer!" />
-            <h4
-                className="text-3xl my-[3%] font-normal animate-in fade-in
-                slide-in-from-top ease-in-out duration-1000"
-            >
-                Choose from interval training, chord identification training, or
-                chord progression training!
-            </h4>
+            <Header
+                text="Choose from interval training, chord identification
+                training, or chord progression training!"
+            />
             <main
-                className="flex flex-row justify-center gap-[4.5%]
+                className="flex flex-row justify-center gap-[4.5%] pt-[2%]
                 animate-in fade-in slide-in-from-bottom-[10%] ease-out duration-1000"
             >
                 <HomeBox
