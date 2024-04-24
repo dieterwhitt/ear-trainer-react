@@ -10,6 +10,7 @@
  * @param props.py y padding adjustment (percentage)
  * @param props.px x padding adjustment (percentage)
  * @param props.size text size
+ * @param props.button_size button size (1 - small 2 - med 3 - lg)
  */
 function GenericButton1(props) {
     console.log("loading button");
@@ -22,21 +23,19 @@ function GenericButton1(props) {
         styleStr = "bg-gray-300 outline-gray-400 ";
     }
     // april 24 2024 - x padding bugging out for some reason
-    // band aid fix need to fix later
+
     styleStr +=
         "font-normal outline rounded-full " +
-        "h-fit px-[3%] outline-2 outline-offset-2 ";
+        "h-fit outline-2 outline-offset-2 ";
     // padding adjustments
     // default x-3% y-1.5%
-    if (props.py) {
-        styleStr += `py-[${props.py}%] `;
+    if (props.button_size === 1) {
+        styleStr += "px-[2%] py-[1%] ";
+    } else if (props.button_size === 3) {
+        styleStr += "px-[12%] py-[6%] ";
     } else {
-        styleStr += "py-[1.5%] ";
-    }
-    if (props.px) {
-        styleStr += `px-[${props.px}%] `;
-    } else {
-        styleStr += "px-[3%] ";
+        // default
+        styleStr += "px-[3%] py-[1.5%] ";
     }
     // check text size
     if (props.size) {

@@ -157,8 +157,7 @@ function MultipleChoiceInterface(props) {
                 text={`Play ${props.keyword}`}
                 enabled={playButtonEnabled}
                 onClick={handlePlay}
-                py={6}
-                px={12}
+                button_size={3}
             />
         );
     }
@@ -199,8 +198,7 @@ function MultipleChoiceInterface(props) {
                 text="Next"
                 enabled={submitButtonEnabled}
                 onClick={handleSubmit}
-                py={6}
-                px={12}
+                button_size={3}
             />
         );
     }
@@ -226,8 +224,7 @@ function MultipleChoiceInterface(props) {
                             restartGame();
                             setFirstRender(true);
                         }}
-                        py={1}
-                        px={2}
+                        button_size={1}
                     />
                 </div>
             );

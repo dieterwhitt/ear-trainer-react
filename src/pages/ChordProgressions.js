@@ -27,8 +27,7 @@ function ChordProgressions() {
                     text="Preview Bass Generation"
                     enabled={true}
                     onClick={testBass}
-                    py={1}
-                    px={2}
+                    button_size={1}
                 />
             </div>
         </div>
