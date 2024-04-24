@@ -3,76 +3,36 @@
 //filename ChordProgressions.js
 
 import React from "react";
-import { useState } from "react";
-import keyboard from "../logic/keyboard";
 import { testBass } from "../logic/keyboard";
+import Title from "../components/Title";
+import Header from "../components/Header";
+import Subheader from "../components/Subheader";
+import GenericButton1 from "../components/GenericButton1";
 
-// Refactor: reuse components including buttons idiot
-// like you need to reuse titles and buttons
-// do this before adding difficulty options
-
-function Title() {
+function ChordProgressions() {
     return (
-        <h1
-            className="
-            text-6xl my-[3%] font-normal animate-in fade-in
-            slide-in-from-top ease-in-out duration-1000"
-        >
-            Chord Progression Training
-        </h1>
-    );
-}
-
-//header component
-function Header() {
-    return (
-        <div
-            className="text-3xl mb-[2.5%] font-normal animate-in fade-in 
-        slide-in-from-top-[40%] ease-in-out duration-1000 mx-[4%]"
-        >
-            <p>
-                Welcome to chord progression training. When you press play, you
-                will be given a chord progression with 5 chords.
-            </p>
-            <p
-                className="text-2xl animate-in fade-in 
-        slide-in-from-top ease-in-out duration-700 mt-[1.5%]"
-            >
-                Possible chords: I/i, IV/iv, V, V6/4, VI/vi.
-            </p>
-            <h1
-                className="
-            text-6xl my-[3%] font-normal animate-in fade-in
-            slide-in-from-top ease-in-out duration-1000"
-            >
-                Coming Soon!
-            </h1>
-        </div>
-    );
-}
-
-const ChordProgressions = () => {
-    return (
-        <div className="font-font1 text-center">
-            <Title />
-            <Header />
+        <div>
+            <Title text="Chord Progression Training" />
+            <Header
+                text="Welcome to chord progression training. When you
+            press play, you will be given a chord progression with 5 chords."
+            />
+            <Subheader text="Possible chords: I/i, IV/iv, V, V6/4, VI/vi." />
+            <Title text="Coming Soon!" />
             <div
                 className="animate-in fade-in 
-                    slide-in-from-bottom-[50%] ease-in-out duration-1000"
+                slide-in-from-bottom-[50%] ease-in-out duration-1000"
             >
-                <button
-                    id="gameButton"
+                <GenericButton1
+                    text="Preview Bass Generation"
+                    enabled={true}
                     onClick={testBass}
-                    className="text-3xl font-normal my-[1%] outline 
-                        rounded-full h-fit outline-2 outline-offset-2 py-[1%] px-[2%] 
-                        mx-[2%] bg-indigo-200 outline-indigo-400 hover:bg-indigo-300
-                        hover:scale-110 duration-300"
-                >
-                    Preview Bass Generation
-                </button>
+                    py={1}
+                    px={2}
+                />
             </div>
         </div>
     );
-};
+}
 
 export default ChordProgressions;

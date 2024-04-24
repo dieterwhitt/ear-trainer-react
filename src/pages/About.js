@@ -7,28 +7,70 @@ import React from "react";
 import github from "../images/github.png";
 import linkedin from "../images/linkedin.png";
 import email from "../images/email.png";
+import leetcode from "../images/leetcode.png";
 
-const About = () => {
+import Title from "../components/Title";
+import Header from "../components/Header";
+
+/**
+ * icon array flex row
+ * @param props.scale image scale
+ */
+function Icons(props) {
+    const icon_array = [
+        {
+            src: email,
+            alt: "email icon",
+            href: "mailto:whittinghamdieter@gmail.com",
+        },
+        {
+            src: github,
+            alt: "github icon",
+            href: "https://github.com/dieterwhitt",
+        },
+        {
+            src: leetcode,
+            alt: "leetcode icon",
+            href: "https://leetcode.com/dieterwhittingham/",
+        },
+        {
+            src: linkedin,
+            alt: "linkedin icon",
+            href: "https://linkedin.com/in/dieterwhittingham",
+        },
+    ];
+    // map each icon to clickable image
+    return (
+        <div className="flex flex-row justify-center items-center">
+            {icon_array.map((icon) => {
+                return (
+                    <div>
+                        <a href={icon.href} target="_blank">
+                            <img
+                                src={icon.src}
+                                alt={icon.alt}
+                                className={`scale-${props.scale}`}
+                            />
+                        </a>
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
+function About() {
     return (
         <div className="font-font1 text-center">
-            <h1
-                className="
-            text-6xl my-[3%] font-normal animate-in fade-in
-            slide-in-from-top ease-in-out duration-1000"
-            >
-                About eartrainer.net
-            </h1>
-            <h2
-                className="text-3xl mb-[2.5%] font-normal animate-in fade-in 
-        slide-in-from-top-[70%] ease-in-out duration-1000 mx-[4%]"
-            >
-                I created this web application to help musicians improve their
-                aural skills.
-            </h2>
+            <Title text="About eartrainer.net" />
+            <Header
+                text="I created this web application to help musicians 
+                improve their aural skills."
+            />
             <p
                 className="text-2xl font-normal animate-in fade-in 
-        slide-in-from-bottom-[5%] ease-in-out duration-1000 mx-[6%]
-        leading-relaxed"
+                slide-in-from-bottom-[5%] ease-in-out duration-1000 mx-[7%]
+                leading-relaxed"
             >
                 At the time of writing, I'm currently a first year computer
                 science student at the University of Waterloo in Waterloo,
@@ -47,23 +89,10 @@ const About = () => {
                 <br />
                 <br />
                 -Dieter Whittingham, April 2024
-                <div className="flex flex-row justify-center items-center">
-                    <a href="mailto:whittinghamdieter@gmail.com">
-                        <img src={email} alt="email icon" />
-                    </a>
-                    <a href="https://github.com/dieterwhitt" target="_blank">
-                        <img src={github} alt="github icon" />
-                    </a>
-                    <a
-                        href="https://linkedin.com/in/dieterwhittingham"
-                        target="_blank"
-                    >
-                        <img src={linkedin} alt="linkedin icon" />
-                    </a>
-                </div>
+                <Icons scale="90" />
             </p>
         </div>
     );
-};
+}
 
 export default About;
