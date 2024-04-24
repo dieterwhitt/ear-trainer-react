@@ -12,6 +12,7 @@
  * @param props.size text size
  */
 function GenericButton1(props) {
+    console.log("loading button");
     var styleStr = "";
     if (props.enabled) {
         styleStr =
@@ -20,9 +21,11 @@ function GenericButton1(props) {
     } else {
         styleStr = "bg-gray-300 outline-gray-400 ";
     }
+    // april 24 2024 - x padding bugging out for some reason
+    // band aid fix need to fix later
     styleStr +=
         "font-normal outline rounded-full " +
-        "h-fit outline-2 outline-offset-2 ";
+        "h-fit px-[3%] outline-2 outline-offset-2 ";
     // padding adjustments
     // default x-3% y-1.5%
     if (props.py) {
@@ -37,11 +40,11 @@ function GenericButton1(props) {
     }
     // check text size
     if (props.size) {
-        styleStr += `text-${props.size}`;
+        styleStr += `text-${props.size} `;
     } else {
-        styleStr += "text-3xl";
+        styleStr += "text-3xl ";
     }
-
+    console.log(styleStr);
     // construct button
     return (
         <button

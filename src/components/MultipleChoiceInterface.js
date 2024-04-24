@@ -211,11 +211,11 @@ function MultipleChoiceInterface(props) {
             //not ready to load
             return (
                 <div>
-                    <h2 className="text-4xl my-[1.5%] font-normal mx-[4%]">
+                    <h2 className="text-4xl my-[1.5%] font-normal">
                         {props.keyword}s Remaining:{" "}
                         {roundsPerGame - playsCompleted}
                     </h2>
-                    <h3 className="text-2xl my-[1.5%] font-normal mx-[4%]">
+                    <h3 className="text-2xl my-[1.5%] font-normal">
                         Finish the current session to see your results.
                     </h3>
                     {/*button that reloads the page*/}
