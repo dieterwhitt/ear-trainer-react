@@ -16,7 +16,7 @@ import Header from "../components/Header";
  * @param props.body body text of the box
  * @param props.button button text
  * @param props.link button destination
- * @param props.show_button hide button
+ * @param props.showButton hide button
  */
 function HomeBox(props) {
     return (
@@ -35,7 +35,7 @@ function HomeBox(props) {
                 {props.body}
             </p>
             <Link to={props.link}>
-                <HomeBoxButton text={props.button} show={props.show_button} />
+                <HomeBoxButton text={props.button} show={props.showButton} />
             </Link>
         </div>
     );
@@ -46,11 +46,11 @@ function HomeBox(props) {
  * @param props.show whether to show the button
  */
 function HomeBoxButton(props) {
-    var show_button = true;
+    var showButton = true;
     if (props.show === false) {
-        show_button = false;
+        showButton = false;
     }
-    if (show_button) {
+    if (showButton) {
         return (
             <button
                 className="text-3xl font-normal my-[8%] outline rounded-full
@@ -86,17 +86,17 @@ function Home() {
                         major ninth."
                     button="Play Intervals"
                     link="/intervals"
-                    show_button={true}
+                    showButton={true}
                 />
                 <HomeBox
                     title="Chord Identification"
                     body="In chord identification, you will
                     be given 10 chords to identify. Possible chords: Major,
                     Minor, Dominant 7th, Diminished 7th, Major 7th, Minor 7th,
-                    and Augmented Triad"
-                    button="Play Chord Identification"
+                    and Augmented Triad."
+                    button="Play Chords"
                     link="/chords"
-                    show_button={true}
+                    showButton={true}
                 />
                 <HomeBox
                     title="Chord Progressions"
@@ -114,7 +114,7 @@ function Home() {
                     }
                     button="Play Chord Progressions"
                     link="/chordprogressions"
-                    show_button={false}
+                    showButton={false}
                 />
             </main>
             <div

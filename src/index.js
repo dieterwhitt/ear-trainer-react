@@ -1,7 +1,7 @@
-//dieter whittingham
-//ear trainer
-//started on jan 7 2024
-//filename index.js
+// dieter whittingham
+// ear trainer
+// started on jan 7 2024
+// index.js
 
 import React from "react";
 import ReactDOM from "react-dom";

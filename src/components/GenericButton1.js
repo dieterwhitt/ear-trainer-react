@@ -1,16 +1,18 @@
 // dieter whittingham
 // april 23 2024
+// GenericButton.js
+
 // generic button component
 
 /**
  * generic blue/grey scaling button component
  * @param props.text button text
  * @param props.enabled whether button is enabled
- * @param props.onClick callback function upon click
+ * @callback props.onClick callback function upon click
  * @param props.py y padding adjustment (percentage)
  * @param props.px x padding adjustment (percentage)
  * @param props.size text size
- * @param props.button_size button size (1 - small 2 - med 3 - lg)
+ * @param props.buttonSize button size (1 - small 2 - med 3 - lg)
  */
 function GenericButton1(props) {
     console.log("loading button");
@@ -29,9 +31,9 @@ function GenericButton1(props) {
         "h-fit outline-2 outline-offset-2 ";
     // padding adjustments
     // default x-3% y-1.5%
-    if (props.button_size === 1) {
+    if (props.buttonSize === 1) {
         styleStr += "px-[2%] py-[1%] ";
-    } else if (props.button_size === 3) {
+    } else if (props.buttonSize === 3) {
         styleStr += "px-[12%] py-[6%] ";
     } else {
         // default

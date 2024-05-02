@@ -17,7 +17,7 @@ import Header from "../components/Header";
  * @param props.scale image scale
  */
 function Icons(props) {
-    const icon_array = [
+    const iconArray = [
         {
             src: email,
             alt: "email icon",
@@ -42,7 +42,7 @@ function Icons(props) {
     // map each icon to clickable image
     return (
         <div className="flex flex-row justify-center items-center">
-            {icon_array.map((icon) => {
+            {iconArray.map((icon) => {
                 return (
                     <div>
                         <a href={icon.href} target="_blank">

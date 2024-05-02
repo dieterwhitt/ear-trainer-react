@@ -1,10 +1,12 @@
 // dieter whittingham
 // april 22 2024
+// MultipleChoiceInterface.js
+
 // multiple choice game interface
 
 import React from "react";
 import { useState } from "react";
-import { getStars } from "../logic/keyboard";
+import { getStars } from "../logic/feedback";
 import Title from "../components/Title";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
@@ -32,8 +34,8 @@ function GameHeader(props) {
 /**
  * multiple choice game interface
  * @param props.options array of multiple choice options
- * @param props.default_option default option
- * @param props.play_function specific play function
+ * @param props.defaultOption default option
+ * @callback props.playFunction specific play function
  * @param keyword game keyword (ex. interval -> play interval, choose interval)
  * @param title title text
  * @param props.header page header
@@ -58,7 +60,7 @@ function MultipleChoiceInterface(props) {
     const [playButtonEnabled, setPlayButtonEnabled] = useState(true);
     const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
     const [dropdownEnabled, setDropdownEnabled] = useState(true);
-    const [dropdownOption, setDropdownOption] = useState(props.default_option);
+    const [dropdownOption, setDropdownOption] = useState(props.defaultOption);
 
     const restartGame = () => {
         if (!firstRender) {
@@ -83,7 +85,7 @@ function MultipleChoiceInterface(props) {
         //get user input (option number)
         const currentInput = dropdownOption.value;
         //check valid input
-        if (currentInput == -1) {
+        if (currentInput === -1) {
             alert("Please select an option.");
         } else {
             //update number of rounds played
@@ -91,7 +93,7 @@ function MultipleChoiceInterface(props) {
             setPlaysCompleted(newPlaysCompleted);
 
             //reset dropdown
-            setDropdownOption(props.default_option);
+            setDropdownOption(props.defaultOption);
             //log
             console.log("user submitted " + currentInput);
             console.log(newPlaysCompleted + " plays completed");
@@ -117,7 +119,7 @@ function MultipleChoiceInterface(props) {
     const handlePlay = (event) => {
         event.preventDefault();
         //play option and get the numerical value for it.
-        const currentAnswer = props.play_function();
+        const currentAnswer = props.playFunction();
         console.log("the correct answer is " + currentAnswer);
         //disable the button so that it cant be used before submission
         setPlayButtonEnabled(false);
@@ -157,7 +159,7 @@ function MultipleChoiceInterface(props) {
                 text={`Play ${props.keyword}`}
                 enabled={playButtonEnabled}
                 onClick={handlePlay}
-                button_size={3}
+                buttonSize={3}
             />
         );
     }
@@ -198,7 +200,7 @@ function MultipleChoiceInterface(props) {
                 text="Next"
                 enabled={submitButtonEnabled}
                 onClick={handleSubmit}
-                button_size={3}
+                buttonSize={3}
             />
         );
     }
@@ -224,7 +226,7 @@ function MultipleChoiceInterface(props) {
                             restartGame();
                             setFirstRender(true);
                         }}
-                        button_size={1}
+                        buttonSize={1}
                     />
                 </div>
             );

@@ -5,11 +5,11 @@
 import React from "react";
 
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
-import { play_interval } from "../logic/keyboard";
+import { playInterval } from "../logic/playInterval";
 
 //main component
 function Intervals() {
-    const interval_options = [
+    const intervalOptions = [
         { value: 0, label: "Perfect Unison" },
         { value: 1, label: "Minor Second" },
         { value: 2, label: "Major Second" },
@@ -29,9 +29,9 @@ function Intervals() {
 
     return (
         <MultipleChoiceInterface
-            options={interval_options}
-            default_option={{ value: -1, label: "Choose Interval" }}
-            play_function={play_interval}
+            options={intervalOptions}
+            defaultOption={{ value: -1, label: "Choose Interval" }}
+            playFunction={playInterval}
             keyword="Interval"
             title="Interval"
             header="Welcome to interval identification. When you press

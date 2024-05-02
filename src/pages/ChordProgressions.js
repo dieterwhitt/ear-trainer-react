@@ -3,11 +3,12 @@
 //filename ChordProgressions.js
 
 import React from "react";
-import { testBass } from "../logic/keyboard";
+import { testBass } from "../logic/playProgression";
 import Title from "../components/Title";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import GenericButton1 from "../components/GenericButton1";
+import { testPlay } from "../logic/keyboard";
 
 function ChordProgressions() {
     return (
@@ -27,7 +28,13 @@ function ChordProgressions() {
                     text="Preview Bass Generation"
                     enabled={true}
                     onClick={testBass}
-                    button_size={1}
+                    buttonSize={1}
+                />
+                <GenericButton1
+                    text="Testing random shit"
+                    enabled={true}
+                    onClick={testPlay}
+                    buttonSize={1}
                 />
             </div>
         </div>

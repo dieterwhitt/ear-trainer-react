@@ -5,11 +5,11 @@
 import React from "react";
 
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
-import { play_chord } from "../logic/keyboard";
+import { playChord } from "../logic/playChord";
 
 //main component
 function Chords() {
-    const chord_options = [
+    const chordOptions = [
         { value: 0, label: "Major (Root Pos.)" },
         { value: 1, label: "Major (1st Inv.)" },
         { value: 2, label: "Minor (Root Pos.)" },
@@ -24,9 +24,9 @@ function Chords() {
     return (
         <div>
             <MultipleChoiceInterface
-                options={chord_options}
-                default_option={{ value: -1, label: "Choose Chord" }}
-                play_function={play_chord}
+                options={chordOptions}
+                defaultOption={{ value: -1, label: "Choose Chord" }}
+                playFunction={playChord}
                 keyword="Chord"
                 title="Chord Identification"
                 header="Welcome to chord identification. When you press
