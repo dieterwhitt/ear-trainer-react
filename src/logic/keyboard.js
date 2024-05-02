@@ -140,7 +140,7 @@ async function loadNotes(names) {
  * @param {int} note - note on the keyboard which is being calculated
  * @returns volume 0-1
  */
-export function volumeFunction(note) {
+function volumeFunction(note) {
     const a = 5.509;
     const b = 0.0393;
     const c = 14.49;

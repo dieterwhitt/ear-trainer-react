@@ -2,6 +2,8 @@
 // may 2 2024
 // playChord.js
 
+import keyboard from "./keyboard";
+
 // not refactored yet
 
 /**
@@ -39,7 +41,7 @@ export function playChord() {
     //loop through all notes
     let volume;
     for (const note of chordIntervalArray) {
-        play(rootIndex + note);
+        keyboard[note + rootIndex].play();
     }
 
     return chordType;

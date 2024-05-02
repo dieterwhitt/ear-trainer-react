@@ -269,7 +269,7 @@ function MultipleChoiceInterface(props) {
                     </p>
                     <div
                         className="animate-in slide-in-from-bottom-[40%]
-                         duration-1000 ease-in-out"
+                         duration-1000 ease-in-out my-[1%]"
                     >
                         <GenericButton1
                             text="Play Again"

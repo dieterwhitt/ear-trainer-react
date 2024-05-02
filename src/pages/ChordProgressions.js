@@ -31,7 +31,7 @@ function ChordProgressions() {
                     buttonSize={1}
                 />
                 <GenericButton1
-                    text="Testing random shit"
+                    text="Test2"
                     enabled={true}
                     onClick={testPlay}
                     buttonSize={1}

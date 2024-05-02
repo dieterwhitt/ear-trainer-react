@@ -2,6 +2,8 @@
 // may 2 2024
 // playInterval.js
 
+import keyboard from "./keyboard";
+
 // not refactored yet
 
 /**
@@ -30,11 +32,11 @@ export function playInterval() {
         intervalIndex = temp;
     }
     //play
-    play(rootIndex);
+    keyboard[rootIndex].play();
     //with delay
     //ignoring unison
     if (interval !== 0) {
-        setTimeout(() => play(intervalIndex), delay);
+        setTimeout(() => keyboard[intervalIndex].play(), delay);
     }
     //return the interval
     return interval;

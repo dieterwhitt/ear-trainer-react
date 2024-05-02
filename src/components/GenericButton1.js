@@ -45,7 +45,6 @@ function GenericButton1(props) {
     } else {
         styleStr += "text-3xl ";
     }
-    console.log(styleStr);
     // construct button
     return (
         <button
