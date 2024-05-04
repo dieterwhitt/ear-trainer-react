@@ -4,13 +4,16 @@
 
 // not refactored
 
+import keyboard from "./keyboard"; /*
+/*
+
 /**
  * create scale: creates a scale array which has the name
  * of the key plus the 8 notes in it as intervals from the first note
  * @param {string} note the first note of the scale ex. 'c', 'cs'
  * @param {boolean} key major - true minor - false
  * @returns
- */
+  */
 function createScale(note, key) {
     if (key) {
         //major key
@@ -25,7 +28,7 @@ function createScale(note, key) {
  * given a scale generates a random chord progression in roman numerals
  * @param {array} scale
  * @returns array of roman numeral strings representing the progression
- */
+  */ /*
 function createNumeralProgression(scale) {
     /*
     seen progressions:
@@ -54,7 +57,7 @@ function createNumeralProgression(scale) {
         - (tonic 4, dominant prep) C V
         - (tonic 5) IV I
         - (dominant) I V
-    */
+     */ /*
     const leadingChords = [
         ["IV", "I"], // 0 - tonic 4
         ["V", "I"], // 1 - tonic 5
@@ -122,7 +125,7 @@ function createNumeralProgression(scale) {
  * converts a roman numeral to its index in a scale array
  * @param {string} numeral
  * @returns - int index of scale
- */
+  */ /*
 function numeralToScaleIndex(numeral) {
     if (numeral === "I" || numeral === "i") {
         return 1;
@@ -141,7 +144,7 @@ function numeralToScaleIndex(numeral) {
  * @param {*} low keyboard index of the lower bound to search
  * @param {*} high index of the upper bound
  * @returns - keyboard index of the searched note, or false if no note is found
- */
+  */ /*
 function scaleToNote(scale, low, high) {
     //find the first tonic note of a scale in a given range
     for (let index = low; index <= high; index++) {
@@ -160,7 +163,7 @@ function scaleToNote(scale, low, high) {
  * current
  * @param {boolean} cadential - boolean representing if the current chord is a Cad 6/4
  * @param {int} tonic - tonic note of the scale for detemrining Cadential jumps
- */
+  */ /*
 function chooseBass(previousNote, noteDiff, cadential, tonic) {
     let cand1, cand2;
     if (noteDiff < 0) {
@@ -236,7 +239,7 @@ function chooseBass(previousNote, noteDiff, cadential, tonic) {
  * @param {Array} scale
  * @param {Array} numeralProgression
  * @returns a array of integers representing the keyboard indexes of the bass line
- */
+  */ /*
 function createBassProgression(scale, numeralProgression) {
     //bass: getting tonic bass note
     //tonic note is from 2g-3fs which is index 22-33
@@ -274,7 +277,7 @@ function createBassProgression(scale, numeralProgression) {
 }
 /**
  * bass line testing function
- */
+  */ /*
 export function testBass() {
     const cmajorScale = createScale("f", false);
     const numeralProgression = createNumeralProgression(cmajorScale);
@@ -297,7 +300,7 @@ function scaleTonicTriad(scale){
     const tonicTriad = [root + scale[3], root + scale[5], root + 12];
     return tonicTriad;
 }
-*/
+ */ /*
 
 /**
  * function for applying a song if it applies, otherwise returs false (default)
@@ -305,7 +308,7 @@ function scaleTonicTriad(scale){
  * @param {String} previousNumeral - previous numeral
  * @param {String} currentNumeral - current numeral
  * @param {Boolean} cadence - whether it's at a cadence
- */
+  */ /*
 function applySong(previousTriad, previousNumeral, currentNumeral, cadence) {
     /**
      * dictionary of songs used
@@ -314,7 +317,7 @@ function applySong(previousTriad, previousNumeral, currentNumeral, cadence) {
      * there may be multiple songs for each progression
      * song format: string with start-destination numbers and split by a -
      * ex. '51-71-23-55'
-     */
+      */ /*
     const songs = [
         //2-1 tonic (V-I, not at cadences)
         "71-53-21",
@@ -409,7 +412,7 @@ function applySong(previousTriad, previousNumeral, currentNumeral, cadence) {
  * @param {*} previousNumeral
  * @param {*} currentNumeral
  * @param {*} cadence
- */
+  */ /*
 function getNextTriad(
     scale,
     previousTriad,
@@ -436,13 +439,13 @@ function getNextTriad(
  * for each note, get all possible destinations
  * use these to
  *
- */
+  */ /*
 
 /**
  *
  * @param {*} scale
  * @param {*} numeralProgression
- */
+  */ /*
 function createTriadProgression(scale, numeralProgression) {
     //triad: array of 3 scale indexes
     //then they will be converted into keyboard indexes in another function
@@ -461,3 +464,5 @@ function createTriadProgression(scale, numeralProgression) {
 }
 
 function triadsToKeyboard() {}
+
+ */

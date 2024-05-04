@@ -39,7 +39,9 @@ class Note {
         // connect
         source.connect(this.gain);
 
-        // volume function?
+        if (context.state === "suspended") {
+            context.resume();
+        }
 
         source.start(context.currentTime + delay);
     }
@@ -170,7 +172,7 @@ function toggleAudio() {
     }
 }
 
-//testing using audio context to play sound
+// testing using audio context to play sound
 export function testPlay() {
     // actually works???
     keyboard[39].play();
