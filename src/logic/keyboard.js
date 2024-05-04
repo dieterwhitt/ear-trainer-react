@@ -12,11 +12,13 @@ class Note {
      * @param {*} id note id (index)
      * @param {*} name note name
      * @param {*} buffer web audio buffer
+     * @param {*} gain web audio gain node
      */
-    constructor(id, name, buffer) {
+    constructor(id, name, buffer, gain) {
         this.id = id;
         this.name = name;
         this.buffer = buffer;
+        this.gain = gain;
     }
 
     /**
@@ -28,14 +30,14 @@ class Note {
             delay = 0;
         }
         // check context suspended?
-        console.log(`playing ${this.name}`);
+        console.log(`playing ${this.name} at volume ${this.gain.value}`);
         // need to create buffer source node each play (see docs)
         // below: from baseAudioContext createBufferSource() method
         const source = context.createBufferSource();
         // set buffer of source
         source.buffer = this.buffer;
         // connect
-        source.connect(context.destination);
+        source.connect(this.gain);
 
         // volume function?
 
@@ -44,6 +46,8 @@ class Note {
 }
 
 // creating keyboard object
+// maybe create keyboard class? (context, load, array, volume)
+
 // keyboard is an array of notes
 
 const context = new AudioContext();
@@ -124,8 +128,12 @@ async function loadNotes(names) {
             // once again i think because the wav files are in a different
             // directory or something like that
 
+            // creating a gain node, using volumefunction
+            const gainNode = context.createGain();
+            gainNode.gain.value = volumeFunction(i);
+            gainNode.connect(context.destination);
             // create a note object and add it to keyboard
-            const note = new Note(i, name, buffer);
+            const note = new Note(i, name, buffer, gainNode);
             keyboard.push(note);
             console.log(`loaded ${name}`);
         } catch (error) {
@@ -137,15 +145,15 @@ async function loadNotes(names) {
 /**
  * exponential function to determine the volume of each note for balancing
  * higher notes - higher volume to balance the sound
- * @param {int} note - note on the keyboard which is being calculated
+ * @param {int} index - note index on the keyboard which is being calculated
  * @returns volume 0-1
  */
-function volumeFunction(note) {
+function volumeFunction(index) {
     const a = 5.509;
     const b = 0.0393;
     const c = 14.49;
     //ae^(bx) + c
-    var volume = Math.floor(a * Math.exp(b * note) + c) / 100;
+    var volume = Math.floor(a * Math.exp(b * index) + c) / 100;
     // cap volume
     volume = Math.min(volume, 1);
     return volume;

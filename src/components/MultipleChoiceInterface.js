@@ -184,11 +184,14 @@ function MultipleChoiceInterface(props) {
                 isSearchable={false}
                 classNames={{
                     container: () =>
-                        "text-3xl font-normal outline rounded-full " +
+                        "font-normal outline rounded-full " +
                         "h-fit outline-2 outline-offset-2 py-[6%] w-[100%] " +
                         colorStr,
+                    control: () => "text-3xl",
                     option: () =>
-                        "font-light bg-slate-50 hover:text-indigo-300 ",
+                        "font-light bg-slate-50 hover:text-indigo-300 scale-y-105",
+                    menu: () => "text-3xl transform-none border-8 rounded",
+                    dropdownIndicator: () => "text-transparent",
                 }}
             />
         );
