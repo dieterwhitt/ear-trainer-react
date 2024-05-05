@@ -4,7 +4,7 @@
 
 // not refactored
 
-import keyboard from "./keyboard"; /*
+import keyboard from "./keyboard"; 
 /*
 
 /**
@@ -22,13 +22,13 @@ function createScale(note, key) {
         //minor key
         return [note + "-", 0, 2, 3, 5, 7, 8, 11];
     }
-}
+} /*
 
 /**
  * given a scale generates a random chord progression in roman numerals
  * @param {array} scale
  * @returns array of roman numeral strings representing the progression
-  */ /*
+ */
 function createNumeralProgression(scale) {
     /*
     seen progressions:

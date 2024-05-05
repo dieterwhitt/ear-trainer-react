@@ -4,8 +4,6 @@
 
 // file for configuring keyboard loading and chord theory
 
-import React from "react";
-
 class Note {
     /**
      * Note object constructor
@@ -30,7 +28,7 @@ class Note {
             delay = 0;
         }
         // check context suspended?
-        console.log(`playing ${this.name} at volume ${this.gain.value}`);
+        console.log(`playing ${this.name} at volume ${this.gain.gain.value}`);
         // need to create buffer source node each play (see docs)
         // below: from baseAudioContext createBufferSource() method
         const source = context.createBufferSource();
@@ -55,8 +53,8 @@ class Note {
 const context = new AudioContext();
 var keyboard = [];
 
-await loadKeyboard();
-console.log("done loading keyboard");
+loadKeyboard();
+//console.log("done loading keyboard");
 export default keyboard;
 
 // ----------- loading functions -----------
