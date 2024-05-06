@@ -3,6 +3,7 @@
 // playChord.js
 
 import keyboard from "./keyboard";
+import { loaded } from "./keyboard";
 
 // not refactored yet
 

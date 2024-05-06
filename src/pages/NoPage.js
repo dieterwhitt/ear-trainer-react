@@ -5,7 +5,7 @@
 import React from "react";
 
 const NoPage = () => {
-    return <h1>404!</h1>;
+    return <p>404!</p>;
 };
 
 export default NoPage;

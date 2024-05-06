@@ -2,10 +2,11 @@
 //jan 7 2024
 //filename Home.js
 
-// ...need to fix this garbage file (components)
+// checking mobile device, so that broken page isn't loaded
+import { isMobile } from "react-device-detect";
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 
 import Title from "../components/Title";
 import Header from "../components/Header";
@@ -67,6 +68,19 @@ function HomeBoxButton(props) {
 }
 
 function Home() {
+    // temporary fix: mobile view
+    if (isMobile) {
+        return (
+            <div>
+                <Title text="Welcome to Ear Trainer!" />
+                <Header
+                    text="Unfortnuately, eartrainer.net doesn't support mobile
+                    devices at this time. Don't worry, mobile support is coming 
+                    soon! Thank you for using eartrainer.net."
+                />
+            </div>
+        );
+    }
     return (
         <div>
             <Title text="Welcome to Ear Trainer!" />
@@ -118,7 +132,7 @@ function Home() {
                 />
             </main>
             <div
-                className="text-xl mt-[2.5%] mb-[1.5%]
+                className="text-xl pt-[2.5%] pb-[1.5%]
                 animate-in fade-in slide-in-from-bottom ease-out duration-1000"
             >
                 Created by Dieter Whittingham

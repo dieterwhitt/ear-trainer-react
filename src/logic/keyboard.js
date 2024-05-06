@@ -52,9 +52,10 @@ class Note {
 
 const context = new AudioContext();
 var keyboard = [];
+export var loaded = false;
 
 loadKeyboard();
-//console.log("done loading keyboard");
+
 export default keyboard;
 
 // ----------- loading functions -----------
@@ -64,6 +65,8 @@ async function loadKeyboard() {
     loadNames(names);
     await loadNotes(names);
     console.log(keyboard);
+    loaded = true;
+    console.log("successfully loaded keyboard");
 }
 
 function loadNames(names) {
