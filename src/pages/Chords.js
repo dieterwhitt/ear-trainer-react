@@ -25,7 +25,7 @@ function Chords() {
         <div>
             <MultipleChoiceInterface
                 options={chordOptions}
-                defaultOption={{ value: -1, label: "Choose Chord" }}
+                defaultOption={{ value: -1, label: "Choose Chord ↓" }}
                 playFunction={playChord}
                 keyword="Chord"
                 title="Chord Identification"

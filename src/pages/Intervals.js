@@ -30,7 +30,7 @@ function Intervals() {
     return (
         <MultipleChoiceInterface
             options={intervalOptions}
-            defaultOption={{ value: -1, label: "Choose Interval" }}
+            defaultOption={{ value: -1, label: "Choose Interval ↓" }}
             playFunction={playInterval}
             keyword="Interval"
             title="Interval"
