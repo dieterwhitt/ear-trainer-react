@@ -11,6 +11,7 @@ import Title from "../components/Title";
 import Header from "../components/Header";
 import Subheader from "../components/Subheader";
 import GenericButton1 from "../components/GenericButton1";
+import MCSettingInterface from "./MCSettingInterface";
 
 import Select from "react-select";
 
@@ -40,6 +41,7 @@ function GameHeader(props) {
  * @param title title text
  * @param props.header page header
  * @param props.subheader page subheader
+ * @param props.defaultSettings default settings
  */
 function MultipleChoiceInterface(props) {
     //state: number of plays completed
@@ -61,6 +63,10 @@ function MultipleChoiceInterface(props) {
     const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
     const [dropdownEnabled, setDropdownEnabled] = useState(true);
     const [dropdownOption, setDropdownOption] = useState(props.defaultOption);
+
+    // new - settings
+    // see MCSettingInterface.js for setting object documentation
+    const [settings, setSettings] = useState(props.defaultSettings);
 
     const restartGame = () => {
         if (!firstRender) {
@@ -293,6 +299,12 @@ function MultipleChoiceInterface(props) {
             <div>
                 <GameTitle keyword={props.title} />
                 <GameHeader header={props.header} subheader={props.subheader} />
+
+                <MCSettingInterface
+                    settings={settings}
+                    updateSettings={setSettings}
+                />
+
                 <FirstRenderPlay />
             </div>
         );

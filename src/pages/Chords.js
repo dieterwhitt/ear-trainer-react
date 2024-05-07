@@ -44,6 +44,7 @@ function Chords() {
                         (Difficulty options coming soon!)
                     </div>
                 }
+                defaultSettings={{}}
             />
         </div>
     );

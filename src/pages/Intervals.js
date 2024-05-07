@@ -45,6 +45,10 @@ function Intervals() {
                     (Difficulty options coming soon!)
                 </div>
             }
+            defaultSettings={{
+                option1: { type: "ans", value: true, group: 0 },
+                option2: { type: "num", value: 10, group: 0 },
+            }}
         />
     );
 }

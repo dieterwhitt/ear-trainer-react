@@ -4,7 +4,7 @@
 
 // not refactored
 
-import keyboard from "./keyboard"; 
+import keyboard from "./keyboard"; /*
 /*
 
 /**
@@ -13,7 +13,7 @@ import keyboard from "./keyboard";
  * @param {string} note the first note of the scale ex. 'c', 'cs'
  * @param {boolean} key major - true minor - false
  * @returns
-  */
+  */ /*
 function createScale(note, key) {
     if (key) {
         //major key
@@ -28,7 +28,7 @@ function createScale(note, key) {
  * given a scale generates a random chord progression in roman numerals
  * @param {array} scale
  * @returns array of roman numeral strings representing the progression
- */
+ */ /*
 function createNumeralProgression(scale) {
     /*
     seen progressions:
