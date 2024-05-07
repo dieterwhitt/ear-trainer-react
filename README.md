@@ -1,6 +1,8 @@
 # ear-trainer-react
 by Dieter Whittingham
 
+early version testing is currently live! [eartrainer.net](https://eartrainer.net)
+
 ![Alt Text](https://github.com/dieterwhitt/ear-trainer-react/blob/main/ear-trainer-showcase.png?raw=true)
 
 ## Purpose
