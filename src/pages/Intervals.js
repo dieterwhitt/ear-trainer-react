@@ -29,7 +29,7 @@ function Intervals() {
 
     return (
         <MultipleChoiceInterface
-            options={intervalOptions}
+            defaultAnswers={intervalOptions}
             defaultOption={{ value: -1, label: "Choose Interval ↓" }}
             playFunction={playInterval}
             keyword="Interval"
@@ -46,8 +46,9 @@ function Intervals() {
                 </div>
             }
             defaultSettings={{
-                option1: { type: "ans", value: true, group: 0 },
-                option2: { type: "num", value: 10, group: 0 },
+                broken: { type: "t/f", value: true, group: 0 },
+                harmonic: { type: "t/f", value: true, group: 0 },
+                rounds: { type: "num", value: 10, group: 0 },
             }}
         />
     );

@@ -20,13 +20,19 @@
 function MCSettingInterface({ settings, updateSettings }) {
     // function to update the settings given an Option and a new value
     function updateOption(option, value) {
+        console.log("option updating");
+        console.log(`${option} -> ${value}`);
         // updates the Option with the name option to have the value value
-        settings[option].value = value;
-        updateSettings(settings);
+        const newSettings = { ...settings };
+        // dont ask me why i need fucking square brackets here
+        newSettings[option].value = value;
+        console.log(newSettings);
+        updateSettings(newSettings);
     }
 
     function OptionInput(option) {
-        const setting = settings[option];
+        var setting = settings[option];
+        console.log(setting);
         // given an option, renders either a check box or a number based on type
         if (setting.type === "ans" || setting.type === "t/f") {
             // render checkbox
@@ -35,7 +41,7 @@ function MCSettingInterface({ settings, updateSettings }) {
                     {option}:
                     <input
                         type="checkbox"
-                        checked={settings.value}
+                        checked={setting.value}
                         // update settings when changed
                         onChange={() =>
                             updateOption(option, !settings[option].value)
@@ -49,7 +55,7 @@ function MCSettingInterface({ settings, updateSettings }) {
                     {option}:
                     <input
                         type="number"
-                        value={option.value}
+                        value={setting.value}
                         onChange={(e) => updateOption(option, e.target.value)}
                     />
                 </label>

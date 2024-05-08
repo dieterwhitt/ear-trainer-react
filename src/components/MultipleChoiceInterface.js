@@ -32,9 +32,27 @@ function GameHeader(props) {
     );
 }
 
+// play button for the first render
+// moving outside (for now)
+function FirstRenderPlay(props) {
+    return (
+        <div
+            className="animate-in fade-in text-5xl my-[5%]
+            slide-in-from-bottom-[50%] ease-in-out duration-1000"
+        >
+            <GenericButton1
+                text="Play 🎵"
+                enabled={true}
+                onClick={props.onClick}
+                size="5xl"
+            />
+        </div>
+    );
+}
+
 /**
  * multiple choice game interface
- * @param props.options array of multiple choice options
+ * @param props.defaultAnswers array of multiple choice answers
  * @param props.defaultOption default option
  * @callback props.playFunction specific play function
  * @param keyword game keyword (ex. interval -> play interval, choose interval)
@@ -55,7 +73,7 @@ function MultipleChoiceInterface(props) {
     //first render of the game
     const [firstRender, setFirstRender] = useState(true);
 
-    //setting the intial rounds per game to 10 (will refactor)
+    //setting the intial rounds per game to 10
     const [roundsPerGame, setRoundsPerGame] = useState(10);
 
     // using usestate instead of getdocument like a retard
@@ -67,6 +85,7 @@ function MultipleChoiceInterface(props) {
     // new - settings
     // see MCSettingInterface.js for setting object documentation
     const [settings, setSettings] = useState(props.defaultSettings);
+    const [answers, setAnswers] = useState(props.defaultAnswers);
 
     const restartGame = () => {
         if (!firstRender) {
@@ -138,25 +157,32 @@ function MultipleChoiceInterface(props) {
         ]);
     };
 
-    // play button for the first render
-    function FirstRenderPlay() {
-        return (
-            <div
-                className="animate-in fade-in text-5xl my-[5%]
-                slide-in-from-bottom-[50%] ease-in-out duration-1000"
-            >
-                <GenericButton1
-                    text="Play 🎵"
-                    enabled={true}
-                    onClick={() => {
-                        restartGame();
-                        setFirstRender(false);
-                    }}
-                    size="5xl"
-                />
-            </div>
+    const verifySettings = () => {
+        // check that settings are valid before starting the game
+    };
+
+    const updateSettings = () => {
+        // update options and rounds per game
+        console.log(settings.rounds.value);
+        setRoundsPerGame(settings.rounds.value);
+        console.log(`set rounds per game`);
+        // for all setting options that have type "ans":
+        // add the name to an array, then filter options by the labels not in
+        // this array
+        const enabledAnswers = [];
+        for (var option in settings) {
+            // answer type setting and is enabled
+            if (settings[option].type === "ans" && settings[option].value) {
+                enabledAnswers.push(option);
+            }
+        }
+
+        // filter and update
+        console.log(answers);
+        setAnswers(
+            answers.filter((answer) => enabledAnswers.includes(answer.label))
         );
-    }
+    };
 
     // button to play a multiple choice option
     function PlayButton() {
@@ -182,7 +208,7 @@ function MultipleChoiceInterface(props) {
         }
         return (
             <Select
-                options={props.options}
+                options={answers}
                 onChange={setDropdownOption}
                 disabled={!dropdownEnabled}
                 value={dropdownOption}
@@ -304,8 +330,13 @@ function MultipleChoiceInterface(props) {
                     settings={settings}
                     updateSettings={setSettings}
                 />
-
-                <FirstRenderPlay />
+                <FirstRenderPlay
+                    onClick={() => {
+                        updateSettings();
+                        restartGame();
+                        setFirstRender(false);
+                    }}
+                />
             </div>
         );
     } else {

@@ -24,7 +24,7 @@ function Chords() {
     return (
         <div>
             <MultipleChoiceInterface
-                options={chordOptions}
+                defaultAnswers={chordOptions}
                 defaultOption={{ value: -1, label: "Choose Chord ↓" }}
                 playFunction={playChord}
                 keyword="Chord"
@@ -44,7 +44,9 @@ function Chords() {
                         (Difficulty options coming soon!)
                     </div>
                 }
-                defaultSettings={{}}
+                defaultSettings={{
+                    rounds: { type: "num", value: 10, group: 0 },
+                }}
             />
         </div>
     );
