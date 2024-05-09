@@ -9,22 +9,9 @@ import { playChord } from "../logic/playChord";
 
 //main component
 function Chords() {
-    const chordOptions = [
-        { value: 0, label: "Major (Root Pos.)" },
-        { value: 1, label: "Major (1st Inv.)" },
-        { value: 2, label: "Minor (Root Pos.)" },
-        { value: 3, label: "Minor (1st Inv.)" },
-        { value: 4, label: "Dominant 7th" },
-        { value: 5, label: "Diminished 7th" },
-        { value: 6, label: "Major 7th" },
-        { value: 7, label: "Minor 7th" },
-        { value: 8, label: "Augmented Triad" },
-    ];
-
     return (
         <div>
             <MultipleChoiceInterface
-                defaultAnswers={chordOptions}
                 defaultOption={{ value: -1, label: "Choose Chord ↓" }}
                 playFunction={playChord}
                 keyword="Chord"

@@ -4,40 +4,81 @@
 
 import keyboard from "./keyboard";
 
-// not refactored yet
-
 /**
  * plays a random interval (unison-major 9th) and returns the inter value
- * @returns the interval that was played (int)
+ * @param settings the settings object that determines what can be played
+ * and how. see MCSettingInterface.js for more info
+ * @returns the interval id that was played (int)
  */
-export function playInterval() {
-    //random boolean which will determine if there will be a delay
-    let delay = Math.floor(Math.random() * 2);
-    //500 ms
-    delay *= 1000;
-    //boolean determining if its ascending
-    const ascending = Boolean(Math.floor(Math.random() * 2));
-    //choose root from 3c to 5c
-    //i.e index 27 to 51
-    let rootIndex = Math.floor(Math.random() * 25 + 27);
-    //interval from 0 to 14 semitones (unison to minor 9th)
-    const interval = Math.floor(Math.random() * 15);
-    //index of the second note
-    let intervalIndex = rootIndex + interval;
+export function playInterval(settings) {
+    const delayS = 1; // SECONDS
+    const lowestNote = 34; // 3g
+    const highestNote = 46; // 4fs
 
+    // we can now finally assume that the settings are interval-specific
+    // since we are no longer in an abstract interface
+    var delay = 0;
+    // boolean determining if its ascending (only matters if broken)
+    const ascending = Boolean(Math.floor(Math.random() * 2));
+    // set delay based on settings
+    if (settings.harmonic.value && settings.broken.value) {
+        // harmonic or broken
+        // choose randomly
+        delay = delayS * Math.floor(Math.random() * 2);
+    } else if (settings.harmonic.value) {
+        // harmonic only
+        delay = 0;
+    } else if (settings.broken.value) {
+        // broken only
+        delay = delayS;
+    }
+    // index low note
+    const rootIndex = Math.floor(
+        Math.random() * (highestNote + 1 - lowestNote) + lowestNote
+    );
+    // interval from 0 to 14 semitones (unison to minor 9th)
+    // only allow intervals that have been enabled
+    var enabledIntervals = [];
+    for (var option in settings) {
+        if (settings[option].type === "ans" && settings[option].value) {
+            // answer enabled: take id
+            enabledIntervals.push(settings[option].id);
+        }
+    }
+    // choose a random interval to play from the list
+    if (enabledIntervals.length > 0) {
+        const interval =
+            enabledIntervals[
+                Math.floor(Math.random() * enabledIntervals.length)
+            ];
+        // index of the high note
+        const intervalIndex = rootIndex + interval;
+        // play
+        // edge case: unison
+        if (interval === 0) {
+            keyboard[rootIndex].play(0);
+        } else if (ascending) {
+            // play lower first
+            keyboard[rootIndex].play(0);
+            keyboard[intervalIndex].play(delay);
+        } else {
+            // play higher first
+            keyboard[rootIndex].play(delay);
+            keyboard[intervalIndex].play(0);
+        }
+        return interval;
+    } else {
+        // error
+        alert("error: no intervals selected to play");
+        return -1;
+    }
+
+    /* 
     if (!ascending) {
         //swap which is played first if descending
         const temp = rootIndex;
         rootIndex = intervalIndex;
         intervalIndex = temp;
     }
-    //play
-    keyboard[rootIndex].play();
-    //with delay
-    //ignoring unison
-    if (interval !== 0) {
-        setTimeout(() => keyboard[intervalIndex].play(), delay);
-    }
-    //return the interval
-    return interval;
+    */
 }

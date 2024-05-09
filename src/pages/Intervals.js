@@ -9,28 +9,9 @@ import { playInterval } from "../logic/playInterval";
 
 //main component
 function Intervals() {
-    const intervalOptions = [
-        { value: 0, label: "Perfect Unison" },
-        { value: 1, label: "Minor Second" },
-        { value: 2, label: "Major Second" },
-        { value: 3, label: "Minor Third" },
-        { value: 4, label: "Major Third" },
-        { value: 5, label: "Perfect Fourth" },
-        { value: 6, label: "Tritone" },
-        { value: 7, label: "Perfect Fifth" },
-        { value: 8, label: "Minor Sixth" },
-        { value: 9, label: "Major Sixth" },
-        { value: 10, label: "Minor Seventh" },
-        { value: 11, label: "Major Seventh" },
-        { value: 12, label: "Perfect Octave" },
-        { value: 13, label: "Minor Ninth" },
-        { value: 14, label: "Major Ninth" },
-    ];
-
     return (
         <MultipleChoiceInterface
-            defaultAnswers={intervalOptions}
-            defaultOption={{ value: -1, label: "Choose Interval ↓" }}
+            defaultOption={{ value: -1, label: " Choose Interval ↓" }}
             playFunction={playInterval}
             keyword="Interval"
             title="Interval"
@@ -46,6 +27,26 @@ function Intervals() {
                 </div>
             }
             defaultSettings={{
+                "Perfect Unison": { type: "ans", id: 0, value: true, group: 0 },
+                "Major Second": { type: "ans", id: 1, value: true, group: 0 },
+                "Minor Second": { type: "ans", id: 2, value: true, group: 0 },
+                "Minor Third": { type: "ans", id: 3, value: true, group: 0 },
+                "Major Third": { type: "ans", id: 4, value: true, group: 0 },
+                "Perfect Fourth": { type: "ans", id: 5, value: true, group: 0 },
+                Tritone: { type: "ans", id: 6, value: true, group: 0 },
+                "Perfect Fifth": { type: "ans", id: 7, value: true, group: 0 },
+                "Minor Sixth": { type: "ans", id: 8, value: true, group: 0 },
+                "Major Sixth": { type: "ans", id: 9, value: true, group: 0 },
+                "Minor Seventh": { type: "ans", id: 10, value: true, group: 0 },
+                "Major Seventh": { type: "ans", id: 11, value: true, group: 0 },
+                "Perfect Octave": {
+                    type: "ans",
+                    id: 12,
+                    value: true,
+                    group: 0,
+                },
+                "Minor Ninth": { type: "ans", id: 13, value: true, group: 0 },
+                "Major Ninth": { type: "ans", id: 14, value: true, group: 0 },
                 broken: { type: "t/f", value: true, group: 0 },
                 harmonic: { type: "t/f", value: true, group: 0 },
                 rounds: { type: "num", value: 10, group: 0 },

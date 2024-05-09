@@ -52,7 +52,6 @@ function FirstRenderPlay(props) {
 
 /**
  * multiple choice game interface
- * @param props.defaultAnswers array of multiple choice answers
  * @param props.defaultOption default option
  * @callback props.playFunction specific play function
  * @param keyword game keyword (ex. interval -> play interval, choose interval)
@@ -85,7 +84,8 @@ function MultipleChoiceInterface(props) {
     // new - settings
     // see MCSettingInterface.js for setting object documentation
     const [settings, setSettings] = useState(props.defaultSettings);
-    const [answers, setAnswers] = useState(props.defaultAnswers);
+    // dropdown values
+    const [answers, setAnswers] = useState([]);
 
     const restartGame = () => {
         if (!firstRender) {
@@ -144,7 +144,7 @@ function MultipleChoiceInterface(props) {
     const handlePlay = (event) => {
         event.preventDefault();
         //play option and get the numerical value for it.
-        const currentAnswer = props.playFunction();
+        const currentAnswer = props.playFunction(settings);
         console.log("the correct answer is " + currentAnswer);
         //disable the button so that it cant be used before submission
         setPlayButtonEnabled(false);
@@ -166,22 +166,18 @@ function MultipleChoiceInterface(props) {
         console.log(settings.rounds.value);
         setRoundsPerGame(settings.rounds.value);
         console.log(`set rounds per game`);
-        // for all setting options that have type "ans":
-        // add the name to an array, then filter options by the labels not in
-        // this array
-        const enabledAnswers = [];
+        // need to set the dropdown answers
+        // check all settings that are "ans", and create a new option
+        // with the value equaling the id of the setting
+        const newAnswers = [];
         for (var option in settings) {
             // answer type setting and is enabled
             if (settings[option].type === "ans" && settings[option].value) {
-                enabledAnswers.push(option);
+                newAnswers.push({ value: settings[option].id, label: option });
             }
         }
 
-        // filter and update
-        console.log(answers);
-        setAnswers(
-            answers.filter((answer) => enabledAnswers.includes(answer.label))
-        );
+        setAnswers(newAnswers);
     };
 
     // button to play a multiple choice option
@@ -353,13 +349,13 @@ function MultipleChoiceInterface(props) {
                         ease-in-out duration-1000"
                 >
                     {/* play button */}
-                    <div className="flex justify-end w-[18%]">
+                    <div className="flex justify-end w-[22%]">
                         <PlayButton />
                     </div>
-                    <div className="flex justify-center w-[18%]">
+                    <div className="flex justify-center w-[22%]">
                         <Dropdown />
                     </div>
-                    <div className="flex justify-start w-[18%]">
+                    <div className="flex justify-start w-[22%]">
                         <SubmitButton />
                     </div>
                 </div>

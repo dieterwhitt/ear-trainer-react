@@ -4,6 +4,8 @@
 
 // file for configuring keyboard loading and chord theory
 
+// still need to add loading screen/loading page
+
 class Note {
     /**
      * Note object constructor
@@ -52,6 +54,7 @@ class Note {
 
 const context = new AudioContext();
 var keyboard = [];
+// maybe make this a promise so it can be awaited
 export var loaded = false;
 
 loadKeyboard();
