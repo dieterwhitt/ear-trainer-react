@@ -4,6 +4,8 @@
 
 // subheader component
 
+import React from "react";
+
 /**
  *
  * @param props.text the text for the subheader

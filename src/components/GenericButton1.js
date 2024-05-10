@@ -4,13 +4,13 @@
 
 // generic button component
 
+import React from "react";
+
 /**
  * generic blue/grey scaling button component
  * @param props.text button text
  * @param props.enabled whether button is enabled
  * @callback props.onClick callback function upon click
- * @param props.py y padding adjustment (percentage)
- * @param props.px x padding adjustment (percentage)
  * @param props.size text size
  * @param props.buttonSize button size (1 - small 2 - med 3 - lg)
  */

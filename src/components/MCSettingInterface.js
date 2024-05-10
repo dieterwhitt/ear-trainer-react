@@ -17,6 +17,9 @@
 
 // this is why i hate javascript
 
+import React from "react";
+import ToggleButton1 from "./ToggleButton1";
+
 function MCSettingInterface({ settings, updateSettings }) {
     // function to update the settings given an Option and a new value
     function updateOption(option, value) {

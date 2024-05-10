@@ -18,14 +18,8 @@ function Intervals() {
             header="Welcome to interval identification. When you press
             play, you will be given a series of random intervals. Identify
             them using the drop down box."
-            subheader={
-                <div>
-                    All intervals up to and including a Major Ninth are
-                    possible.
-                    <br />
-                    (Difficulty options coming soon!)
-                </div>
-            }
+            subheader="All intervals up to and including a Major Ninth are
+                    possible."
             defaultSettings={{
                 "Perfect Unison": { type: "ans", id: 0, value: true, group: 0 },
                 "Major Second": { type: "ans", id: 1, value: true, group: 0 },

@@ -4,6 +4,8 @@
 
 // header component
 
+import React from "react";
+
 /**
  * @param props.text header text
  */
