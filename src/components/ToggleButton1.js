@@ -9,7 +9,7 @@ import React from "react";
  * state should be handled by parent component
  * @param props.text button text
  * @param props.on whether the toggle is on or off
- * @param props.size text size
+ * @callback props.onClick callback
  */
 function ToggleButton1(props) {
     var text = props.text;
@@ -26,7 +26,11 @@ function ToggleButton1(props) {
         text += " ✘";
     }
 
-    return <button className={styleStr}>{text}</button>;
+    return (
+        <button className={styleStr} onClick={props.onClick}>
+            {text}
+        </button>
+    );
 }
 
 export default ToggleButton1;

@@ -37,8 +37,8 @@ function GameHeader(props) {
 function FirstRenderPlay(props) {
     return (
         <div
-            className="animate-in fade-in text-5xl my-[5%]
-            slide-in-from-bottom-[50%] ease-in-out duration-1000"
+            className="animate-in fade-in text-5xl py-[5%]
+            slide-in-from-bottom-[20%] ease-in-out duration-1000"
         >
             <GenericButton1
                 text="Play 🎵"

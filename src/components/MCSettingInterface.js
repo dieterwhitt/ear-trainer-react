@@ -40,6 +40,17 @@ function MCSettingInterface({ settings, updateSettings }) {
         if (setting.type === "ans" || setting.type === "t/f") {
             // render checkbox
             return (
+                <ToggleButton1
+                    text={option}
+                    on={setting.value}
+                    onClick={() =>
+                        updateOption(option, !settings[option].value)
+                    }
+                />
+            );
+
+            {
+                /*
                 <label>
                     {option}:
                     <input
@@ -51,7 +62,8 @@ function MCSettingInterface({ settings, updateSettings }) {
                         }
                     />
                 </label>
-            );
+                    */
+            }
         } else if (setting.type === "num") {
             return (
                 <label>
