@@ -32,6 +32,8 @@ function NavBar() {
                 })}
             </nav>
         );
+    } else {
+        return <div></div>;
     }
 }
 

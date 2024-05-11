@@ -133,7 +133,7 @@ function Home() {
             </main>
             <div
                 className="text-xl pt-[2.5%] pb-[1.5%]
-                animate-in fade-in slide-in-from-bottom ease-out duration-1000"
+                animate-in fade-in slide-in-from-bottom-[25%]  ease-out duration-1000"
             >
                 Created by Dieter Whittingham
             </div>

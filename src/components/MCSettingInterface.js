@@ -19,6 +19,7 @@
 
 import React from "react";
 import ToggleButton1 from "./ToggleButton1";
+import NumberButton1 from "./NumberButton1";
 
 function MCSettingInterface({ settings, updateSettings }) {
     // function to update the settings given an Option and a new value
@@ -27,7 +28,6 @@ function MCSettingInterface({ settings, updateSettings }) {
         console.log(`${option} -> ${value}`);
         // updates the Option with the name option to have the value value
         const newSettings = { ...settings };
-        // dont ask me why i need fucking square brackets here
         newSettings[option].value = value;
         console.log(newSettings);
         updateSettings(newSettings);
@@ -48,22 +48,6 @@ function MCSettingInterface({ settings, updateSettings }) {
                     }
                 />
             );
-
-            {
-                /*
-                <label>
-                    {option}:
-                    <input
-                        type="checkbox"
-                        checked={setting.value}
-                        // update settings when changed
-                        onChange={() =>
-                            updateOption(option, !settings[option].value)
-                        }
-                    />
-                </label>
-                    */
-            }
         } else if (setting.type === "num") {
             return (
                 <label>

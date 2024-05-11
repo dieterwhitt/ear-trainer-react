@@ -22,8 +22,8 @@ function Intervals() {
                     possible."
             defaultSettings={{
                 "Perfect Unison": { type: "ans", id: 0, value: true, group: 0 },
-                "Major Second": { type: "ans", id: 1, value: true, group: 0 },
-                "Minor Second": { type: "ans", id: 2, value: true, group: 0 },
+                "Minor Second": { type: "ans", id: 1, value: true, group: 0 },
+                "Major Second": { type: "ans", id: 2, value: true, group: 0 },
                 "Minor Third": { type: "ans", id: 3, value: true, group: 0 },
                 "Major Third": { type: "ans", id: 4, value: true, group: 0 },
                 "Perfect Fourth": { type: "ans", id: 5, value: true, group: 0 },

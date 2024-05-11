@@ -49,7 +49,7 @@ function Icons(props) {
                             <img
                                 src={icon.src}
                                 alt={icon.alt}
-                                className={`scale-${props.scale}`}
+                                className="scale-75"
                             />
                         </a>
                     </div>
@@ -89,7 +89,7 @@ function About() {
                 <br />
                 <br />
                 -Dieter Whittingham, April 2024
-                <Icons scale="90" />
+                <Icons />
             </p>
         </div>
     );
