@@ -50,6 +50,16 @@ function MCSettingInterface({ settings, updateSettings }) {
             );
         } else if (setting.type === "num") {
             return (
+                <div>
+                    <NumberButton1
+                        text={`${option}: `}
+                        value={setting.value}
+                        onChange={(e) => updateOption(option, e.target.value)}
+                    />
+                </div>
+            );
+            /*
+            return (
                 <label>
                     {option}:
                     <input
@@ -59,6 +69,7 @@ function MCSettingInterface({ settings, updateSettings }) {
                     />
                 </label>
             );
+            */
         }
     }
     // map through all options (settings keys)
