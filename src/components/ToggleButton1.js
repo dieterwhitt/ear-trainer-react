@@ -15,14 +15,14 @@ function ToggleButton1(props) {
     var text = props.text;
     var styleStr =
         "font-normal text-2xl outline rounded-md h-fit outline-2 bg-white " +
-        "px-[1%] py-[0.5%] mx-[0.5%] my-[0.5%] ";
+        "px-[1%] py-[0.5%] mx-[0.8%] my-[0.8%] ";
 
     if (props.on) {
-        styleStr += "text-emerald-600";
+        styleStr += "text-emerald-600 hover:text-emerald-500 ";
         text += " ✔";
     } else {
         // off
-        styleStr += "text-rose-700";
+        styleStr += "text-rose-700 hover:text-rose-400 ";
         text += " ✘";
     }
 

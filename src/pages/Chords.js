@@ -27,11 +27,60 @@ function Chords() {
                         <br />
                         Major and Minor may be in root position or first
                         inversion. All other chords will be in root position.
-                        <br />
-                        (Difficulty options coming soon!)
                     </div>
                 }
                 defaultSettings={{
+                    "Major (Root Pos.)": {
+                        type: "ans",
+                        id: 0,
+                        value: true,
+                        group: 0,
+                    },
+                    "Major (1st Inv.)": {
+                        type: "ans",
+                        id: 1,
+                        value: true,
+                        group: 0,
+                    },
+                    "Minor (Root Pos.)": {
+                        type: "ans",
+                        id: 2,
+                        value: true,
+                        group: 0,
+                    },
+                    "Minor (1st Inv.)": {
+                        type: "ans",
+                        id: 3,
+                        value: true,
+                        group: 0,
+                    },
+                    "Dominant 7th": {
+                        type: "ans",
+                        id: 4,
+                        value: true,
+                        group: 0,
+                    },
+                    "Diminished 7th": {
+                        type: "ans",
+                        id: 5,
+                        value: true,
+                        group: 0,
+                    },
+                    "Major 7th": { type: "ans", id: 6, value: true, group: 0 },
+                    "Minor 7th": {
+                        type: "ans",
+                        id: 8,
+                        value: true,
+                        group: 0,
+                    },
+                    "Augmented Triad": {
+                        type: "ans",
+                        id: 9,
+                        value: true,
+                        group: 0,
+                    },
+                    broken: { type: "t/f", value: true, group: 0 },
+                    harmonic: { type: "t/f", value: true, group: 0 },
                     rounds: { type: "num", value: 10, group: 0 },
                 }}
             />

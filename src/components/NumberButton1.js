@@ -20,7 +20,7 @@ function NumberButton1(props) {
             <label
                 className="font-normal text-2xl outline rounded-md 
             outline-2 bg-white text-indigo-400 align-middle px-[1%]
-             py-[0.5%] mx-[0.5%]  "
+             py-[0.5%] mx-[0.8%] "
             >
                 {props.text}
                 <input

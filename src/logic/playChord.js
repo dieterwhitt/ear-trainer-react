@@ -5,7 +5,8 @@
 import keyboard from "./keyboard";
 import { loaded } from "./keyboard";
 
-// not refactored yet
+// add calculated inversions soon
+// need to add new setting type to do this
 
 /**
  * plays a random chord for chord identification training

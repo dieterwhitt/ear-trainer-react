@@ -58,23 +58,25 @@ function MCSettingInterface({ settings, updateSettings }) {
                     />
                 </div>
             );
-            /*
-            return (
-                <label>
-                    {option}:
-                    <input
-                        type="number"
-                        value={setting.value}
-                        onChange={(e) => updateOption(option, e.target.value)}
-                    />
-                </label>
-            );
-            */
         }
     }
     // map through all options (settings keys)
+    // put it in a box, blue outline
     return (
-        <div>{Object.keys(settings).map((option) => OptionInput(option))}</div>
+        <div
+            className="mx-[20%] pb-[2%] border-solid rounded-xl border-4
+            bg-gradient-to-b from-white to-slate-50 border-indigo-400 "
+        >
+            <div
+                className="text-4xl font-normal py-[1.5%] mb-[2%] bg-indigo-200
+                border-solid border-indigo-400 border-b-4 rounded-t-md"
+            >
+                Settings
+            </div>
+            <div className="">
+                {Object.keys(settings).map((option) => OptionInput(option))}
+            </div>
+        </div>
     );
 }
 
