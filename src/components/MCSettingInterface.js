@@ -35,7 +35,7 @@ function MCSettingInterface({ settings, updateSettings }) {
 
     function OptionInput(option) {
         var setting = settings[option];
-        console.log(setting);
+        // console.log(setting);
         // given an option, renders either a check box or a number based on type
         if (setting.type === "ans" || setting.type === "t/f") {
             // render checkbox
@@ -65,11 +65,12 @@ function MCSettingInterface({ settings, updateSettings }) {
     return (
         <div
             className="mx-[20%] pb-[2%] border-solid rounded-xl border-4
-            bg-gradient-to-b from-white to-slate-50 border-indigo-400 "
+            bg-gradient-to-b from-white to-slate-50 border-indigo-400 
+            animate-in fade-in slide-in-from-bottom-[10%] ease-in-out duration-1000"
         >
             <div
                 className="text-4xl font-normal py-[1.5%] mb-[2%] bg-indigo-200
-                border-solid border-indigo-400 border-b-4 rounded-t-md"
+                border-solid border-indigo-400 border-b-4 rounded-t-md "
             >
                 Settings
             </div>

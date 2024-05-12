@@ -38,7 +38,7 @@ function FirstRenderPlay(props) {
     return (
         <div
             className="animate-in fade-in text-5xl py-[5%]
-            slide-in-from-bottom-[20%] ease-in-out duration-1000"
+            slide-in-from-bottom-[15%] ease-in-out duration-1000"
         >
             <GenericButton1
                 text="Play 🎵"

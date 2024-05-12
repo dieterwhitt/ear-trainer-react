@@ -27,6 +27,8 @@ function Chords() {
                         <br />
                         Major and Minor may be in root position or first
                         inversion. All other chords will be in root position.
+                        <br />
+                        Inversions for all chords coming soon!
                     </div>
                 }
                 defaultSettings={{
@@ -69,13 +71,13 @@ function Chords() {
                     "Major 7th": { type: "ans", id: 6, value: true, group: 0 },
                     "Minor 7th": {
                         type: "ans",
-                        id: 8,
+                        id: 7,
                         value: true,
                         group: 0,
                     },
                     "Augmented Triad": {
                         type: "ans",
-                        id: 9,
+                        id: 8,
                         value: true,
                         group: 0,
                     },

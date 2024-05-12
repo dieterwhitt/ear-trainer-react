@@ -13,7 +13,7 @@ import keyboard from "./keyboard";
 export function playInterval(settings) {
     const delayS = 1; // SECONDS
     const lowestNote = 34; // 3g
-    const highestNote = 46; // 4fs
+    const highestNote = 45; // 4fs
 
     // we can now finally assume that the settings are interval-specific
     // since we are no longer in an abstract interface
@@ -45,6 +45,7 @@ export function playInterval(settings) {
             enabledIntervals.push(settings[option].id);
         }
     }
+    console.log(`enabled interval types: ${enabledIntervals}`);
     // choose a random interval to play from the list
     if (enabledIntervals.length > 0) {
         const interval =
@@ -54,6 +55,10 @@ export function playInterval(settings) {
         // index of the high note
         const intervalIndex = rootIndex + interval;
         // play
+        console.log(
+            `playing interval ${interval} with root ${keyboard[rootIndex].name}, 
+            delay: ${delay}, ascending: ${ascending}`
+        );
         // edge case: unison
         if (interval === 0) {
             keyboard[rootIndex].play(0);
@@ -72,13 +77,4 @@ export function playInterval(settings) {
         alert("error: no intervals selected to play");
         return -1;
     }
-
-    /* 
-    if (!ascending) {
-        //swap which is played first if descending
-        const temp = rootIndex;
-        rootIndex = intervalIndex;
-        intervalIndex = temp;
-    }
-    */
 }

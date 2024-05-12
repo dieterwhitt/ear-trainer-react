@@ -41,6 +41,8 @@ function Intervals() {
                 },
                 "Minor Ninth": { type: "ans", id: 13, value: true, group: 0 },
                 "Major Ninth": { type: "ans", id: 14, value: true, group: 0 },
+                "Minor Tenth": { type: "ans", id: 15, value: true, group: 0 },
+                "Major Tenth": { type: "ans", id: 16, value: true, group: 0 },
                 broken: { type: "t/f", value: true, group: 0 },
                 harmonic: { type: "t/f", value: true, group: 0 },
                 rounds: { type: "num", value: 10, group: 0 },
