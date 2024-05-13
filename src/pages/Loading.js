@@ -24,11 +24,15 @@ function Loading() {
 
     const [loaded, setLoaded] = useState(keyboard.loaded);
     const [loadpct, setLoadpct] = useState(keyboard.loadpct);
+    // to trigger rerender
+    const [tick, setTick] = useState(0);
+
     useEffect(() => {
         setTimeout(() => {
             // setting triggers re-render
             setLoaded(keyboard.loaded);
             setLoadpct(keyboard.loadpct);
+            setTick((tick) => tick + 1);
         }, 200);
     });
 
