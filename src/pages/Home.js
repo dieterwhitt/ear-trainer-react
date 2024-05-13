@@ -6,7 +6,7 @@
 import { isMobile } from "react-device-detect";
 
 import React from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Title from "../components/Title";
 import Header from "../components/Header";

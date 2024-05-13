@@ -1,6 +1,6 @@
-//dieter whittingham
-//jan 7 2024
-//filename ChordProgressions.js
+// dieter whittingham
+// jan 7 2024
+// filename ChordProgressions.js
 
 import React from "react";
 //import { testBass } from "../logic/playProgression";

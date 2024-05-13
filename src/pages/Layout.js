@@ -1,6 +1,6 @@
-//dieter whittingham
-//jan 7 2024
-//filename Layout.js
+// dieter whittingham
+// jan 7 2024
+// filename Layout.js
 
 import React from "react";
 import { Outlet } from "react-router-dom";

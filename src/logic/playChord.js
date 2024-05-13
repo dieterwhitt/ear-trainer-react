@@ -3,7 +3,6 @@
 // playChord.js
 
 import keyboard from "./keyboard";
-import { loaded } from "./keyboard";
 
 // add calculated inversions soon
 // need to add new setting type to do this
@@ -76,12 +75,12 @@ export function playChord(settings) {
         }
         // playing
         console.log(
-            `playing chord ${chordType} with root ${keyboard[rootIndex].name}, 
+            `playing chord ${chordType} with root ${keyboard.notes[rootIndex].name}, 
             broken: ${broken}, ascending: ${ascending}`
         );
         for (var interval of chord) {
             // play note relative to root index
-            keyboard[rootIndex + interval].play(time);
+            keyboard.notes[rootIndex + interval].play(time);
             // update time for next note
             if (!broken) {
                 // harmonic: no delay
@@ -114,7 +113,7 @@ export function playChord(settings) {
         "chord: playing chord type " +
             chordType +
             " with root " +
-            keyboard[rootIndex]
+            keyboard.notes[rootIndex]
     );
 
     //play chord
@@ -122,7 +121,7 @@ export function playChord(settings) {
     //loop through all notes
     let volume;
     for (const note of chordIntervalArray) {
-        keyboard[note + rootIndex].play();
+        keyboard.notes[note + rootIndex].play();
     }
 
     return chordType;

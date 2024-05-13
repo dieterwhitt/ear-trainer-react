@@ -1,6 +1,6 @@
-//dieter whittingham
-//jan 7 2024
-//filename About.js
+// dieter whittingham
+// jan 7 2024
+// filename About.js
 
 import React from "react";
 

@@ -1,14 +1,27 @@
-//dieter whittingham
-//jan 7 2024
-//filename Chords.js
+// dieter whittingham
+// jan 7 2024
+// filename Chords.js
 
 import React from "react";
 
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
 import { playChord } from "../logic/playChord";
 
-//main component
+// redirection
+import keyboard from "../logic/keyboard";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+// main component
 function Chords() {
+    // standard load check
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!keyboard.loaded) {
+            console.log("killing myself");
+            return navigate("/loading", { state: { dest: "/chords" } });
+        }
+    }, []);
     return (
         <div>
             <MultipleChoiceInterface

@@ -7,7 +7,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-//routing
+// routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
@@ -16,6 +16,7 @@ import Chords from "./pages/Chords";
 import ChordProgressions from "./pages/ChordProgressions";
 import About from "./pages/About";
 import Test from "./pages/Test";
+import Loading from "./pages/Loading";
 import NoPage from "./pages/NoPage";
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
                     />
                     <Route path="about" element={<About />} />
                     <Route path="test" element={<Test />} />
+                    <Route path="loading" element={<Loading redirect="/" />} />
                     <Route path="*" element={<NoPage />} />
                 </Route>
             </Routes>

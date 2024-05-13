@@ -56,20 +56,20 @@ export function playInterval(settings) {
         const intervalIndex = rootIndex + interval;
         // play
         console.log(
-            `playing interval ${interval} with root ${keyboard[rootIndex].name}, 
+            `playing interval ${interval} with root ${keyboard.notes[rootIndex].name}, 
             delay: ${delay}, ascending: ${ascending}`
         );
         // edge case: unison
         if (interval === 0) {
-            keyboard[rootIndex].play(0);
+            keyboard.notes[rootIndex].play(0);
         } else if (ascending) {
             // play lower first
-            keyboard[rootIndex].play(0);
-            keyboard[intervalIndex].play(delay);
+            keyboard.notes[rootIndex].play(0);
+            keyboard.notes[intervalIndex].play(delay);
         } else {
             // play higher first
-            keyboard[rootIndex].play(delay);
-            keyboard[intervalIndex].play(0);
+            keyboard.notes[rootIndex].play(delay);
+            keyboard.notes[intervalIndex].play(0);
         }
         return interval;
     } else {

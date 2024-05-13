@@ -1,14 +1,27 @@
-//dieter whittingham
-//jan 7 2024
-//filename Intervals.js
+// dieter whittingham
+// jan 7 2024
+// filename Intervals.js
 
 import React from "react";
 
 import MultipleChoiceInterface from "../components/MultipleChoiceInterface";
 import { playInterval } from "../logic/playInterval";
 
-//main component
+// redirection
+import keyboard from "../logic/keyboard";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 function Intervals() {
+    // standard load check
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!keyboard.loaded) {
+            console.log("killing myself");
+            return navigate("/loading", { state: { dest: "/intervals" } });
+        }
+    }, []);
+
     return (
         <MultipleChoiceInterface
             defaultOption={{ value: -1, label: " Choose Interval ↓" }}
