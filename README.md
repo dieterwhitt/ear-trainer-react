@@ -3,6 +3,8 @@ by Dieter Whittingham
 
 early version testing is currently live! [eartrainer.net](https://eartrainer.net)
 
+[video demonstration](https://www.youtube.com/watch?v=VjQxz4IkUis&t=119s&ab_channel=dieter) as of May 2024
+
 ![Alt Text](https://github.com/dieterwhitt/ear-trainer-react/blob/main/ear-trainer-showcase.png?raw=true)
 
 ## Purpose
