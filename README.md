@@ -1,7 +1,7 @@
 # ear-trainer-react
 by Dieter Whittingham
 
-early version testing is currently live! [eartrainer.net](https://eartrainer.net)
+currently available at [eartrainer.net](https://eartrainer.net)
 
 [video demonstration](https://www.youtube.com/watch?v=VjQxz4IkUis&t=119s&ab_channel=dieter) as of May 2024
 
